@@ -33,3 +33,4 @@ yarn-debug.log*
 
 # Vendor
 /vendor
+quiz.code-workspace
