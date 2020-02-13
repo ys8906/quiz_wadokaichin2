@@ -1,0 +1,81 @@
+title {label: "Quiz Entity-relationship diagram", size: "20"}
+
+## Entities
+# Entities are declared in '[' ... ']'. All attributes after the entity header
+# up until the end of the file (or the next entity declaration) correspond
+# to this entity.
+
+[User]
+  *id {label: "integer"}
+  name {label: "string, null:false, default=''"}
+  email {label: "string, null:false, default=''"}
+  password {label: "string, null:false, default=''"}
+  timestamps
+
+[Quiz]
+  *+id {label: "integer"}
+  +user_id {label: "FK, integer"}
+  +each_quiz_id {label: "FK, integer"}
+
+[Quiz_Wadoukaichin]
+  *+id {label: "integer"}
+  +quiz_id {label: "FK, integer"}
+  answer {label: "string, null:false, default=''"}
+  image {label: "string, default'"}
+  timestamps
+
+[CategoryOrTag_Quiz]
+  *+id {label: "integer"}
+  +CategoryOrTag_id {label: "FK, integer"}
+  +each_quiz_id {label: "FK, integer"}
+
+[CategoryOrTag]
+  *+id {label: "integer"}
+  name {label: "string, null:false, default=''"}
+
+[Reaction]
+  *id {label: "integer"}
+  +user_id {label: "FK, integer"}
+  +each_quiz_id {label: "FK, integer"}
+  reaction {label: "TBC, integer?"}
+  comment {label: "string, default=''"}
+  timestamps
+
+[Savedata]
+  *id {label: "integer"}
+  +user_id {label: "FK, integer"}
+  +slot_id {label: "FK, integer"}
+
+[Savedata_slot]
+  *id {label: "integer"}
+  +slot_id {label: "gameid, not null"}
+  +quiz_id {label: "gameid, not null"}
+  progress {label: "TBC, integer with enum?"}
+  timestamps
+
+## Relationships
+# Each relationship must be between exactly two entities, which need not
+# be distinct. Each entity in the relationship has exactly one of four
+# possible cardinalities:
+#
+# Cardinality    Syntax
+# 0 or 1         ?
+# exactly 1      1
+# 0 or more      *
+# 1 or more      +
+
+# has_many
+User              1--* Quiz
+User              1--* Savedata
+
+Savedata          1--* Savedata_slot
+
+Quiz              1--* Quiz_Wadoukaichin
+
+# has_many :through
+CategoryOrTag_Quiz *--1 Quiz
+CategoryOrTag_Quiz *--1 CategoryOrTag
+
+Reaction          *--1 Quiz_Wadoukaichin
+Reaction          *--1 User
+
