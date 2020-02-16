@@ -73,5 +73,52 @@ class WordDataService
       end
     end
 
+    def scrape_jukugo                   # WordDataService.scrape_jukugo
+      gyo = ["a", "k", "s", "t", "n",
+              "h", "m", "y", "r", "w",
+              "g", "z", "d", "b"]       # 行(子音)
+      gyo.count.times do |g|
+        CSV.open("services/jukugo/jukugo_#{gyo[g]}.csv", "w") do |csv|
+          csv << ["id", "idiom", "reading", "meaning"]
+          retu = 0                      # 段(母音): aiueo
+          5.times do |r|                # [aiueo].length = 5
+            retu += 1
+            no = 0                      # each idiom page number
+            skip_count = 0            
+            4213.times do               # idioms starting from "し" count most (4213)
+              break if skip_count > 30  # skip if empty pages count 30
+              no += 1
+              url = "https://k2.hofurink.com/products/myphp8.php?&gyo=#{gyo[g]}&retu=#{retu}&no=#{no}"
+              doc = Nokogiri::HTML.parse(open(url))
+              doc.xpath("//div[@id='Categories']/div/div[1]/table/tbody").each do |node|
+                idiom = node.xpath("tr[1]/td/h3").inner_text.strip
+                if idiom == ""
+                  skip_count += 1
+                  p "skipped #{skip_count} times"
+                  next
+                end
+                reading = node.xpath("tr[2]/td/h3").inner_text.strip
+                meaning = node.xpath("tr[4]/td/h3").inner_text.strip
+                csv << [idiom, reading, meaning]
+                p [idiom, reading, meaning]
+              end
+            end
+          end
+        end
+      end
+    end
+    
   end
 end
+
+
+# url = "https://k2.hofurink.com/products/myphp8.php?&gyo=#{x}&retu=#{y}&no=#{z}"
+# doc = Nokogiri::HTML.parse(open(url))
+# doc.xpath("//div[@id='Categories']/div/div[1]/table/tbody").each do |node|
+#   idiom = node.xpath("tr[1]/td/h3").text.strip
+#   reading = node.xpath("tr[2]/td/h3").text.strip
+#   meaning = node.xpath("tr[4]/td/h3").text.strip
+#   p idiom
+#   p reading
+#   p meaning
+# end

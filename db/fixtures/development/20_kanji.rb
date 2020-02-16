@@ -1,5 +1,5 @@
 CSV.foreach('db/fixtures/development/20_kanji.csv', headers: true) do |row|
-  Kanji.seed do |u|
+  Kanji.seed_once do |u|
     u.id                = row['id']
     u.character         = row['character']
     u.jis               = row['jis']
