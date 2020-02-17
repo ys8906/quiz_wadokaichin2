@@ -1,6 +1,8 @@
+require 'csv'
+file_path = "db/fixtures/development/10_user.csv"
+
 # First user
-require "csv"
-CSV.foreach('db/fixtures/development/10_user.csv', headers: true) do |row|
+CSV.foreach(file_path, headers: true) do |row|
   User.seed do |u|
     u.id        = row['id']
     u.name      = row['name']

@@ -1,4 +1,7 @@
-CSV.foreach('db/fixtures/development/20_kanji.csv', headers: true) do |row|
+require 'csv'
+file_path = "db/fixtures/development/20_kanji.csv"
+
+CSV.foreach(filepath, headers: true) do |row|
   Kanji.seed_once do |u|
     u.id                = row['id']
     u.character         = row['character']
