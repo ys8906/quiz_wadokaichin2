@@ -1,7 +1,7 @@
 class CreateKanjis < ActiveRecord::Migration[6.0]
   def change
     create_table :kanjis do |t|
-      t.string :character
+      t.string :character, unique: true
       t.integer :jis
       t.integer :joyo
       t.integer :kanken

@@ -13,6 +13,7 @@ class WordDataService
         url = "https://kanjijoho.com/cat/kyu#{i+1}.html"
   
         CSV.open("services/kanji/kanken/kanken_level_#{i+1}.csv", "w") do |csv|
+          # sleep 0.9
           doc = Nokogiri::HTML.parse(open(url))
           csv << ["unicode", "character"]
           doc.xpath("//div[@id='main2']/table[@class='kyuichiran']/tr/td").each do |node|
@@ -79,16 +80,19 @@ class WordDataService
               "g", "z", "d", "b"]       # 行(子音)
       gyo.count.times do |g|
         CSV.open("services/jukugo/jukugo_#{gyo[g]}.csv", "w") do |csv|
-          csv << ["id", "idiom", "reading", "meaning"]
+          csv << ["name", "reading", "meaning"]
           retu = 0                      # 段(母音): aiueo
           5.times do |r|                # [aiueo].length = 5
             retu += 1
             no = 0                      # each idiom page number
             skip_count = 0            
             4213.times do               # idioms starting from "し" count most (4213)
-              break if skip_count > 30  # skip if empty pages count 30
+              break if skip_count > 30    # other letter has less idioms, and it should break if contents end.
+                                          # but some numbers are missing, and just a skip does not mean the end.
+                                          # then, regard 30-time-skip as a guide of no more idioms for the letter
               no += 1
               url = "https://k2.hofurink.com/products/myphp8.php?&gyo=#{gyo[g]}&retu=#{retu}&no=#{no}"
+              # sleep 0.9
               doc = Nokogiri::HTML.parse(open(url))
               doc.xpath("//div[@id='Categories']/div/div[1]/table/tbody").each do |node|
                 idiom = node.xpath("tr[1]/td/h3").inner_text.strip
@@ -107,18 +111,22 @@ class WordDataService
         end
       end
     end
-    
+
+    def merge_jukugo                   # WordDataService.merge_jukugo
+      gyo = ["a", "k", "s", "t", "n",
+             "h", "m", "y", "r", "w",
+             "g", "z", "d", "b"]
+      i = 0
+      CSV.open("db/fixtures/development/30_jukugo.csv", "w") do |csv|
+        csv << ["id", "name", "reading", "meaning"]
+        gyo.count.times do |g|
+          CSV.foreach("services/jukugo/jukugo_#{gyo[g]}.csv", headers: true) do |row|
+            i += 1
+            csv << [i, row[0], row[1], row[2]]
+          end
+        end
+      end
+    end
+
   end
 end
-
-
-# url = "https://k2.hofurink.com/products/myphp8.php?&gyo=#{x}&retu=#{y}&no=#{z}"
-# doc = Nokogiri::HTML.parse(open(url))
-# doc.xpath("//div[@id='Categories']/div/div[1]/table/tbody").each do |node|
-#   idiom = node.xpath("tr[1]/td/h3").text.strip
-#   reading = node.xpath("tr[2]/td/h3").text.strip
-#   meaning = node.xpath("tr[4]/td/h3").text.strip
-#   p idiom
-#   p reading
-#   p meaning
-# end
