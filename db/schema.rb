@@ -10,10 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_17_052236) do
+ActiveRecord::Schema.define(version: 2020_02_17_132228) do
+
+  create_table "jukugo_kanjis", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.integer "jukugo_id"
+    t.integer "kanji1_id"
+    t.integer "kanji2_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "jukugos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.string "name"
+    t.string "name", limit: 2
     t.string "reading"
     t.text "meaning"
     t.datetime "created_at", precision: 6, null: false
@@ -21,11 +29,28 @@ ActiveRecord::Schema.define(version: 2020_02_17_052236) do
   end
 
   create_table "kanjis", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.string "character"
+    t.string "character", limit: 1
     t.integer "jis"
     t.integer "joyo"
     t.integer "kanken"
     t.integer "primary_school"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "quiz_wadokaichin_jukugos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.integer "quiz_wadokaichin_id"
+    t.integer "jukugo1_id"
+    t.integer "jukugo2_id"
+    t.integer "jukugo3_id"
+    t.integer "jukugo4_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "quiz_wadokaichins", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.string "answer"
+    t.string "image"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
