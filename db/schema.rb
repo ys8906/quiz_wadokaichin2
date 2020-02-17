@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_17_132228) do
+ActiveRecord::Schema.define(version: 2020_02_17_152518) do
 
   create_table "jukugo_kanjis", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.integer "jukugo_id"
@@ -53,6 +53,10 @@ ActiveRecord::Schema.define(version: 2020_02_17_132228) do
     t.string "image"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "jukugo1_name"
+    t.string "jukugo2_name"
+    t.string "jukugo3_name"
+    t.string "jukugo4_name"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
