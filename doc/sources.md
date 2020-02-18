@@ -1,3 +1,7 @@
+//////////
+// 漢字 //
+/////////
+
 ***
 ■漢字検定 級別
 <a href="https://kanjijoho.com"></a>
@@ -45,3 +49,10 @@ JIS第四水準漢字（2,436字）
 <a href="https://github.com/ynupc/scalastringcourseday7/blob/master/src/main/resources/kanji/jis_level_4.csv"></a>
 
 
+//////////
+// 熟語 //
+/////////
+***
+■二字熟語
+<a href="https://k2.hofurink.com/products/myphp8.php?&gyo=a&retu=1&no=1"></a>
+※gyo: akstn = あかさたな, retu: あいうえお = 12345, no: 熟語ナンバー
