@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :quiz_wadokaichin do
-    sequence(:answer)     { "一" }
-    sequence(:image)      { File.open("spec/factories/image.jpg") }
+    answer     { "一" }
+    image      { File.open("spec/factories/image.jpg") }
   end
 end

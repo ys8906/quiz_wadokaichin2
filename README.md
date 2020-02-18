@@ -12,6 +12,8 @@ Things you may want to cover:
 * Configuration
 
 * Database creation
+・このプロジェクトでは、seed_fuを使用しており、通常のseedファイルは存在しません。
+　そのため、"db:seed_fu"で生成をお願いいたします。
 
 * Database initialization
 
