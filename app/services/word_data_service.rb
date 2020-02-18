@@ -9,10 +9,10 @@ class WordDataService
   class << self
 
     def scrape_kanken         # WordDataService.scrape_kanken
-      file_path = "services/kanji/kanken/kanken_level_#{i+1}.csv"
-      url = "https://kanjijoho.com/cat/kyu#{i+1}.html"
-
       10.times do |i|
+        url       = "https://kanjijoho.com/cat/kyu#{i+1}.html"
+        file_path = "services/kanji/kanken/kanken_level_#{i+1}.csv"
+  
         CSV.open(file_path, "w") do |csv|
           # sleep 0.9
           doc = Nokogiri::HTML.parse(open(url))
@@ -28,32 +28,31 @@ class WordDataService
   
     def merge_kanji         # WordDataService.merge_kanji
       # Merge all kanji csv files into one
-      file_path_merged           = "db/fixtures/development/20_kanji.csv"
-      file_path_jis             = "services/kanji/jis/jis_level_#{i+1}.csv"
-      file_path_joyo            = "services/kanji/joyo/joyo_kanji.csv"
-      file_path_kanken          = "services/kanji/kanken/kanken_level_#{i+1}.csv"
-      file_path_primary_school  = "services/kanji/primary_school/primary_school_#{i+1}.csv"
-
+      file_path_merged = "db/fixtures/development/20_kanji.csv"
       CSV.open(file_path_merged, "w") do |csv|
         csv << ["character", "jis", "joyo", "kanken", "primary_school"]
         # jis
         4.times.each do |i|
+          file_path_jis = "services/kanji/jis/jis_level_#{i+1}.csv"
           CSV.foreach(file_path_jis, headers: true) do |row|
             csv << [row[1], i+1, 0, 0, 0]
           end
         end
         # joyo
+        file_path_joyo ="services/kanji/joyo/joyo_kanji.csv" 
         CSV.foreach(file_path_joyo, headers: true) do |row|
           csv << [row[1], 0, 1, 0, 0]
         end
         # kanken
         10.times.each do |i|
+          file_path_kanken = "services/kanji/kanken/kanken_level_#{i+1}.csv"
           CSV.foreach(file_path_kanken, headers: true) do |row|
             csv << [row[1], 0, 0, i+1, 0]
           end
         end
         # primary_school
         6.times.each do |i|
+          file_path_primary_school = "services/kanji/primary_school/primary_school_#{i+1}.csv"
           CSV.foreach(file_path_primary_school, headers: true) do |row|
             csv << [row[1], 0, 0, 0, i+1]
           end
@@ -82,14 +81,12 @@ class WordDataService
     end
 
     def scrape_jukugo                   # WordDataService.scrape_jukugo
-      file_path        = "services/jukugo/jukugo_#{gyo[g]}.csv"
-      url              = "https://k2.hofurink.com/products/myphp8.php?&gyo=#{gyo[g]}&retu=#{retu}&no=#{no}" 
-
       gyo = ["a", "k", "s", "t", "n",
               "h", "m", "y", "r", "w",
               "g", "z", "d", "b"]       # 行(子音)
       gyo.count.times do |g|
-        CSV.open(file_path, "w") do |csv|
+        file_path_each = "services/jukugo/jukugo_#{gyo[g]}.csv"
+        CSV.open(file_path_each, "w") do |csv|
           csv << ["name", "reading", "meaning"]
           retu = 0                      # 段(母音): aiueo
           5.times do |r|                # [aiueo].length = 5
@@ -101,6 +98,7 @@ class WordDataService
                                           # but some numbers are missing, and just a skip does not mean the end.
                                           # then, regard 30-time-skip as a guide of no more idioms for the letter
               no += 1
+              url = "https://k2.hofurink.com/products/myphp8.php?&gyo=#{gyo[g]}&retu=#{retu}&no=#{no}"
               # sleep 0.9
               doc = Nokogiri::HTML.parse(open(url))
               doc.xpath("//div[@id='Categories']/div/div[1]/table/tbody").each do |node|
@@ -122,16 +120,15 @@ class WordDataService
     end
 
     def merge_jukugo                   # WordDataService.merge_jukugo
-      file_path_merged = "db/fixtures/development/30_jukugo.csv"
-      file_path_each   = "services/jukugo/jukugo_#{gyo[g]}.csv"
-
       gyo = ["a", "k", "s", "t", "n",
              "h", "m", "y", "r", "w",
              "g", "z", "d", "b"]
       i = 0
+      file_path_merged = "db/fixtures/development/30_jukugo.csv"
       CSV.open(file_path_merged, "w") do |csv|
         csv << ["id", "name", "reading", "meaning"]
         gyo.count.times do |g|
+          file_path_each = "services/jukugo/jukugo_#{gyo[g]}.csv"
           CSV.foreach(file_path_each, headers: true) do |row|
             i += 1
             csv << [i, row[0], row[1], row[2]]

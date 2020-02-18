@@ -12,14 +12,6 @@
 
 ActiveRecord::Schema.define(version: 2020_02_18_063835) do
 
-  create_table "jukugo_kanjis", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.integer "jukugo_id"
-    t.integer "kanji1_id"
-    t.integer "kanji2_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "jukugos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name", limit: 2
     t.string "reading"

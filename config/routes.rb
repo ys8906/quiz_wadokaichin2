@@ -3,4 +3,5 @@ Rails.application.routes.draw do
     sessions: 'users/sessions'
   }
   root   'static_pages#home'
+  resources :quiz_wadokaichins, only: [:show]
 end
