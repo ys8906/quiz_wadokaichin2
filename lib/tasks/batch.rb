@@ -6,7 +6,7 @@ class Batch
     twitter = TwitterService.new
 
     # Generate wadokaichin
-    quiz.generate_wadokaichin_random
+    quiz.generate_wadokaichin_random_auto
     text = "TEST TWEET: New Wadokaichin"
     image = "app/assets/images/quiz_wadokaichin/quiz_#{QuizWadokaichin.last.id}.jpg"
 
@@ -15,6 +15,12 @@ class Batch
 
     # After
     p "QuizGenerate.wadokaichin executed"
+  end
+
+  def cron_test
+    file = File.open("test_#{Time.now}.txt","w")
+    file.puts Time.now
+    p "cron_test executed"
   end
 
 end
