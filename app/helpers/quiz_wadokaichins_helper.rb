@@ -1,0 +1,2 @@
+module QuizWadokaichinsHelper
+end

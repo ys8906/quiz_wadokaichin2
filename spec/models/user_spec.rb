@@ -5,6 +5,8 @@ RSpec.describe User, type: :model do
     @user = build(:user)
   end
 
-  pending "add some examples to (or delete) #{__FILE__}"
-  
+  it "is valid factory user" do
+    expect(@user).to be_valid
+  end
+
 end
