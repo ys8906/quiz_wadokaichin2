@@ -1,7 +1,44 @@
 <h1>和同開珎</h1>
-<%= @quiz.answer %>
-<%= @quiz.jukugo_right_name %>
-<%= @quiz.jukugo_down_name %>
-<%= @quiz.jukugo_left_name %>
-<%= @quiz.jukugo_up_name %>
-<%= image_tag("quiz_wadokaichin/quiz_6.jpg") %>
+
+<div class="flash">
+	<%= flash[:info] %>
+</div>
+
+<%= form_with url: quiz_wadokaichin_path, skip_enforcing_utf8: true, local: true do |f| %>
+<table>
+	<tbody>
+		<tr>
+			<td></td>
+			<td><%= @quiz.jukugo_up_name.slice(0) %></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td><%= @quiz.jukugo_left_name.slice(0) %></td>
+			<td>
+				<%= f.text_field :answer, value: @answer, size:1, maxlength:1 %>			
+			</td>
+			<td><%= @quiz.jukugo_right_name.slice(1) %></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><%= @quiz.jukugo_down_name.slice(1) %></td>
+			<td></td>
+		</tr>
+	</tbody>
+</table>
+<%= f.submit "Final answer?" %>
+<% end %>	
+
+<button id="show-answer">答えを見る</button>
+<span id="answer" hidden="true"><%= @quiz.answer %></span>
+
+<%= image_pack_tag "media/images/quiz_wadokaichins/#{@quiz.id}.jpg" %>
+
+<script>
+$(function() {
+	$('#answer').hide();
+	$("#show-answer").click(function() {
+		$("#answer").show();
+	});
+});
+</script>
