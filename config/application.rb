@@ -37,5 +37,12 @@ module Quiz
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
+
+    # Autoload ./lib
+    config.autoload_paths += Dir["#{config.root}/lib/**/"]
+    # Below did not work (somehow)
+    # config.autoload_paths += %W(#{config.root}/lib)
+    # config.paths.add 'lib', eager_load: true
+
   end
 end
