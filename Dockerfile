@@ -2,13 +2,15 @@
 FROM ruby:2.6.5
 # rails cで日本語が打てるように設定
 ENV LANG C.UTF-8
-
+# 日本時間
+ENV TZ='Asia/Tokyo'
 # 必要なパッケージのインストール（基本的に必要になってくるものだと思うので削らないこと）
 RUN apt-get update -qq && \
     apt-get install -y build-essential \ 
                        libpq-dev \        
                        nodejs \
-                       default-mysql-client         
+                       # For gem 'whenever'   
+                       cron        
 
 # Install Yarn 
 RUN apt-get update && apt-get install -y curl apt-transport-https wget && \
@@ -31,3 +33,6 @@ RUN yarn install --check-files
 RUN gem install bundler
 RUN bundle install
 ADD . $APP_ROOT
+
+# Update cron tasks by whenever
+RUN bundle exec whenever --update-crontab

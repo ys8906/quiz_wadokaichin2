@@ -26,6 +26,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'devise', '4.7.1'
 gem 'seed-fu', '~> 2.3'
 gem 'twitter', '~> 6.2'
+gem 'whenever', '~> 1.0', require: false
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
