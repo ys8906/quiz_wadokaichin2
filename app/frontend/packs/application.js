@@ -6,7 +6,7 @@
 require("@rails/ujs").start()
 require("@rails/activestorage").start()
 require("channels")
-require("jquery");
+// require("jquery");
 
 // import '../src/javascripts/application.js';
 import '../src/stylesheets/application.css';
