@@ -3,5 +3,6 @@ Rails.application.routes.draw do
     sessions: 'users/sessions'
   }
   root   'static_pages#home'
-  resources :quiz_wadokaichins, only: [:show]
+  resources :quiz_wadokaichins, only: [:index, :show]
+  post  '/quiz_wadokaichins/:id',  to: 'quiz_wadokaichins#show'
 end

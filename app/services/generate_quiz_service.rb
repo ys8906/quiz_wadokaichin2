@@ -37,7 +37,7 @@ class GenerateQuizService
                 "l_text:Verdana_50_bold:#{QuizWadokaichin.last.jukugo_left_name.slice(0)},g_west,x_160/" +
                 "l_text:Verdana_50_bold:#{QuizWadokaichin.last.jukugo_up_name.slice(0)},g_north,y_35/" +
                 "wadokaichin_cwtzdu.jpg")
-          image_file_path = "app/assets/images/quiz_wadokaichin/quiz_#{QuizWadokaichin.last.id}.jpg"
+          image_file_path = "public/images/quiz_wadokaichins/#{QuizWadokaichin.last.id}.jpg"
           open(image_url) do |file|
             open(image_file_path, "wb") do |image|
               image.write(file.read)
@@ -94,12 +94,12 @@ class GenerateQuizService
                     jukugo_left_id: jukugo_right_match[0].id, jukugo_up_id: jukugo_right_match[1].id)
           # Generate quiz_image
           image_url = URI.escape("https://res.cloudinary.com/dlab9jkaw/image/upload/" +
-                "l_text:Verdana_50_bold:#{QuizWadokaichin.last.jukugo_right_name.slice(1)},g_east,x_160/" +
-                "l_text:Verdana_50_bold:#{QuizWadokaichin.last.jukugo_down_name.slice(1)},g_south,y_35/" +
-                "l_text:Verdana_50_bold:#{QuizWadokaichin.last.jukugo_left_name.slice(0)},g_west,x_160/" +
-                "l_text:Verdana_50_bold:#{QuizWadokaichin.last.jukugo_up_name.slice(0)},g_north,y_35/" +
+                "l_text:Sawarabi Gothic_bold:#{QuizWadokaichin.last.jukugo_right_name.slice(1)},g_east,x_160/" +
+                "l_text:Sawarabi Gothic_bold:#{QuizWadokaichin.last.jukugo_down_name.slice(1)},g_south,y_35/" +
+                "l_text:Sawarabi Gothic_bold:#{QuizWadokaichin.last.jukugo_left_name.slice(0)},g_west,x_160/" +
+                "l_text:Sawarabi Gothic_bold:#{QuizWadokaichin.last.jukugo_up_name.slice(0)},g_north,y_35/" +
                 "wadokaichin_cwtzdu.jpg")
-          image_file_path = "app/assets/images/quiz_wadokaichin/quiz_#{QuizWadokaichin.last.id}.jpg"
+          image_file_path = "public/images/quiz_wadokaichins/#{QuizWadokaichin.last.id}.jpg"
           open(image_url) do |file|
             open(image_file_path, "wb") do |image|
               image.write(file.read)
@@ -149,7 +149,7 @@ class GenerateQuizService
               "l_text:Verdana_50_bold:#{QuizWadokaichin.last.jukugo_left_name.slice(0)},g_west,x_160/" +
               "l_text:Verdana_50_bold:#{QuizWadokaichin.last.jukugo_up_name.slice(0)},g_north,y_35/" +
               "wadokaichin_cwtzdu.jpg")
-        image_file_path = "app/assets/images/quiz_wadokaichin/quiz_#{QuizWadokaichin.last.id}.jpg"
+        image_file_path = "public/images/quiz_wadokaichins/#{QuizWadokaichin.last.id}.jpg"
         open(image_url) do |file|
           open(image_file_path, "wb") do |image|
             image.write(file.read)

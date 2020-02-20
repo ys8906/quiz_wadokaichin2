@@ -6,8 +6,9 @@
 require("@rails/ujs").start()
 require("@rails/activestorage").start()
 require("channels")
+require("jquery");
 
-import '../src/javascripts/application.js';
+// import '../src/javascripts/application.js';
 import '../src/stylesheets/application.css';
 
 // Uncomment to copy all static images under ../images to the output folder and reference
