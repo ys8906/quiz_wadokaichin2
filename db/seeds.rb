@@ -1,2 +1,2 @@
-# Separating environments for each seed
-load(Rails.root.join('db', 'seeds', "#{Rails.env.downcase}.rb"))
+# Use seed_fu automatically 
+SeedFu.seed
