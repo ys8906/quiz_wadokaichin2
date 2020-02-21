@@ -34,3 +34,9 @@ yarn-debug.log*
 # Vendor
 /vendor
 quiz.code-workspace
+
+# ローカル画像フォルダ
+app/frontend/images
+
+# db永続化
+db/volumes
