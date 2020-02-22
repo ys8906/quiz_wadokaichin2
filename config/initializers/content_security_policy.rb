@@ -1,3 +1,12 @@
+# from https://github.com/rails/webpacker#vue
+Rails.application.config.content_security_policy do |policy|
+  if Rails.env.development?
+    policy.script_src :self, :https, :unsafe_eval
+  else
+    policy.script_src :self, :https
+  end
+end
+
 # Be sure to restart your server when you modify this file.
 
 # Define an application-wide content security policy
