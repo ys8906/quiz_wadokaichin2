@@ -23,7 +23,7 @@ class GenerateQuizService
   ## 個別メソッド
   def generate_wadokaichin_random_auto         # GenerateQuizService.new.generate_wadokaichin_random_auto
     loop do
-      kanji = Kanji.where('id >= ?', rand(Kanji.first.id..Kanji.last.id)).first.character
+      kanji = Kanji.offset(rand(Kanji.count)).first.character
       jukugo_left_match = Jukugo.where("name like ?", "#{kanji}%").sample(2)
       jukugo_right_match = Jukugo.where("name like ?", "%#{kanji}").sample(2)
       if kanji_has_jukugos?(jukugo_left_match.size, jukugo_right_match.size)
@@ -36,7 +36,7 @@ class GenerateQuizService
   def generate_wadokaichin_random         # GenerateQuizService.new.generate_wadokaichin_random
     loop do
       # DBから漢字をランダムに取ってくる
-      kanji = Kanji.where('id >= ?', rand(Kanji.first.id..Kanji.last.id)).first.character
+      kanji = Kanji.offset(rand(Kanji.count)).first.character
       # DBから左右に対象の漢字を含む熟語を二つ持ってくる
       jukugo_left_match = Jukugo.where("name like ?", "#{kanji}%").sample(2)
       jukugo_right_match = Jukugo.where("name like ?", "%#{kanji}").sample(2)
@@ -92,7 +92,7 @@ class GenerateQuizService
           when /^[yY]/
             p "再生成"
             redo
-          # If not, break the loop
+          # やり直さない場合、ループを終了する
           when /^[nN]/, /^$/
             p "n/a"
             return
