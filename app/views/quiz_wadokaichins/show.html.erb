@@ -5,7 +5,7 @@
 </div>
 
 <%= form_with url: quiz_wadokaichin_path, skip_enforcing_utf8: true, local: true do |f| %>
-<table>
+<table id="table">
 	<tbody>
 		<tr>
 			<td></td>
@@ -33,12 +33,3 @@
 <span id="answer" hidden="true"><%= @quiz.answer %></span>
 
 <%= image_tag @quiz.image_url %>
-
-<script>
-$(function() {
-	$('#answer').hide();
-	$("#show-answer").click(function() {
-		$("#answer").show();
-	});
-});
-</script>
