@@ -1,12 +1,24 @@
-// This file is automatically compiled by Webpack, along with any other files
-// present in this directory. You're encouraged to place your actual application logic in
-// a relevant structure within app/javascript and only use these pack files to reference
-// that code so it'll be compiled.
+// Vue
+import Vue from 'vue'
 
-// import '../src/javascripts/application.js';
-import '../src/stylesheets/application.css';
+// Vuetify
+import "vuetify/dist/vuetify.min.css"
+import 'material-design-icons-iconfont/dist/material-design-icons.css'
+import '@mdi/font/css/materialdesignicons.css'
+import Vuetify from 'vuetify'
 
-// Uncomment to copy all static images under ../images to the output folder and reference
-// them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)
-// or the `imagePath` JavaScript helper below.
-const images = require.context('../images', true)
+// main.js
+import App from '../app.vue'
+
+Vue.use(Vuetify)
+const vuetify = new Vuetify();
+
+document.addEventListener('DOMContentLoaded', () => {
+  const app = new Vue({
+    vuetify,
+    render: h => h(App)
+  }).$mount()
+  document.body.appendChild(app.$el)
+
+  console.log(app)
+})
