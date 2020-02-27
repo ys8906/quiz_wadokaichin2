@@ -1,0 +1,7 @@
+#table {
+  background-image: url("https://quiz-site-ys.s3-ap-northeast-1.amazonaws.com/wadokaichin/quiz-background.jpg");
+  background-position: center;
+  background-size: contain;
+  padding: 20px;
+  margin: 20px;
+}

@@ -1,3 +1,7 @@
+// frontend内のファイル読み込み
+const images = require.context('../images', true)
+import '../stylesheets/application.css'
+
 // Vue
 import Vue from 'vue'
 
@@ -8,10 +12,10 @@ import '@mdi/font/css/materialdesignicons.css'
 import Vuetify from 'vuetify'
 
 // main.js
-import App from '../app.vue'
+import App from '../App.vue'
 
 Vue.use(Vuetify)
-const vuetify = new Vuetify();
+const vuetify = new Vuetify()
 
 document.addEventListener('DOMContentLoaded', () => {
   const app = new Vue({
