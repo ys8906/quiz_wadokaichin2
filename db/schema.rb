@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_18_063835) do
+ActiveRecord::Schema.define(version: 2020_02_21_150204) do
 
   create_table "jukugos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name", limit: 2
@@ -33,22 +33,22 @@ ActiveRecord::Schema.define(version: 2020_02_18_063835) do
   create_table "quiz_wadokaichin_jukugos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.integer "quiz_wadokaichin_id"
     t.integer "jukugo_right_id"
-    t.integer "jukugo_down_id"
+    t.integer "jukugo_bottom_id"
     t.integer "jukugo_left_id"
-    t.integer "jukugo_up_id"
+    t.integer "jukugo_top_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "quiz_wadokaichins", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "answer"
-    t.string "image"
+    t.string "image_url"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "jukugo_right_name"
-    t.string "jukugo_down_name"
+    t.string "jukugo_bottom_name"
     t.string "jukugo_left_name"
-    t.string "jukugo_up_name"
+    t.string "jukugo_top_name"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|

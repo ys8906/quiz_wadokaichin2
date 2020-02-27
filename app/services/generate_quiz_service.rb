@@ -1,114 +1,56 @@
 class GenerateQuizService
-  require 'open-uri'
-  require 'uri'
 
-  # TODO: need to prevent overlapping quiz (though unlikely to happen)
-  # OPTIMIZE
-  # FIXME
+  # TODO: 重複を防ぐメソッド（確率が低いので後回し）
 
-  def generate_wadokaichin(kanji)         # GenerateQuizService.new.generate_wadokaichin()
+  ## 共通メソッド
+  def kanji_has_jukugos?(left_size, right_size)
+    true if (left_size + right_size == 4)
+  end
+
+  def create_quiz_wadokaichin(kanji, jukugo_left_match, jukugo_right_match)
+    # QuizWadokaichinを生成
+    quiz = QuizWadokaichin.create(answer: kanji, jukugo_right_name: jukugo_left_match.first.name,
+                                                 jukugo_bottom_name: jukugo_left_match.last.name,
+                                                 jukugo_left_name: jukugo_right_match.first.name,
+                                                 jukugo_top_name: jukugo_right_match.last.name)
+    # QuizWadokaichinJukugo（中間テーブル）を生成
+    quiz.create_quiz_wadokaichin_jukugo(jukugo_right_id: jukugo_left_match.first.id,
+                                        jukugo_bottom_id: jukugo_left_match.last.id,
+                                        jukugo_left_id: jukugo_right_match.first.id,
+                                        jukugo_top_id: jukugo_right_match.last.id)
+  end
+
+  ## 個別メソッド
+  def generate_wadokaichin_random_auto         # GenerateQuizService.new.generate_wadokaichin_random_auto
     loop do
-      # Take 2 jukugos from matched lists
+      kanji = Kanji.offset(rand(Kanji.count)).first.character
       jukugo_left_match = Jukugo.where("name like ?", "#{kanji}%").sample(2)
       jukugo_right_match = Jukugo.where("name like ?", "%#{kanji}").sample(2)
-      # If there are 2 (or more) kanjis, confirm before creating
-      if jukugo_left_match.count == 2 && jukugo_right_match.count == 2
-        p [kanji, jukugo_left_match[0].name, jukugo_left_match[1].name,
-            jukugo_right_match[0].name, jukugo_right_match[1].name]
-        p "これで作成しますか？[y/n]"
-        response = gets
-        case response
-        # If yes, create and save quiz
-        when /^[yY]/
-          # Create QuizWadokaichin
-          QuizWadokaichin.create(answer: kanji,
-                                  jukugo_right_name: jukugo_left_match[0].name,
-                                  jukugo_down_name: jukugo_left_match[1].name,
-                                  jukugo_left_name: jukugo_right_match[0].name,
-                                  jukugo_up_name: jukugo_right_match[1].name)
-          # Create QuizWadokaichinJukugo (junction table)
-          QuizWadokaichin.last.build_quiz_wadokaichin_jukugo\
-            .update(jukugo_right_id: jukugo_left_match[0].id, jukugo_down_id: jukugo_left_match[1].id,
-                    jukugo_left_id: jukugo_right_match[0].id, jukugo_up_id: jukugo_right_match[1].id)
-          # Generate quiz_image
-          image_url = URI.escape("https://res.cloudinary.com/dlab9jkaw/image/upload/" +
-                "l_text:Verdana_50_bold:#{QuizWadokaichin.last.jukugo_right_name.slice(1)},g_east,x_160/" +
-                "l_text:Verdana_50_bold:#{QuizWadokaichin.last.jukugo_down_name.slice(1)},g_south,y_35/" +
-                "l_text:Verdana_50_bold:#{QuizWadokaichin.last.jukugo_left_name.slice(0)},g_west,x_160/" +
-                "l_text:Verdana_50_bold:#{QuizWadokaichin.last.jukugo_up_name.slice(0)},g_north,y_35/" +
-                "wadokaichin_cwtzdu.jpg")
-          image_file_path = "public/images/quiz_wadokaichins/#{QuizWadokaichin.last.id}.jpg"
-          open(image_url) do |file|
-            open(image_file_path, "wb") do |image|
-              image.write(file.read)
-            end
-          end
-          return p "作成成功:
-                    #{[kanji, jukugo_left_match[0].name, jukugo_left_match[1].name,
-                      jukugo_right_match[0].name, jukugo_right_match[1].name]}"
-        # If not, you can try again to pick up another pattern
-        when /^[nN]/, /^$/
-          p "作り直しますか？[y/n]"
-          response = gets
-          case response
-          when /^[yY]/
-            p "再生成"
-            redo
-          # If not, break the loop
-          when /^[nN]/, /^$/
-            p "n/a"
-            return
-          end
-        end
-      # If there are no more than 2 kanjis, break the loop
-      else
-        p "n/a"
+      if kanji_has_jukugos?(jukugo_left_match.size, jukugo_right_match.size)
+        create_quiz_wadokaichin(kanji, jukugo_left_match, jukugo_right_match)
+        return QuizWadokaichin.last
       end
     end
   end
 
   def generate_wadokaichin_random         # GenerateQuizService.new.generate_wadokaichin_random
     loop do
-      # Take random kanji from db
-      kanji = Kanji.where('id >= ?', rand(Kanji.first.id..Kanji.last.id)).first
-      # Take 2 jukugos from matched lists
-      jukugo_left_match = Jukugo.where("name like ?", "#{kanji.character}%").sample(2)
-      jukugo_right_match = Jukugo.where("name like ?", "%#{kanji.character}").sample(2)
-      if jukugo_left_match.count == 2 && jukugo_right_match.count == 2
-        p [kanji.character, jukugo_left_match[0].name, jukugo_left_match[1].name,
-            jukugo_right_match[0].name, jukugo_right_match[1].name]
+      # DBから漢字をランダムに取ってくる
+      kanji = Kanji.offset(rand(Kanji.count)).first.character
+      # DBから左右に対象の漢字を含む熟語を二つ持ってくる
+      jukugo_left_match = Jukugo.where("name like ?", "#{kanji}%").sample(2)
+      jukugo_right_match = Jukugo.where("name like ?", "%#{kanji}").sample(2)
+      if kanji_has_jukugos?(jukugo_left_match.size, jukugo_right_match.size)
+        p [kanji, jukugo_left_match.first.name, jukugo_left_match.last.name,
+            jukugo_right_match.first.name, jukugo_right_match.last.name]
         p "これで作成しますか？[y/n]"
         response = gets
         case response
-        # If yes, create and save quiz
+        # yesならクイズを生成
         when /^[yY]/
-          # Create QuizWadokaichin
-          QuizWadokaichin.create(answer: kanji.character,
-                                  jukugo_right_name: jukugo_left_match[0].name,
-                                  jukugo_down_name: jukugo_left_match[1].name,
-                                  jukugo_left_name: jukugo_right_match[0].name,
-                                  jukugo_up_name: jukugo_right_match[1].name)
-          # Create QuizWadokaichinJukugo (junction table)
-          QuizWadokaichin.last.build_quiz_wadokaichin_jukugo\
-            .update(jukugo_right_id: jukugo_left_match[0].id, jukugo_down_id: jukugo_left_match[1].id,
-                    jukugo_left_id: jukugo_right_match[0].id, jukugo_up_id: jukugo_right_match[1].id)
-          # Generate quiz_image
-          image_url = URI.escape("https://res.cloudinary.com/dlab9jkaw/image/upload/" +
-                "l_text:Sawarabi Gothic_bold:#{QuizWadokaichin.last.jukugo_right_name.slice(1)},g_east,x_160/" +
-                "l_text:Sawarabi Gothic_bold:#{QuizWadokaichin.last.jukugo_down_name.slice(1)},g_south,y_35/" +
-                "l_text:Sawarabi Gothic_bold:#{QuizWadokaichin.last.jukugo_left_name.slice(0)},g_west,x_160/" +
-                "l_text:Sawarabi Gothic_bold:#{QuizWadokaichin.last.jukugo_up_name.slice(0)},g_north,y_35/" +
-                "wadokaichin_cwtzdu.jpg")
-          image_file_path = "public/images/quiz_wadokaichins/#{QuizWadokaichin.last.id}.jpg"
-          open(image_url) do |file|
-            open(image_file_path, "wb") do |image|
-              image.write(file.read)
-            end
-          end
-          return p "作成成功: #{[kanji.character,
-                    jukugo_left_match[0].name, jukugo_left_match[1].name,
-                    jukugo_right_match[0].name, jukugo_right_match[1].name]}"
-        # If not, you can try again to pick up another pattern
+          create_quiz_wadokaichin(kanji, jukugo_left_match, jukugo_right_match)
+          return QuizWadokaichin.last
+        # 該当する熟語がない場合、別の漢字でやり直せる
         when /^[nN]/, /^$/
           p "作り直しますか？[y/n]"
           response = gets
@@ -116,7 +58,7 @@ class GenerateQuizService
           when /^[yY]/
             p "再生成"
             redo
-          # If not, break the loop
+          # やり直さない場合、ループを終了する
           when /^[nN]/, /^$/
             p "n/a"
             return
@@ -125,37 +67,40 @@ class GenerateQuizService
       end
     end
   end
-    
-  def generate_wadokaichin_random_auto         # GenerateQuizService.new.generate_wadokaichin_random_auto
+
+    def generate_wadokaichin(kanji)         # GenerateQuizService.new.generate_wadokaichin()
     loop do
-      kanji = Kanji.where('id >= ?', rand(Kanji.first.id..Kanji.last.id)).first
-      jukugo_left_match = Jukugo.where("name like ?", "#{kanji.character}%").sample(2)
-      jukugo_right_match = Jukugo.where("name like ?", "%#{kanji.character}").sample(2)
-      if jukugo_left_match.count == 2 && jukugo_right_match.count == 2
-        # Create QuizWadokaichin
-        QuizWadokaichin.create(answer: kanji.character,
-                                jukugo_right_name: jukugo_left_match[0].name,
-                                jukugo_down_name: jukugo_left_match[1].name,
-                                jukugo_left_name: jukugo_right_match[0].name,
-                                jukugo_up_name: jukugo_right_match[1].name)
-        # Create QuizWadokaichinJukugo (junction table)
-        QuizWadokaichin.last.build_quiz_wadokaichin_jukugo\
-          .update(jukugo_right_id: jukugo_left_match[0].id, jukugo_down_id: jukugo_left_match[1].id,
-                  jukugo_left_id: jukugo_right_match[0].id, jukugo_up_id: jukugo_right_match[1].id)
-        # Generate quiz_image
-        image_url = URI.escape("https://res.cloudinary.com/dlab9jkaw/image/upload/" +
-              "l_text:Verdana_50_bold:#{QuizWadokaichin.last.jukugo_right_name.slice(1)},g_east,x_160/" +
-              "l_text:Verdana_50_bold:#{QuizWadokaichin.last.jukugo_down_name.slice(1)},g_south,y_35/" +
-              "l_text:Verdana_50_bold:#{QuizWadokaichin.last.jukugo_left_name.slice(0)},g_west,x_160/" +
-              "l_text:Verdana_50_bold:#{QuizWadokaichin.last.jukugo_up_name.slice(0)},g_north,y_35/" +
-              "wadokaichin_cwtzdu.jpg")
-        image_file_path = "public/images/quiz_wadokaichins/#{QuizWadokaichin.last.id}.jpg"
-        open(image_url) do |file|
-          open(image_file_path, "wb") do |image|
-            image.write(file.read)
+      # DBから左右に対象の漢字を含む熟語を二つ持ってくる
+      jukugo_left_match = Jukugo.where("name like ?", "#{kanji}%").sample(2)
+      jukugo_right_match = Jukugo.where("name like ?", "%#{kanji}").sample(2)
+      # 当てはまる熟語が2つ以上存在する場合、生成を続けるか確認する
+      if kanji_has_jukugos?(jukugo_left_match.size, jukugo_right_match.size)
+        p [kanji, jukugo_left_match.first.name, jukugo_left_match.last.name,
+            jukugo_right_match.first.name, jukugo_right_match.last.name]
+        p "これで作成しますか？[y/n]"
+        response = gets
+        case response
+        # yesならクイズを生成
+        when /^[yY]/
+          create_quiz_wadokaichin(kanji, jukugo_left_match, jukugo_right_match)
+          return QuizWadokaichin.last
+        # 該当する熟語がない場合、別の漢字でやり直せる
+        when /^[nN]/, /^$/
+          p "作り直しますか？[y/n]"
+          response = gets
+          case response
+          when /^[yY]/
+            p "再生成"
+            redo
+          # やり直さない場合、ループを終了する
+          when /^[nN]/, /^$/
+            p "n/a"
+            return
           end
         end
-        return
+      # 該当する熟語がない場合、ループを終了する
+      else
+        p "n/a"
       end
     end
   end

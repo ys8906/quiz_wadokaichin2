@@ -27,6 +27,8 @@ gem 'devise', '4.7.1'
 gem 'seed-fu', '~> 2.3'
 gem 'twitter', '~> 6.2'
 gem 'whenever', '~> 1.0', require: false
+gem 'slack-notifier', '2.3.2'
+gem 'aws-sdk', '~> 3'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

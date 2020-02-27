@@ -10,7 +10,8 @@ RUN apt-get update -qq && \
                        libpq-dev \        
                        nodejs \
                        # For gem 'whenever'   
-                       cron        
+                       cron \
+                       vim    
 
 # Install Yarn 
 RUN apt-get update && apt-get install -y curl apt-transport-https wget && \
