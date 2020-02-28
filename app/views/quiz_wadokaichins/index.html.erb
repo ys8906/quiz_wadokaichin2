@@ -1,4 +1,16 @@
 <h2>wadokaichin index</h2>
-<%= render @quiz_wadokaichins %>
-<%= paginate @quiz_wadokaichins %>
-<i class="fas fa-check"></i>
+
+<%= form_with url: quiz_wadokaichins_path, html: {method: 'GET'},
+    skip_enforcing_utf8: true, local: true do |f| %>
+  <p>クイズ</p>
+  <%= f.select :category, options_for_select({ "和銅開珍": "QuizWadokaichin" }) %>
+  <p>並び替え</p>
+  <%= f.select :order, options_for_select({ "新しい順": "id ASC",
+                                            "古い順": "id DESC" }) %>
+  <%= f.submit "表示", :class=>"btn bg-primary" %>
+<% end %>
+
+<div id="content">
+  <%= render @quizzes %>
+  <%= paginate @quizzes %>
+</div>
