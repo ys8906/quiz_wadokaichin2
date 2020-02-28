@@ -1,6 +1,6 @@
-<h2>wadokaichin index</h2>
+<h2>home</h2>
 
-<%= form_with url: quiz_wadokaichins_path, html: {method: 'GET'},
+<%= form_with url: root_path, html: {method: 'GET'},
     skip_enforcing_utf8: true, local: true do |f| %>
   <p>クイズ</p>
   <%= f.select :category, options_for_select({ "和銅開珍": "QuizWadokaichin" }) %>
