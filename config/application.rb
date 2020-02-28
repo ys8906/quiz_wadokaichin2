@@ -44,5 +44,7 @@ module Quiz
     # config.autoload_paths += %W(#{config.root}/lib)
     # config.paths.add 'lib', eager_load: true
 
+    config.i18n.default_locale = :ja
+
   end
 end

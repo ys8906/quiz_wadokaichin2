@@ -2,8 +2,9 @@
 const images = require.context('../images', true)
 import '../stylesheets/application.scss'
 
-// Bootstrap
+// Frontend modules
 require("jquery")
+require("@fortawesome/fontawesome-free")
 require("bootstrap")
 
 // Vue
