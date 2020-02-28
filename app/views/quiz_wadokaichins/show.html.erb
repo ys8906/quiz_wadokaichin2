@@ -1,35 +1,107 @@
-<h1>和同開珎</h1>
+<div id="quiz_wadokaichin_show" class="container">
+	<div class="row">
+		<h2>
+			<%= link_to "No.#{@quiz.id - 1}", quiz_wadokaichin_path(@quiz.id - 1) %>
+		</h2>
+		<h1>和同開珎 No.<%= @quiz.id %></h1>
+		<h2>
+			<%= link_to "No.#{@quiz.id + 1}", quiz_wadokaichin_path(@quiz.id + 1) %>
+		</h2>
+	</div>
 
-<div class="flash">
-	<%= flash[:info] %>
+	<table id="table">
+		<tbody>
+			<tr>
+				<td></td>
+				<td><%= @quiz.jukugo_top_name.slice(0) %></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td><%= @quiz.jukugo_left_name.slice(0) %></td>
+				<td>
+					<input
+						type="text"
+						size="1"
+						maxlength="1"
+						v-model="answer"
+					>
+				</td>
+				<td><%= @quiz.jukugo_right_name.slice(1) %></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><%= @quiz.jukugo_bottom_name.slice(1) %></td>
+				<td></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<button
+		@click="checkAnswer"
+		:disabled="isCorrect || answerIsVisible"
+	>
+		解答する
+	</button>
+	<button
+		v-on:click="answerIsVisible = true"
+		:disabled="answerIsVisible"
+	>
+		答えを見る
+	</button>
+
+	<div class="flash">
+		<p
+			v-if="isCorrect == true"
+		>
+			正解！
+		</p>
+		<p
+			v-else-if="isCorrect == false"
+		>
+			再チャレンジ！
+		</p>
+	</div>
+
+	<div>
+		<div
+			v-if="answerIsVisible"
+		>
+			<p>答え：<%= @quiz.answer %></p>
+			<p><%= @quiz.jukugo_right_name %>：<%= @quiz.jukugo_right.meaning %></p>
+			<p><%= @quiz.jukugo_bottom_name %>：<%= @quiz.jukugo_bottom.meaning %></p>
+			<p><%= @quiz.jukugo_left_name %>：<%= @quiz.jukugo_left.meaning %></p>
+			<p><%= @quiz.jukugo_top_name %>：<%= @quiz.jukugo_top.meaning %></p>
+		</div>
+		<div
+			v-else
+		>
+			和同開珎とは、四つの熟語に共通する、一つの漢字を当てるクイズです。
+			漢字を上下左右に四つ並べる様子が、日本最古の貨幣といわれる「和同開珎」に似ているため、しばしばなぞらえて同じ名前で呼ばれます。「虫食い漢字クイズ」などとも呼ばれます。
+			画像の中央に解答を入力し、「回答する」を押すと、解答結果が現れます。
+			「答えを見る」を押すと、正答と解説が現れます。
+		</div>
+	</div>
+
+
 </div>
 
-<%= form_with url: quiz_wadokaichin_path, skip_enforcing_utf8: true, local: true do |f| %>
-<table id="table">
-	<tbody>
-		<tr>
-			<td></td>
-			<td><%= @quiz.jukugo_top_name.slice(0) %></td>
-			<td></td>
-		</tr>
-		<tr>
-			<td><%= @quiz.jukugo_left_name.slice(0) %></td>
-			<td>
-				<%= f.text_field :answer, value: @answer, size:1, maxlength:1 %>			
-			</td>
-			<td><%= @quiz.jukugo_right_name.slice(1) %></td>
-		</tr>
-		<tr>
-			<td></td>
-			<td><%= @quiz.jukugo_bottom_name.slice(1) %></td>
-			<td></td>
-		</tr>
-	</tbody>
-</table>
-<%= f.submit "Final answer?" %>
-<% end %>	
-
-<button id="show-answer">答えを見る</button>
-<span id="answer" hidden="true"><%= @quiz.answer %></span>
-
-<%= image_tag @quiz.image_url %>
+<script>
+new Vue ({
+	el: '#quiz_wadokaichin_show',
+	data: {
+		answer: null,
+		isCorrect: null,
+		answerIsVisible: null,
+	},
+	methods: {
+		checkAnswer() {
+			if (this.answer == <%= @quiz.answer.to_json.html_safe %>) {
+				this.isCorrect = true
+				this.answerIsVisible = true
+			} else {
+				this.isCorrect = false
+			}
+		}
+	}
+})
+</script>
