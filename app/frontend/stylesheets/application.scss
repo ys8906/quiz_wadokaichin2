@@ -4,6 +4,7 @@
   background-size: cover;
   padding: 20px;
   margin: 20px;
+}
 
 // Colors
 $crimson: #ba000d;
@@ -50,4 +51,4 @@ h8 {
 
 // Imports
 @import "~bootstrap/scss/bootstrap";
-@import "common.scss"
+@import "common.scss";
