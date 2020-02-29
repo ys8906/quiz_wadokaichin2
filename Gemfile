@@ -31,6 +31,15 @@ gem 'slack-notifier', '2.3.2'
 gem 'aws-sdk', '~> 3'
 gem 'kaminari', '~> 1.2'
 
+# Social login
+gem 'omniauth', '~> 1.9'
+gem 'omniauth-twitter', '~> 1.4'
+gem 'omniauth-google-oauth2', '~> 0.8.0'
+gem 'omniauth-yahoojp', '~> 0.2.1'
+  # omniauth-oauth2のバージョンアップに対応した版（有志作成）
+gem 'omniauth-line', git: 'https://github.com/gomo/omniauth-line.git', branch: 'master'
+gem 'omniauth-facebook', '~> 6.0'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
