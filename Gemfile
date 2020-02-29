@@ -29,6 +29,7 @@ gem 'twitter', '~> 6.2'
 gem 'whenever', '~> 1.0', require: false
 gem 'slack-notifier', '2.3.2'
 gem 'aws-sdk', '~> 3'
+gem 'kaminari', '~> 1.2'
 
 # Social login
 gem 'omniauth', '~> 1.9'

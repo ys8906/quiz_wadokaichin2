@@ -47,8 +47,15 @@ h8 {
   font-size: 12px;
 }
 
-// Default
+// Fontawesome
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
+$fa-font-path: "~@fortawesome/fontawesome-free/webfonts";
+@import '~@fortawesome/fontawesome-free/scss/brands';
+@import '~@fortawesome/fontawesome-free/scss/regular';
+@import '~@fortawesome/fontawesome-free/scss/solid';
 
-// Imports
+// Bootstrap
 @import "~bootstrap/scss/bootstrap";
+
+// css
 @import "common.scss";
