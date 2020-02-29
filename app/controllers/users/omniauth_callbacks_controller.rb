@@ -17,6 +17,10 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     callback_from :yahoojp
   end
 
+  def line
+    callback_from :line
+  end
+
   # More info at:
   # https://github.com/plataformatec/devise#omniauth
 
