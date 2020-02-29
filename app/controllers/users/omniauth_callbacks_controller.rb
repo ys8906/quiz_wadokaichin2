@@ -9,6 +9,14 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     callback_from :twitter
   end
 
+  def google_oauth2
+    callback_from :google_oauth2
+  end
+
+  def yahoojp
+    callback_from :yahoojp
+  end
+
   # More info at:
   # https://github.com/plataformatec/devise#omniauth
 
@@ -33,11 +41,16 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
     def callback_from(provider)
       provider = provider.to_s
+      if provider == "google_oauth2"
+        kind = "Google"
+      else
+        kind = provider.capitalize
+      end
 
-      @user = User.find_for_oauth(request.env['omniauth.auth'])
+      @user = User.from_omniauth(request.env['omniauth.auth'])
 
       if @user.persisted?
-        flash[:notice] = I18n.t('devise.omniauth_callbacks.success', kind: provider.capitalize)
+        flash[:notice] = I18n.t('devise.omniauth_callbacks.success', kind: kind)
         sign_in_and_redirect @user, event: :authentication
       else
         session["devise.#{provider}_data"] = request.env['omniauth.auth']

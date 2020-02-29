@@ -260,8 +260,12 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   config.omniauth :twitter, Rails.application.credentials.twitter[:api_key],
-                            Rails.application.credentials.twitter[:api_secret_key],
-                            callback_url: Rails.application.credentials.twitter[:callback_url]
+                            Rails.application.credentials.twitter[:api_secret_key]
+  config.omniauth :google_oauth2,  Rails.application.credentials.google[:client_id],
+                                   Rails.application.credentials.google[:client_secret]
+  config.omniauth :yahoojp,  Rails.application.credentials.yahoojp[:client_id],
+                             Rails.application.credentials.yahoojp[:secret],
+                             scope: 'openid profile email address'
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
