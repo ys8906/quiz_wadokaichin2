@@ -1,6 +1,10 @@
 // frontend内のファイル読み込み
 const images = require.context('../images', true)
-import '../stylesheets/application.css'
+import '../stylesheets/application.scss'
+
+// Bootstrap
+require("jquery")
+require("bootstrap")
 
 // Vue
 import Vue from 'vue'
