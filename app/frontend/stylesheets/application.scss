@@ -1,9 +1,50 @@
 #table {
   background-image: url("https://quiz-site-ys.s3-ap-northeast-1.amazonaws.com/wadokaichin/quiz-background.jpg");
   background-position: center;
-  background-size: contain;
+  background-size: cover;
   padding: 20px;
   margin: 20px;
+}
+
+// Colors
+$crimson: #ba000d;
+$white: #ffffff;
+$gray-300: #e3e3e3;
+$gray-400: #d2d2d2;
+$gray-600: #a3a3a3;
+$gray-800: #7d7d7d;
+
+// Typography
+$font-family-base: Noto Sans JP;
+h1 {
+  font-size: 48px;
+  font-weight: bold;
+}
+h2 {
+  font-size: 40px;
+  font-weight: bold;
+}
+h3 {
+  font-size: 32px;
+  font-weight: bold;
+}
+h4 {
+  font-size: 30px;
+  font-weight: bold;
+}
+h5 {
+  font-size: 16px;
+  font-weight: bold;
+}
+h6 {
+  font-size: 14px;
+  font-weight: bold;
+}
+h7 {
+  font-size: 14px;
+}
+h8 {
+  font-size: 12px;
 }
 
 // Fontawesome
@@ -15,3 +56,4 @@ $fa-font-path: "~@fortawesome/fontawesome-free/webfonts";
 
 // Bootstrap
 @import "~bootstrap/scss/bootstrap";
+@import "common.scss";
