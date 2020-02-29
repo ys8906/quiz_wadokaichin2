@@ -9,7 +9,7 @@ class User < ApplicationRecord
 
   # Omniauth
   def self.from_omniauth(auth)
-    if auth.provider == "twitter" || "line"
+    if auth.info.email.blank?
       user = User.where(uid: auth.uid, provider: auth.provider).first
       unless user
         user = User.create(
@@ -20,18 +20,7 @@ class User < ApplicationRecord
           password: Devise.friendly_token[0, 20]  # Deviseのパスワード生成機能
         )
       end
-    elsif auth.provider == "google_oauth2"
-      user = User.where(email: auth.info.email).first
-      unless user
-        user = User.create(
-          provider: auth.provider,
-          uid:      auth.uid,
-          name:     auth.info.name,
-          email:    auth.info.email,
-          password: Devise.friendly_token[0, 20]
-        )
-      end
-    elsif auth.provider == "yahoojp"
+    else
       user = User.where(email: auth.info.email).first
       unless user
         user = User.create(
