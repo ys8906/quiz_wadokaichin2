@@ -29,6 +29,12 @@ services:
     command: bundle exec bin/webpack-dev-server
     ports:
       - "3035:3035"
+  
+  mailcatcher:
+    image: schickling/mailcatcher
+    ports:
+      - "1080:1080"
+      - "1025:1025"
 
 volumes:
   mysql_quiz_data:
