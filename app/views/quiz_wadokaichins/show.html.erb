@@ -1,124 +1,11 @@
 <div id="quiz_wadokaichin_show" class="container">
-	<div class="row header-link">
-		<h2>
-			<%= link_to "No.#{@quiz.id - 1}", quiz_wadokaichin_path(@quiz.id - 1) %>
-		</h2>
-		<h1>和同開珎 No.<%= @quiz.id %></h1>
-		<h2>
-			<%= link_to "No.#{@quiz.id + 1}", quiz_wadokaichin_path(@quiz.id + 1) %>
-		</h2>
-	</div>
-
-	<table class="wadokaichin-table">
-		<tbody>
-			<tr>
-				<td></td>
-				<td><%= @quiz.jukugo_top_name.slice(0) %></td>
-				<td></td>
-			</tr>
-			<tr>
-				<td><%= @quiz.jukugo_left_name.slice(0) %></td>
-				<td>
-					<input
-						type="text"
-						size="1"
-						maxlength="1"
-						v-model="answer"
-					>
-				</td>
-				<td><%= @quiz.jukugo_right_name.slice(1) %></td>
-			</tr>
-			<tr>
-				<td></td>
-				<td><%= @quiz.jukugo_bottom_name.slice(1) %></td>
-				<td></td>
-			</tr>
-		</tbody>
-	</table>
-
-	<div class="answer-buttons">
-		<button
-			@click="checkAnswer"
-			:disabled="isCorrect || answerIsVisible"
-		>
-			解答する
-		</button>
-		<button
-			v-on:click="answerIsVisible = true"
-			:disabled="answerIsVisible"
-		>
-			答えを見る
-		</button>
-	</div>
-
-	<div class="sns">
-		<div class="fb-like" data-href=<%= @url %>
-				　data-width="" data-layout="button" data-action="like" data-size="small"
-				　data-share="false"></div>
-		<a href="https://twitter.com/share" class="twitter-share-button"
-			 data-text="あなたは解けるかな？"　data-url=<%= @url %> data-show-count="false"></a>
-	</div>
-	
-	</div>
-
-	<div class="vote">
-		<% if @reactions.where(remote_ip: @remote_ip).present? %>
-			<p>投票ありがとうございました！</p>
-		<% else %>
-			<%= form_with url: quiz_wadokaichin_reactions_path do |f| %>
-				<%= f.hidden_field :quiz_id, value: @quiz.id %>
-				<%= f.hidden_field :remote_ip, value: @remote_ip %>
-				<% 5.times.each do |i| %>
-					<label id="star-label-<%= i+1 %>" class="far fa-star">
-						<input
-							type="radio"
-							name="rating"
-							class="d-none"
-							value="<%= i+1 %>"
-							v-model="star"
-							v-on:click="rate"
-						>
-					</label>
-				<% end %>
-				<%= f.submit "投票する"%>
-			<% end %>
-		<% end %>
-		<p>平均：<%= @reactions.present? ? (@reactions.average(:rating)+3)/(@reactions.size+1) : 3.0 %></p>
-	</div>
-
-	<div class="flash">
-		<p><%= "以前解答した問題です" if @savedata.where(quiz_wadokaichin_id: @quiz.id).present? %></p>
-		<p
-			v-if="isCorrect == true"
-		>
-			正解！
-		</p>
-		<p
-			v-else-if="isCorrect == false"
-		>
-			再チャレンジ！
-		</p>
-	</div>
-
-	<div class="answer">
-		<div
-			v-if="answerIsVisible"
-		>
-			<p>答え：<%= @quiz.answer %></p>
-			<p><%= @quiz.jukugo_right_name %>：<%= @quiz.jukugo_right.meaning %></p>
-			<p><%= @quiz.jukugo_bottom_name %>：<%= @quiz.jukugo_bottom.meaning %></p>
-			<p><%= @quiz.jukugo_left_name %>：<%= @quiz.jukugo_left.meaning %></p>
-			<p><%= @quiz.jukugo_top_name %>：<%= @quiz.jukugo_top.meaning %></p>
-		</div>
-		<div
-			v-else
-		>
-			和同開珎とは、四つの熟語に共通する、一つの漢字を当てるクイズです。
-			漢字を上下左右に四つ並べる様子が、日本最古の貨幣といわれる「和同開珎」に似ているため、しばしばなぞらえて同じ名前で呼ばれます。「虫食い漢字クイズ」などとも呼ばれます。
-			画像の中央に解答を入力し、「回答する」を押すと、解答結果が現れます。
-			「答えを見る」を押すと、正答と解説が現れます。
-		</div>
-	</div>
+	<%= render 'quiz_wadokaichins/partials/header_link' %>
+	<%= render 'quiz_wadokaichins/partials/wadokaichin_table' %>
+	<%= render 'quiz_wadokaichins/partials/answer_buttons' %>
+	<%= render 'quiz_wadokaichins/partials/social_buttons' %>
+	<%= render 'quiz_wadokaichins/partials/vote' %>
+	<%= render 'quiz_wadokaichins/partials/flash' %>
+	<%= render 'quiz_wadokaichins/partials/answer' %>
 </div>
 
 <script>
@@ -132,7 +19,9 @@ new Vue ({
 	},
 	watch: {
 		answerIsVisible: function() {
-			if (<%= user_signed_in?.to_json.html_safe %> && this.answerIsVisible == true) {
+			// もしユーザーかつセーブデータがなければ、正解するか答えを見たらセーブ
+			if (<%= user_signed_in?.to_json.html_safe %> &&
+							this.answerIsVisible && <%= @savedata.blank? %> == true) {
 				axios.post('../../quiz_wadokaichin_savedata', {
 					quiz_id: <%= @quiz.id %>,
 					correct: this.isCorrect

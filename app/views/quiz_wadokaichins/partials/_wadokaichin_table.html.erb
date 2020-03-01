@@ -1,0 +1,26 @@
+<table class="wadokaichin-table">
+  <tbody>
+    <tr>
+      <td></td>
+      <td><%= @quiz.jukugo_top_name.slice(0) %></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><%= @quiz.jukugo_left_name.slice(0) %></td>
+      <td>
+        <input
+          type="text"
+          size="1"
+          maxlength="1"
+          v-model="answer"
+        >
+      </td>
+      <td><%= @quiz.jukugo_right_name.slice(1) %></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td><%= @quiz.jukugo_bottom_name.slice(1) %></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>

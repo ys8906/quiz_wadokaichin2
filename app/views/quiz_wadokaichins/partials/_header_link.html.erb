@@ -1,0 +1,9 @@
+<div class="row header-link">
+  <h2>
+    <%= link_to "No.#{@quiz.id - 1}", quiz_wadokaichin_path(@quiz.id - 1) %>
+  </h2>
+  <h1>和同開珎 No.<%= @quiz.id %></h1>
+  <h2>
+    <%= link_to "No.#{@quiz.id + 1}", quiz_wadokaichin_path(@quiz.id + 1) %>
+  </h2>
+</div>

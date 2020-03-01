@@ -1,0 +1,19 @@
+<div class="answer">
+  <div
+    v-if="answerIsVisible"
+  >
+    <p>答え：<%= @quiz.answer %></p>
+    <p><%= @quiz.jukugo_right_name %>：<%= @quiz.jukugo_right.meaning %></p>
+    <p><%= @quiz.jukugo_bottom_name %>：<%= @quiz.jukugo_bottom.meaning %></p>
+    <p><%= @quiz.jukugo_left_name %>：<%= @quiz.jukugo_left.meaning %></p>
+    <p><%= @quiz.jukugo_top_name %>：<%= @quiz.jukugo_top.meaning %></p>
+  </div>
+  <div
+    v-else
+  >
+    和同開珎とは、四つの熟語に共通する、一つの漢字を当てるクイズです。
+    漢字を上下左右に四つ並べる様子が、日本最古の貨幣といわれる「和同開珎」に似ているため、しばしばなぞらえて同じ名前で呼ばれます。「虫食い漢字クイズ」などとも呼ばれます。
+    画像の中央に解答を入力し、「回答する」を押すと、解答結果が現れます。
+    「答えを見る」を押すと、正答と解説が現れます。
+  </div>
+</div>

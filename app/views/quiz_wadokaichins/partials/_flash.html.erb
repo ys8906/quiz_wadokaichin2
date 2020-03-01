@@ -1,0 +1,13 @@
+<div class="flash">
+  <p><%= "以前解答した問題です" if @savedata.present? %></p>
+  <p
+    v-if="isCorrect == true"
+  >
+    正解！
+  </p>
+  <p
+    v-else-if="isCorrect == false"
+  >
+    再チャレンジ！
+  </p>
+</div>
