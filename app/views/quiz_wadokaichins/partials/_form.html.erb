@@ -5,7 +5,7 @@
     skip_enforcing_utf8: true, local: true do |f| %>
   <%= f.text_field :email, placeholder: "メールアドレス" %>
   <%= f.text_field :name, placeholder: "お名前" %>
-  <%= f.text_field :title, placeholder: "タイトル" %>
+  <%= f.hidden_field :title, value: @quiz.class.name.to_s + @quiz.id.to_s %>
   <%= f.text_field :content, placeholder: "お問い合わせ内容" %>
   <%= f.submit "送信", class: "btn bg-primary" %>
 <% end %>
