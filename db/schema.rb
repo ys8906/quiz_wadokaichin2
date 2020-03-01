@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_29_163019) do
+ActiveRecord::Schema.define(version: 2020_03_01_095605) do
 
   create_table "jukugos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name", limit: 2
@@ -47,6 +47,15 @@ ActiveRecord::Schema.define(version: 2020_02_29_163019) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["quiz_wadokaichin_id", "remote_ip"], name: "quiz_wadokaichin_reactions_index", unique: true
+  end
+
+  create_table "quiz_wadokaichin_savedata", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "quiz_wadokaichin_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "correct"
+    t.index ["user_id", "quiz_wadokaichin_id"], name: "quiz_wadokaichin_savedata_index", unique: true
   end
 
   create_table "quiz_wadokaichins", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|

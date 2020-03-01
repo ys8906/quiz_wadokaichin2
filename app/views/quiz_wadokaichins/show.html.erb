@@ -58,6 +58,8 @@
 		<a href="https://twitter.com/share" class="twitter-share-button"
 			 data-text="あなたは解けるかな？"　data-url=<%= @url %> data-show-count="false"></a>
 	</div>
+	
+	</div>
 
 	<div class="vote">
 		<% if @reactions.where(remote_ip: @remote_ip).present? %>
@@ -85,6 +87,7 @@
 	</div>
 
 	<div class="flash">
+		<p><%= "以前解答した問題です" if @savedata.where(quiz_wadokaichin_id: @quiz.id).present? %></p>
 		<p
 			v-if="isCorrect == true"
 		>
@@ -125,7 +128,17 @@ new Vue ({
 		answer: null,
 		isCorrect: null,
 		answerIsVisible: null,
-		star: null
+		star: null,
+	},
+	watch: {
+		answerIsVisible: function() {
+			if (<%= user_signed_in?.to_json.html_safe %> && this.answerIsVisible == true) {
+				axios.post('../../quiz_wadokaichin_savedata', {
+					quiz_id: <%= @quiz.id %>,
+					correct: this.isCorrect
+				})
+			}
+		}
 	},
 	methods: {
 		checkAnswer() {

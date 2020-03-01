@@ -7,6 +7,9 @@ class User < ApplicationRecord
   # Callbacks
   after_create :send_welcome_mail
 
+  # Associations
+  has_many :quiz_wadokaichin_savedata, dependent: :destroy
+
   # Omniauth
   def self.from_omniauth(auth)
     if auth.info.email.blank?

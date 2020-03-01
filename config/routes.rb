@@ -15,4 +15,5 @@ Rails.application.routes.draw do
 
   resources :quiz_wadokaichins, only: [:show]
   resources :quiz_wadokaichin_reactions, only: [:create]
+  resources :quiz_wadokaichin_savedata, only: [:create]
 end
