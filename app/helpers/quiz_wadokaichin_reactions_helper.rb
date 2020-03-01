@@ -1,0 +1,2 @@
+module QuizWadokaichinReactionsHelper
+end
