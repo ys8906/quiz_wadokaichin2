@@ -10,8 +10,19 @@ require("bootstrap")
 // Vue
 import Vue from 'vue'
 window.Vue = Vue
-import App from '../App.vue'
 
+// Axios
+import axios from "axios"
+  // CSRFトークンを指定
+  axios.defaults.headers.common = {
+    'X-Requested-With': 'XMLHttpRequest',
+    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+  }
+  // viewでのエイリアス設定
+  window.axios = axios
+
+
+import App from '../App.vue'
 document.addEventListener('DOMContentLoaded', () => {
   const app = new Vue({
     render: h => h(App)

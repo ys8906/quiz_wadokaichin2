@@ -5,8 +5,8 @@
   <p>クイズ</p>
   <%= f.select :category, options_for_select({ "和銅開珍": "QuizWadokaichin" }) %>
   <p>並び替え</p>
-  <%= f.select :order, options_for_select({ "新しい順": "id ASC",
-                                            "古い順": "id DESC" }) %>
+  <%= f.select :order, options_for_select({ "新しい順": "id DESC",
+                                            "古い順": "id ASC" }) %>
   <%= f.submit "表示", :class=>"btn bg-primary" %>
 <% end %>
 
