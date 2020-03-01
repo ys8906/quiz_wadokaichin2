@@ -21,7 +21,6 @@ import axios from "axios"
   // viewでのエイリアス設定
   window.axios = axios
 
-
 import App from '../App.vue'
 document.addEventListener('DOMContentLoaded', () => {
   const app = new Vue({
