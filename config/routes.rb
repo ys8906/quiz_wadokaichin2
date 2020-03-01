@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  # クイズ検索ページ = ホーム
   root 'home#root'
 
   # devise
@@ -13,5 +14,5 @@ Rails.application.routes.draw do
   get   '/form/send_inquiry', to: 'static_pages#send_inquiry'
 
   resources :quiz_wadokaichins, only: [:show]
-  post  '/quiz_wadokaichins/:id',  to: 'quiz_wadokaichins#show'
+  resources :quiz_wadokaichin_reactions, only: [:create]
 end
