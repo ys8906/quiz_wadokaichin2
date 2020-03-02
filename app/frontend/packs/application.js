@@ -1,11 +1,12 @@
-// frontend内のファイル読み込み
-const images = require.context('../images', true)
-import '../stylesheets/application.scss'
-
 // Frontend modules
 require("jquery")
 require("@fortawesome/fontawesome-free")
 require("bootstrap")
+
+// frontend内のファイル読み込み
+const images = require.context('../images', true)
+import '../stylesheets/application.scss'
+import '../javascripts/infinite-loading.pkgd.min'
 
 // Vue
 import Vue from 'vue'

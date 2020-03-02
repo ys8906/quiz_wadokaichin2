@@ -1,0 +1,11 @@
+<div id="quiz_thumbnails">
+  <%= render @related_quizzes %>
+</div>
+
+<div class="quiz_thumbnails"
+  data-infinite-scroll='{ "path": "li.page-item a[rel=next]",
+                          "append": ".quiz_wadokaichin_thumbnail",
+                          "history": "push",
+                          "hideNav": "nav" }'>
+  <%= paginate @related_quizzes %>
+</div>
