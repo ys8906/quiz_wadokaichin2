@@ -29,8 +29,7 @@ a {
 
 .privacy {
   &__box {
-    text-align: left;
-    margin:  0 auto;
+    margin: 0 auto;
   }
   &__title {
     text-align: center;
@@ -47,6 +46,24 @@ a {
   &__link {
     margin: 10px 0 20px 0;
     line-height: 1.5;
+  }
+}
+
+.form {
+  &__box {
+    margin-bottom: 20px;
+  }
+  &__title {
+    text-align: center;
+    margin: 30px 0;
+  }
+  &__subtitle {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  &__text {
+    margin: 0px auto 10px auto;
+    text-align: left;
   }
 }
 
