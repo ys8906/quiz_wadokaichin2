@@ -1,4 +1,8 @@
-
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
 
 // Header & footer
 .header {
@@ -82,9 +86,10 @@
 }
 
 .footer {
+  margin-top: auto;
   background-color: $gray-300;
-  padding: 20px;
   &__link-text {
+    padding: 10px 0;
     margin-right: 30px;
   }
 }
