@@ -27,6 +27,29 @@ a {
   }
 }
 
+.privacy {
+  &__box {
+    text-align: left;
+    margin:  0 auto;
+  }
+  &__title {
+    text-align: center;
+    margin: 30px 0;
+  }
+  &__subtitle {
+    color: $primary;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  &__text {
+    line-height: 1.5;
+  }
+  &__link {
+    margin: 10px 0 20px 0;
+    line-height: 1.5;
+  }
+}
+
 .footer {
   background-color: $gray-300;
   padding: 15px;
