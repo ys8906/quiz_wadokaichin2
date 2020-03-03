@@ -1,16 +1,3 @@
-// Colors
-$crimson: #ba000d;
-$white: #ffffff;
-$gray-300: #e3e3e3;
-$gray-400: #d2d2d2;
-$gray-600: #a3a3a3;
-$gray-800: #7d7d7d;
-  // For fontawesome
-  .fa-twitter-color { color: #1DA1F2 }
-  .fa-google-color { color: #DD5144 }
-  .fa-yahoo-color { color: #FF0027 }
-  .fa-line-color { color: #00B900 }
-
 // Typography
 $font-family-base: Noto Sans JP;
 h1 {
@@ -51,3 +38,9 @@ h8 {
   font-size: 12px;
   margin: 0;
 }
+
+// Fontawesome
+.fa-twitter-color { color: #1DA1F2 }
+.fa-google-color { color: #DD5144 }
+.fa-yahoo-color { color: #FF0027 }
+.fa-line-color { color: #00B900 }
