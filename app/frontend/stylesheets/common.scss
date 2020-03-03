@@ -67,6 +67,25 @@ a {
   }
 }
 
+.edit {
+  &__box {
+    margin-bottom: 20px;
+  }
+  &__title {
+    text-align: center;
+    margin: 30px 0;
+  }
+  &__subtitle {
+    text-align: center;
+    margin-bottom: 30px;
+    line-height: 1.5;
+  }
+  &__text {
+    margin: 0px auto 10px auto;
+    text-align: left;
+  }
+}
+
 .footer {
   background-color: $gray-300;
   padding: 15px;
