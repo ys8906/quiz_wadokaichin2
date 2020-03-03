@@ -1,9 +1,4 @@
-a {
-  color: $black;
-  &:hover {
-    color: $gray-800;
-  }
-}
+
 
 // Header & footer
 .header {
@@ -88,9 +83,9 @@ a {
 
 .footer {
   background-color: $gray-300;
-  padding: 15px;
+  padding: 20px;
   &__link-text {
-    margin-right: 15px;
+    margin-right: 30px;
   }
 }
 
