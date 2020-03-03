@@ -1,28 +1,34 @@
-<header class="navbar navbar-fixed-top header">
-  <div class="header--container row">
-    <div class="header--left">
-     <h5><%= link_to "ホームロゴ", root_path, id: "logo" %></h5>
+<header class="header navbar navbar-fixed-top d-flex">
+  <h4 class="mr-auto">
+    <%= link_to "ホームロゴ", root_path, id: "logo" %>
+  </h4>
+  <% if user_signed_in? %>
+  <h5 class="header__link-text d-none d-lg-block">ようこそ、<%= current_user.name %>さん！</h5>
+  <div class="nav-item dropdown">
+    <a href="#" data-toggle="dropdown">
+      <i class="far fa-smile fa-2x header__icon"></i>
+    </a>
+    <div class="dropdown-menu dropdown-menu-right header__dropdown">
+      <h5 class="header__dropdown-text"><%= link_to "ユーザー情報変更", edit_user_registration_path %></h5>
+      <h5 class="header__dropdown-text"><%= button_to "ログアウト", destroy_user_session_path, method: :delete %></h5>
     </div>
-    <div class="header--right">
-      <% if user_signed_in? %>
-        <h5 class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            アカウント <b class="caret"></b>
-          </a>
-          <ul class="dropdown-menu">
-            <li><%= link_to "ユーザーページ", edit_user_registration_path %></li>
-            <li class="divider"></li>
-            <li>
-              <%= button_to "ログアウト", destroy_user_session_path, method: :delete %>
-            </li>
-          </ul>
-      <% else %>
-        <div class="row">
-          <h5><%= link_to "サインイン", new_user_registration_path %></h5>
-          <span class="col-1"></span>
-          <h5><%= link_to "ログイン", user_session_path %></h5>
-        </div>
+  </div>
+  <% else %>
+  <div class="header__is-logout d-flex align-items-center">
+    <h4><span class="header__link-text d-flex badge badge-primary">ログイン</span></h4>
+      <%- if devise_mapping.omniauthable? %>
+        <%- resource_class.omniauth_providers.each do |provider| %>
+          <% icon = "fab fa-twitter fa-lg fa-twitter-color",  name = "Twitter"  if provider.to_s == "twitter" %>
+          <% icon = "fab fa-google fa-lg fa-google-color",    name = "Google"   if provider.to_s == "google_oauth2" %>
+          <% icon = "fab fa-yahoo fa-lg fa-yahoo-color",      name = "Yahoo"    if provider.to_s == "yahoojp" %>
+          <% icon = "fab fa-line fa-lg fa-line-color",        name = "Line"     if provider.to_s == "line" %>
+          <%= link_to omniauth_authorize_path(resource_name, provider) do %>
+            <i class="<%= icon[0].to_s %> header__icon"></i>
+            <h5 class="header__link-text d-none d-lg-block"><%= name %></h5>
+          <% end %>
+        <% end %>
       <% end %>
-    </div>
+    <%= render 'layouts/shared/is_logout_dropdown' %>
+    <% end %>
   </div>
 </header>
