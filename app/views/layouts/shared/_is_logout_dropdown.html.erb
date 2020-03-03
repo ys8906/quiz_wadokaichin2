@@ -1,4 +1,4 @@
-<div class="nav-item dropdown">
+<div id="is-logout-dropdown" class="nav-item dropdown">
   <a href="#" data-toggle="dropdown">
     <i class="far fa-envelope fa-lg header__icon"></i>
     <h5 class="header__link-text d-none d-lg-block">メール</h5>
@@ -8,11 +8,11 @@
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <div class="field">
         <h5 class="header__dropdown-text">メールアドレス</h5>
-        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", "v-model": "email" %>
       </div>
       <div class="field">
         <h5 class="header__dropdown-text">パスワード</h5>
-        <%= f.password_field :password, autocomplete: "current-password" %>
+        <%= f.password_field :password, autocomplete: "current-password", "v-model": "password" %>
       </div>
       <% if devise_mapping.rememberable? %>
         <div class="field">
@@ -34,7 +34,8 @@
       <% end %>
 
       <div class="actions">
-        <%= f.submit "ログインする", class: "btn btn-primary font-weight-bold" %>
+        <%= f.submit "ログインする", class: "btn btn-primary font-weight-bold",
+            ":disabled": "!this.email || !this.password" %>
       </div>
     <% end %>
     <div class="dropdown-divider"></div>
@@ -44,3 +45,13 @@
     <% end %>
   </div>
 </div>
+
+<script>
+new Vue ({
+	el: '#is-logout-dropdown',
+	data: {
+    email: null,
+    password: null
+  }
+})
+</script>
