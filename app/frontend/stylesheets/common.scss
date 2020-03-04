@@ -58,7 +58,7 @@ body {
   }
   &__subtitle {
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 50px;
   }
   &__text {
     margin: 0px auto 10px auto;
@@ -82,6 +82,20 @@ body {
   &__text {
     margin: 0px auto 10px auto;
     text-align: left;
+  }
+}
+
+.quiz_thumbnail {
+  background-color: $gray-300;
+  text-align: center;
+  &__title {
+    margin: 10px 0 5px 0;
+    &--category {
+      color: $primary;
+    }
+    &--number {
+      font-size: 16px;
+    }
   }
 }
 
