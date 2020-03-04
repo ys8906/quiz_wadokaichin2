@@ -4,7 +4,7 @@
     メールアドレスおよび現在のパスワードと、変更したい内容を入力してください。
     <br>変更しない場合は、空欄のままにしてください。
   </h5>
-  <div class="offset-1 col-10">
+  <div class="edit__wrapper offset-1 col-10">
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
     <%= render "devise/shared/error_messages", resource: resource %>
       <div class="edit__box form-group row">

@@ -3,7 +3,7 @@
     <%= link_to "ホームロゴ", root_path, id: "logo" %>
   </h4>
   <% if user_signed_in? %>
-  <h5 class="header__link-text d-none d-lg-block">ようこそ、<%= current_user.name %>さん！</h5>
+  <h5 class="header__link-text">ようこそ、<%= current_user.name %>さん！</h5>
   <div class="nav-item dropdown">
     <a href="#" data-toggle="dropdown">
       <i class="far fa-smile fa-2x header__icon"></i>
@@ -28,7 +28,7 @@
           <% icon = "fab fa-line fa-lg fa-line-color",        name = "Line"     if provider.to_s == "line" %>
           <%= link_to omniauth_authorize_path(resource_name, provider) do %>
             <i class="<%= icon[0].to_s %> header__icon"></i>
-            <h5 class="header__link-text d-none d-lg-block"><%= name %></h5>
+            <h5 class="header__link-text d-none d-md-block"><%= name %></h5>
           <% end %>
         <% end %>
       <% end %>

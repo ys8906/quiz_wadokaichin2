@@ -1,7 +1,7 @@
 <div id="form" class="container">
   <h3 class="form__title">メッセージフォーム</h3>
   <h4 class="form__subtitle">感想や別解などがあれば、いつでもお知らせください。</h4>
-  <div class="offset-1 col-10">
+  <div class="form__wrapper offset-1 col-10">
     <%= form_with url: form_send_inquiry_path, html: {method: 'GET'},
         skip_enforcing_utf8: true, local: true do |f| %>
       <div class="form__box form-group row">

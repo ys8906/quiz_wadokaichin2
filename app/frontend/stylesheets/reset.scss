@@ -40,6 +40,17 @@ h8 {
   margin: 0;
 }
 
+@mixin title() {
+  text-align: center;
+  margin: 30px 0;
+}
+
+@mixin subtitle() {
+  color: $primary;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
 // Others
 a {
   color: $black;

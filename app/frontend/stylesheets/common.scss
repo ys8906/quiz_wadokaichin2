@@ -1,8 +1,10 @@
+// Body
 body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 }
+
 
 // Header & footer
 .header {
@@ -26,68 +28,26 @@ body {
   }
 }
 
-.privacy {
-  &__box {
-    margin: 0 auto;
-  }
-  &__title {
-    text-align: center;
-    margin: 30px 0;
-  }
-  &__subtitle {
-    color: $primary;
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  &__text {
-    line-height: 1.5;
-  }
-  &__link {
-    margin: 10px 0 20px 0;
-    line-height: 1.5;
+.footer {
+  margin-top: auto;
+  background-color: $gray-300;
+  &__link-text {
+    padding: 10px 0;
+    margin-right: 30px;
   }
 }
 
-.form {
-  &__box {
-    margin-bottom: 20px;
-  }
-  &__title {
-    text-align: center;
-    margin: 30px 0;
-  }
-  &__subtitle {
-    text-align: center;
-    margin-bottom: 50px;
-  }
-  &__text {
-    margin: 0px auto 10px auto;
-    text-align: left;
-  }
-}
 
-.edit {
-  &__box {
-    margin-bottom: 20px;
-  }
-  &__title {
-    text-align: center;
-    margin: 30px 0;
-  }
-  &__subtitle {
-    text-align: center;
-    margin-bottom: 30px;
-    line-height: 1.5;
-  }
-  &__text {
-    margin: 0px auto 10px auto;
-    text-align: left;
-  }
+// Shared components
+.pagination {
+  margin: 20px 0;
 }
 
 .quiz_thumbnail {
   background-color: $gray-300;
   text-align: center;
+  border: none;
+  margin: 10px;
   &__title {
     margin: 10px 0 5px 0;
     &--category {
@@ -99,12 +59,89 @@ body {
   }
 }
 
-.footer {
-  margin-top: auto;
-  background-color: $gray-300;
-  &__link-text {
-    padding: 10px 0;
-    margin-right: 30px;
+
+// Pages
+.index {
+  &__title {
+    @include title()
+  }
+  &__subtitle {
+    @include subtitle()
+  }
+  &__searchtext {
+    margin: 0 0px;
+  }
+  &__navbar {
+    margin: 10px 0;
+  }
+  &__box {
+    margin: 0 10px;
+  }
+}
+
+  // Responsive
+  @media(max-width: 768px) {
+    .index {
+      &__form {
+        flex-direction: column;
+      }
+    }
+  }
+
+.privacy {
+  &__box {
+    margin: 0 auto;
+  }
+  &__title {
+    @include title()
+  }
+  &__subtitle {
+    @include subtitle()
+  }
+  &__text {
+    line-height: 1.5;
+  }
+  &__link {
+    margin: 10px 0 20px 0;
+    line-height: 1.5;
+  }
+}
+
+.form {
+  &__title {
+    @include title()
+  }
+  &__subtitle {
+    @include subtitle()
+  }
+  &__wrapper {
+    margin-top: 40px;
+  }
+  &__box {
+    margin-bottom: 20px;
+  }
+  &__text {
+    margin: 0px auto 10px auto;
+    text-align: left;
+  }
+}
+
+.edit {
+  &__title {
+    @include title()
+  }
+  &__subtitle {
+    @include subtitle()
+  }
+  &__wrapper {
+    margin-top: 40px;
+  }
+  &__box {
+    margin-bottom: 20px;
+  }
+  &__text {
+    margin: 0px auto 10px auto;
+    text-align: left;
   }
 }
 
