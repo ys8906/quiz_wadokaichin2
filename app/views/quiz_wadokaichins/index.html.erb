@@ -19,16 +19,16 @@
         class: "index__form index__searchtext form-inline" do |f| %>
       <% if user_signed_in? %>
         <div class="index__box">
-          <h5 class="index__searchtext navbar-text">未回答のクイズ</h5>
-          <%= f.check_box :unanswered, class: "navbar-text" %>
+          <h5 class="index__searchtext navbar-text">答えを見たクイズ</h5>
+          <%= f.check_box :answer_shown, { checked: params[:answer_shown].to_i == 1 } %>
         </div>
         <div class="index__box">
           <h5 class="index__searchtext navbar-text">正解したクイズ</h5>
-          <%= f.check_box :answered, class: "navbar-text" %>
+          <%= f.check_box :answered, { checked: params[:answered].to_i == 1 } %>
         </div>
         <div class="index__box">
-          <h5 class="index__searchtext navbar-text">答えを見たクイズ</h5>
-          <%= f.check_box :answer_shown, class: "navbar-text" %>
+          <h5 class="index__searchtext navbar-text">未回答のクイズ</h5>
+          <%= f.check_box :unanswered, { checked: params[:unanswered].to_i == 1 } %>
         </div>
       <% end %>
         <div class="index__box">
@@ -45,6 +45,7 @@
   <div class="container">
     <div class="justify-content-center row">
       <%= render @quizzes %>
+      <h4 class="mt-5"><%= "検索結果はありませんでした。" if @quizzes.size < 1 %></h4>
     </div>
   </div>
   <%= paginate @quizzes %>
