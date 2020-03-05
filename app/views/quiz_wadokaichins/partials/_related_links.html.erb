@@ -1,11 +1,6 @@
-<div id="quiz_thumbnails">
-  <%= render @related_quizzes %>
-</div>
-
-<div class="quiz_thumbnails"
-  data-infinite-scroll='{ "path": "li.page-item a[rel=next]",
-                          "append": ".quiz_wadokaichin_thumbnail",
-                          "history": "push",
-                          "hideNav": "nav" }'>
-  <%= paginate @related_quizzes %>
+<div class="wadokaichin__link-box container">
+  <h4 class="wadokaichin__link-box--title">他のクイズにも挑戦してみますか？</h4>
+  <div class="justify-content-center row">
+    <%= render @related_quizzes %>
+  </div>
 </div>

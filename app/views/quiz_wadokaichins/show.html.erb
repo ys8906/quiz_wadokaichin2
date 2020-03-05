@@ -1,57 +1,8 @@
 <div id="quiz_wadokaichin_show" class="container">
 	<%= render 'quiz_wadokaichins/partials/header_link' %>
-	<%= render 'quiz_wadokaichins/partials/wadokaichin_table' %>
-	<%= render 'quiz_wadokaichins/partials/answer_buttons' %>
-	<%= render 'quiz_wadokaichins/partials/social_buttons' %>
-	<%= render 'quiz_wadokaichins/partials/vote' %>
-	<%= render 'quiz_wadokaichins/partials/flash' %>
-	<%= render 'quiz_wadokaichins/partials/answer' %>
-	<%= render 'quiz_wadokaichins/partials/form' %>
-	<%= render 'quiz_wadokaichins/partials/related_links' %>
+	<div class="container">
+		<%= render 'quiz_wadokaichins/partials/wadokaichin_table' %>
+		<%= render 'quiz_wadokaichins/partials/related_links' %>
+	</div>
 </div>
 
-<script>
-new Vue ({
-	el: '#quiz_wadokaichin_show',
-	data: {
-		answer: null,
-		isCorrect: null,
-		answerIsVisible: null,
-		star: null,
-	},
-	watch: {
-		answerIsVisible: function() {
-			// もしユーザーかつセーブデータがなければ、正解するか答えを見たらセーブ
-			if (<%= user_signed_in?.to_json.html_safe %> &&
-							this.answerIsVisible && <%= @savedata.blank? %> == true) {
-				axios.post('../../quiz_wadokaichin_savedata', {
-					quiz_id: <%= @quiz.id %>,
-					correct: this.isCorrect
-				})
-			}
-		}
-	},
-	methods: {
-		checkAnswer() {
-			if (this.answer == <%= @quiz.answer.to_json.html_safe %>) {
-				this.isCorrect = true
-				this.answerIsVisible = true
-			} else {
-				this.isCorrect = false
-			}
-		},
-		rate(e) {
-			x = e.currentTarget.value
-			for (let i = 1; i < 6; i++) {
-				// "far fa-star": blank, "fas fa-star": filled
-				document.getElementById(`star-label-${i}`).classList.remove("far", "fas")
-				if (i <= x) {
-					document.getElementById(`star-label-${i}`).classList.add("fas")
-				} else {
-					document.getElementById(`star-label-${i}`).classList.add("far")
-				}
-			}
-		}
-	}
-})
-</script>

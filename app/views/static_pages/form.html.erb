@@ -1,11 +1,50 @@
-<h2 class="main">メッセージフォーム</h2>
-<h5 class="description">感想や別解などがあれば、いつでもお知らせください。</h5>
+<div id="form" class="container">
+  <h3 class="form__title">メッセージフォーム</h3>
+  <h4 class="form__subtitle">感想や別解などがあれば、いつでもお知らせください。</h4>
+  <div class="form__wrapper offset-1 col-10">
+    <%= form_with url: form_send_inquiry_path, html: {method: 'GET'},
+        skip_enforcing_utf8: true, local: true do |f| %>
+      <div class="form__box form-group row">
+        <h5 class="col-3 form__text">メールアドレス</h5>
+        <div class="text-center col-8">
+          <%= f.text_field :email, class: "col-12", "v-model": "email" %>
+        </div>
+      </div>
+      <div class="form__box form-group row">
+        <h5 class="col-3 form__text">お名前</h5>
+        <div class="text-center col-8">
+          <%= f.text_field :name, class: "col-12", "v-model": "name" %>
+        </div>
+      </div>
+      <div class="form__box form-group row">
+        <h5 class="col-3 form__text">タイトル</h5>
+        <div class="text-center col-8">
+          <%= f.text_field :title, class: "col-12", "v-model": "title" %>
+        </div>
+      </div>
+      <div class="form__box form-group row">
+        <h5 class="col-3 form__text">お問い合わせ内容</h5>
+        <div class="text-center col-8">
+          <%= f.text_area :content, class: "col-12",
+              style: "border-color: #BFBFBF; border-style: ridge;", size: "x5", "v-model": "content" %>
+        </div>
+      </div>
+      <div class="form__box text-center">
+        <%= f.submit "送信する", class: "btn btn-primary font-weight-bold text-right",
+             ":disabled": "!this.email || !this.name || !this.title || !this.content" %>
+      </div>
+    <% end %>
+  </div>
+</div>
 
-<%= form_with url: form_send_inquiry_path, html: {method: 'GET'},
-    skip_enforcing_utf8: true, local: true do |f| %>
-  <%= f.text_field :email, placeholder: "メールアドレス" %>
-  <%= f.text_field :name, placeholder: "お名前" %>
-  <%= f.text_field :title, placeholder: "タイトル" %>
-  <%= f.text_field :content, placeholder: "お問い合わせ内容" %>
-  <%= f.submit "送信", class: "btn bg-primary" %>
-<% end %>
+<script>
+new Vue ({
+	el: '#form',
+	data: {
+    email: null,
+    name: null,
+    title: null,
+    content: null,
+  }
+})
+</script>

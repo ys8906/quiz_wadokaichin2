@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   # クイズ検索ページ = ホーム
-  root 'home#root'
+  root 'quiz_wadokaichins#index'
 
   # devise
   devise_for :users, controllers: {
@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   get   '/form', to: 'static_pages#form'
   get   '/form/send_inquiry', to: 'static_pages#send_inquiry'
 
-  resources :quiz_wadokaichins, only: [:show]
+  resources :quiz_wadokaichins, only: [:index, :show]
   resources :quiz_wadokaichin_reactions, only: [:create]
   resources :quiz_wadokaichin_savedata, only: [:create]
 end

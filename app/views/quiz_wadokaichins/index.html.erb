@@ -1,0 +1,78 @@
+<div id="index" class="justify-content-center">
+  <h3 class="index__title">クイズ一覧</h3>
+  
+  <ul class="nav nav-tabs justify-content-center">
+    <li class="nav-item">
+      <%= link_to "和銅開珍", quiz_wadokaichins_path, class: "nav-link active" %>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">カテゴリー2</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#">カテゴリー3</a>
+    </li>
+  </ul>
+
+
+  <nav class="index__navbar d-flex justify-content-center">
+    <%= form_with url: root_path, html: { method: "GET", name: "form" },
+        class: "index__form index__searchtext form-inline" do |f| %>
+      <% if user_signed_in? %>
+        <div class="index__box">
+          <h5 class="index__searchtext navbar-text">答えを見たクイズ</h5>
+          <%= f.check_box :answer_shown, { checked: params[:answer_shown].to_i == 1 } %>
+        </div>
+        <div class="index__box">
+          <h5 class="index__searchtext navbar-text">正解したクイズ</h5>
+          <%= f.check_box :answered, { checked: params[:answered].to_i == 1 } %>
+        </div>
+        <div class="index__box">
+          <h5 class="index__searchtext navbar-text">未回答のクイズ</h5>
+          <%= f.check_box :unanswered, { checked: params[:unanswered].to_i == 1 } %>
+        </div>
+      <% end %>
+        <div class="index__box">
+          <h5 class="index__searchtext navbar-text">並び替え</h5>
+          <%= f.select :order, { "新しい順": "id DESC", "古い順": "id ASC" }, class: "index__searchtext" %>
+        </div>
+        <div class="index__box">
+          <%= f.submit "表示", name: nil, class: "index__searchtext btn btn-primary font-weight-bold" %>
+        </div>
+    <% end %>
+  </nav>
+
+  <% if true # pagination %>
+  <div class="container">
+    <div class="justify-content-center row">
+      <%= render @quizzes %>
+      <h4 class="mt-5"><%= "検索結果はありませんでした。" if @quizzes.size < 1 %></h4>
+    </div>
+  </div>
+  <%= paginate @quizzes %>
+  <% end %>
+
+  <% if false # infinite-loading %>
+  <%# FIXME: hideNavが効かない現象 %>
+  <div class="container">
+    <div id="quiz_thumbnails" class="justify-content-center row">
+      <%= render @quizzes %>
+      <div class="quiz_thumbnails"
+        data-infinite-scroll='{ "path": "li.page-item a[rel=next]",
+                                "append": ".quiz_thumbnail",
+                                "history": "push",
+                                "hideNav": "nav" }'>
+        <%= paginate @quizzes %>
+      </div>
+    </div>
+  </div>
+
+  <% end %>
+
+</div>
+
+
+<script>
+new Vue ({
+	el: '#index'
+})
+</script>
