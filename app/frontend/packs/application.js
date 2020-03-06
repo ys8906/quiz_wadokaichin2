@@ -1,10 +1,9 @@
-// Frontend modules
+// node modules
 require("jquery")
 require("@fortawesome/fontawesome-free")
 require("bootstrap")
 
-// frontend内のファイル読み込み
-const images = require.context('../images', true)
+// frontend内のファイル
 import '../stylesheets/application.scss'
 import '../javascripts/infinite-loading.pkgd.min'
 
@@ -12,22 +11,35 @@ import '../javascripts/infinite-loading.pkgd.min'
 import Vue from 'vue'
 window.Vue = Vue
 
-// Axios
-import axios from "axios"
-  // CSRFトークンを指定
-  axios.defaults.headers.common = {
-    'X-Requested-With': 'XMLHttpRequest',
-    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-  }
-  // viewでのエイリアス設定
-  window.axios = axios
+  // Axios
+  import axios from "axios"
+    // CSRFトークンを指定
+    axios.defaults.headers.common = {
+      'X-Requested-With': 'XMLHttpRequest',
+      'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+    }
+    // viewでのエイリアス設定
+    window.axios = axios
 
-import App from '../App.vue'
-document.addEventListener('DOMContentLoaded', () => {
-  const app = new Vue({
-    render: h => h(App)
-  }).$mount()
-  document.body.appendChild(app.$el)
+  // Components
+  import QuizWadokaichinShow from '../components/QuizWadokaichinShow.vue'
+    // 読み込みを遅らせる
+    window.onload = function() {
+      new Vue({
+        el: 'quiz-wadokaichin-show',
+        components: {
+          QuizWadokaichinShow
+        }
+      })
+    }
 
-  console.log(app)
-})
+  //// For SPA
+  // import App from '../App.vue'
+  // document.addEventListener('DOMContentLoaded', () => {
+  //   const app = new Vue({
+  //     render: h => h(App)
+  //   }).$mount()
+  //   document.body.appendChild(app.$el)
+  
+  //   console.log(app)
+  // })
