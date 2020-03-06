@@ -39,7 +39,12 @@ class User < ApplicationRecord
   end
 
   def send_welcome_mail
-    ApplicationMailer.user_welcome_mail(self).deliver
+    begin
+      UsersMailer.send_welcome_mail(self).deliver
+    rescue => exception
+      # エラー報告
+      @notifier.ping "#{Time.now}: [エラー] #{$@}"
+    end
   end
 
   private

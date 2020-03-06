@@ -1249,7 +1249,6 @@ DEPENDENCIES
   spring
   spring-watcher-listen (~> 2.0.0)
   twitter (~> 6.2)
-  tzinfo-data
   web-console (>= 3.3.0)
   webdrivers
   webpacker (~> 4.0)
