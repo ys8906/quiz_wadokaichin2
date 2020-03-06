@@ -50,7 +50,7 @@ class User < ApplicationRecord
   private
     # ユニークアドレスを生成
     def self.dummy_email(auth)
-      "#{auth.uid}-#{auth.provider}@social-login.com"
+      "#{auth.uid}-#{auth.provider}@ys8906-social-login.com"
     end
 
 end
