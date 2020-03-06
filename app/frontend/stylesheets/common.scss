@@ -128,6 +128,18 @@ body {
   }
   &__social-box {
     margin-left: 0px;
+    &--tweet {
+      height: 28px;
+      font-size: 12px;
+      line-height: 12px;
+      color: white;
+      background-color: #1DA1F2;
+    }
+    &--facebook {
+      :hover {
+        color: black;
+      }
+    }
   }
   &__vote-box {
     padding: 10px;
