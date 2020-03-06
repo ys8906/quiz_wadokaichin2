@@ -29,24 +29,24 @@
 
       <div class="wadokaichin__social-box">
         <div class="wadokaichin__button-box row justify-content-center">
-          <div class="wadokaichin__button-box--button ml-n3 fb-like" data-href=<%= @url %>
+          <div class="wadokaichin__button-box--button ml-n3 fb-like" data-href=<%= request.url %>
               　data-width="" data-layout="button" data-action="like" data-size="large"
               　data-share="false"></div>
           <span class="m-2"></span>
           <a href="https://twitter.com/share" class="twitter-share-button"
-              data-text="あなたは解けるかな？"　data-url=<%= @url %> data-show-count="false" data-size="large"></a>
+              data-text="あなたは解けるかな？"　data-url=<%= request.url %> data-show-count="false" data-size="large"></a>
         </div>
 
         <% if false %>
         <div class="wadokaichin__vote-box col-6 text-right">
           <div id="rating" class="rating">
             <h6>平均：<%= @reactions.present? ? (@reactions.average(:rating)+3)/(@reactions.size+1) : 3.0 %></h6>
-            <% if @reactions.where(remote_ip: @remote_ip).present? %>
+            <% if @reactions.where(remote_ip: request.remote_ip).present? %>
               <span class="badge badge-primary">投票済み</span>
             <% else %>
               <%= form_with url: quiz_wadokaichin_reactions_path do |f| %>
                 <%= f.hidden_field :quiz_id, value: @quiz.id %>
-                <%= f.hidden_field :remote_ip, value: @remote_ip %>
+                <%= f.hidden_field :remote_ip, value: request.remote_ip %>
                 <% 5.times.each do |i| %>
                   <label id="star-label-<%= i+1 %>" class="far fa-star fa-lg text-primary">
                     <input
