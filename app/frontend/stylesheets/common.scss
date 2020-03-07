@@ -1,3 +1,71 @@
+
+// Typography
+$font-family-base: Noto Sans JP;
+h1 {
+  font-size: 48px;
+  font-weight: bold;
+  margin: 0;
+}
+h2 {
+  font-size: 40px;
+  font-weight: bold;
+  margin: 0;
+}
+h3 {
+  font-size: 32px;
+  font-weight: bold;
+  margin: 0;
+}
+h4 {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0;
+}
+h5 {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0;
+}
+h6 {
+  font-size: 14px;
+  font-weight: bold;
+  margin: 0;
+}
+h7 {
+  font-size: 14px;
+  margin: 0;
+}
+h8 {
+  font-size: 12px;
+  margin: 0;
+}
+
+@mixin title() {
+  text-align: center;
+  margin: 30px 0;
+}
+
+@mixin subtitle() {
+  color: $primary;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+// Others
+a {
+  color: $black;
+  &:hover {
+    color: $gray-800;
+    text-decoration: none;
+  }
+}
+
+// Fontawesome
+.fa-twitter-color { color: #1DA1F2 }
+.fa-google-color { color: #DD5144 }
+.fa-yahoo-color { color: #FF0027 }
+.fa-line-color { color: #00B900 }
+
 // Body
 body {
   display: flex;

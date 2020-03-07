@@ -1,5 +1,5 @@
 // node modules
-require("jquery")
+// require("jquery")
 require("@fortawesome/fontawesome-free")
 require("bootstrap")
 

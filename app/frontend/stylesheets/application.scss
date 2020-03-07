@@ -6,9 +6,10 @@ $fa-font-path: "~@fortawesome/fontawesome-free/webfonts";
 @import '~@fortawesome/fontawesome-free/scss/solid';
 
 // Bootstrap
-@import "custom.scss";
+  // オーバーライド用のファイルは、bootstrapの読み込みより前に置く必要あり
+  // cf. https://getbootstrap.com/docs/4.1/getting-started/theming/#variable-defaults
+@import "bootstrap_override.scss";
 @import "~bootstrap/scss/bootstrap";
 
-// style
-@import "reset.scss";
+// Style
 @import "common.scss";
