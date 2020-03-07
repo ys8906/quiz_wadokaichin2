@@ -1,7 +1,7 @@
 class QuizWadokaichinsController < ApplicationController
   def index
     params[:order] ? (order = params[:order]) : (order = "created_at DESC")
-    if !params[:unanswered] && !params[:answered] && !params[:answer_shown]
+    if params[:unanswered].to_i.zero? && params[:answered].to_i.zero? && params[:answer_shown].to_i.zero?
       @quizzes = QuizWadokaichin.order(order).page(params[:page]).per(9)
     else
       # OPTIMIZE: これ以上きれいに書けるやつおるん？

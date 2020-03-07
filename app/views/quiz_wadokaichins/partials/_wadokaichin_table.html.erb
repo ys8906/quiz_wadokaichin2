@@ -4,6 +4,7 @@
                     <%= @quiz.jukugo_bottom.meaning.to_json %>,
                     <%= @quiz.jukugo_left.meaning.to_json %>,
                     <%= @quiz.jukugo_top.meaning.to_json %>]"
-  :need-savedata="<%= (user_signed_in? && @savedata.blank?) ? true : false %>"
+  :is-signed-in="<%= user_signed_in? ? true : false %>"
+  :has-savedata="<%= @savedata.present? ? true : false %>"
   :url="<%= request.url.to_json %>"
 ></quiz-wadokaichin-show>

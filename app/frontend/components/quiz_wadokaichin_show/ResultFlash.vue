@@ -1,18 +1,20 @@
 <template>
-  <div class="mb-3">
-    <h3
+  <div class="wadokaichin__result-box mb-3">
+    <div
       v-if="isCorrect == true"
-      class="text-success text-center"
+      class="wadokaichin__result-box--text text-success text-center"
     >
       正解！
-    </h3>
-    <h3
+    </div>
+    <div
       v-else-if="isCorrect == false"
-      class="text-warning text-center"
+      class="wadokaichin__result-box--text text-warning text-center"
     >
       残念！
-    </h3>
-    <h3 v-else >ㅤ</h3>
+    </div>
+    <!-- 回答前も空白文字でスペースを確保 -->
+    <div v-else
+      class="wadokaichin__result-box--text">ㅤ</div>
   </div>
 </template>
 

@@ -1,36 +1,36 @@
 <div id="is-logout-dropdown" class="nav-item dropdown">
   <a href="#" data-toggle="dropdown">
     <i class="far fa-envelope fa-lg header__icon"></i>
-    <h5 class="header__link-text d-none d-md-block">メール</h5>
+    <div class="header__link-text d-none d-md-block">メール</div>
     <i class="fas fa-caret-down header__icon"></i>
   </a>
   <div class="dropdown-menu dropdown-menu-right header__dropdown"> 
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <div class="field">
-        <h5 class="header__dropdown-text">メールアドレス</h5>
+        <div class="header__dropdown-text">メールアドレス</div>
         <%= f.email_field :email, autofocus: true, autocomplete: "email", "v-model": "email" %>
       </div>
       <div class="field">
-        <h5 class="header__dropdown-text">パスワード</h5>
+        <div class="header__dropdown-text">パスワード</div>
         <%= f.password_field :password, autocomplete: "current-password", "v-model": "password" %>
       </div>
       <% if devise_mapping.rememberable? %>
         <div class="field">
           <%= f.check_box :remember_me %>
           <label for="user_remember_me" class="header__dropdown-text">
-            <h5>ログインしたままにする</h5>
+            <div>ログインしたままにする</div>
           </label>
         </div>
       <% end %>
 
       <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
-        <h5 class="header__dropdown-text"><%= link_to "パスワードをお忘れですか？", new_password_path(resource_name) %></h5>
+        <div class="header__dropdown-text"><%= link_to "パスワードをお忘れですか？", new_password_path(resource_name) %></div>
       <% end %>
       <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
-        <h5 class="header__dropdown-text"><%= link_to "登録確認メールが届いていませんか？", new_confirmation_path(resource_name) %></h5>
+        <div class="header__dropdown-text"><%= link_to "登録確認メールが届いていませんか？", new_confirmation_path(resource_name) %></div>
       <% end %>
       <%- if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks' %>
-        <h5 class="header__dropdown-text"><%= link_to "パスワード再設定メールが届いていませんか？", new_unlock_path(resource_name) %></h5>
+        <div class="header__dropdown-text"><%= link_to "パスワード再設定メールが届いていませんか？", new_unlock_path(resource_name) %></div>
       <% end %>
 
       <div class="actions">
@@ -41,7 +41,7 @@
     <div class="dropdown-divider"></div>
 
     <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-      <h5 class="header__dropdown-text"><%= link_to "初めてのご利用ですか？", new_registration_path(resource_name) %></h5>
+      <div class="header__dropdown-text"><%= link_to "初めてのご利用ですか？", new_registration_path(resource_name) %></div>
     <% end %>
   </div>
 </div>

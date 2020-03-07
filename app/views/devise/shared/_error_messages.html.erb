@@ -1,13 +1,13 @@
 <% if resource.errors.any? %>
   <div id="error_explanation" class="error_field alert alert-danger">
-    <h4 class="text-center">
+    <div class="flash__title text-center">
       <%= I18n.t("errors.messages.not_saved",
                  count: resource.errors.count,
                  resource: resource.class.model_name.human.downcase)
        %>
-    </h4>
+    </div>
       <% resource.errors.full_messages.each do |message| %>
-        <h5 class="text-center mt-2 font-weight-normal"><%= message %></h5>
+        <div class="flash__subtitle text-center mt-2 font-weight-normal"><%= message %></div>
       <% end %>
   </div>
   <br>
