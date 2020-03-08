@@ -1,3 +1,24 @@
+// Reset
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
 
 // Typography
 $font-family-base: Noto Sans JP;
@@ -33,15 +54,13 @@ $font-family-base: Noto Sans JP;
 }
 
 @mixin title() {
-  font-size: 32px;
-  font-weight: bold;
+  @include display1();
   text-align: center;
   margin: 30px 0;
 }
 
 @mixin subtitle() {
-  font-size: 24px;
-  font-weight: bold;
+  @include heading2();
   color: $primary;
   text-align: center;
   margin-bottom: 20px;
@@ -147,8 +166,9 @@ a {
 
 // Pages
 .index {
-  &__title {
-    @include title();
+  &__category {
+    @include display1();
+    margin-top: 30px;
   }
   &__searchtext {
     @include heading1();
@@ -273,7 +293,7 @@ a {
 
 .privacy {
   &__box {
-    margin: 0 auto;
+    margin: 0 auto 50px auto;
   }
   &__title {
     @include title();

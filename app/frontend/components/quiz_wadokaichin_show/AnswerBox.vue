@@ -45,12 +45,12 @@
     <div
       v-else
     >
-      <div class="wadokaichin__answer-box--text">
+      <h2 class="wadokaichin__answer-box--text">
         <span class="wadokaichin__answer-box--large-letter text-primary">和</span>
         同開珎とは、四つの熟語に共通する、一つの漢字を当てるクイズです。<br>
         漢字を上下左右に四つ並べる様子が、日本最古の貨幣といわれる「和同開珎」に似ているため、
         しばしばなぞらえて同じ名前で呼ばれます。「虫食い漢字クイズ」などとも呼ばれます。
-      </div>
+      </h2>
       <div class="wadokaichin__answer-box--text">
         <br>
         <span class="wadokaichin__answer-box--large-letter text-primary">画</span>

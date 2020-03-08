@@ -1,6 +1,9 @@
 <header class="header navbar navbar-fixed-top d-flex">
   <div class="mr-auto">
-    <%= link_to "ホームロゴ", root_path, id: "logo" %>
+    <h1 class="header__link-text">楽しいクイズが遊べるサイト</h1>
+    <div>
+      <%= link_to "ホームロゴ", root_path, id: "logo" %>
+    </div>
   </div>
   <% if user_signed_in? %>
   <div class="header__link-text">ようこそ、<%= current_user.name %>さん！</div>

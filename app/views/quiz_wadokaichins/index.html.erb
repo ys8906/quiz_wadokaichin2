@@ -1,16 +1,20 @@
 <div id="index" class="justify-content-center">
-  <div class="index__title">クイズ一覧</div>
-  
   <ul class="nav nav-tabs justify-content-center">
     <li class="nav-item">
-      <%= link_to "和銅開珍", quiz_wadokaichins_path, class: "nav-link active" %>
+      <h2>
+        <%= link_to "和銅開珍", quiz_wadokaichins_path, class: "index__category nav-link active" %>
+      </h2>
     </li>
     <% if false %>
       <li class="nav-item">
-        <a class="nav-link" href="#">カテゴリー2</a>
+        <h2>
+          <a class="index__category nav-link" href="#">カテゴリー2</a>
+        </h2>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">カテゴリー3</a>
+        <h2>
+          <a class="index__category nav-link" href="#">カテゴリー3</a>
+        </h2>
       </li>
     <% end %>
   </ul>
@@ -44,13 +48,15 @@
   </nav>
 
   <% if true # pagination %>
-  <div class="container">
-    <div class="justify-content-center row">
-      <%= render @quizzes %>
-      <div class="index__searchtext mt-5"><%= "検索結果はありませんでした。" if @quizzes.size < 1 %></div>
-    </div>
-  </div>
-  <%= paginate @quizzes %>
+  <main>
+    <section>
+      <div class="justify-content-center row">
+        <%= render @quizzes %>
+        <div class="index__searchtext mt-5"><%= "検索結果はありませんでした。" if @quizzes.size < 1 %></div>
+      </div>
+    </section>
+    <%= paginate @quizzes %>
+  </main>
   <% end %>
 
   <% if false # infinite-loading %>
