@@ -20,6 +20,27 @@ time, mark, audio, video {
 	vertical-align: baseline;
 }
 
+a {
+  color: $black;
+  &:hover {
+    color: $gray-800;
+    text-decoration: none;
+  }
+}
+
+input, textarea {
+  border-radius: 4px;
+  -webkit-appearance: none;
+  border: 1px solid black
+}
+
+// Footerを下部に固定する用
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 // Typography
 $font-family-base: Noto Sans JP;
 @mixin hero() {
@@ -71,22 +92,6 @@ $font-family-base: Noto Sans JP;
 .fa-google-color { color: #DD5144 }
 .fa-yahoo-color { color: #FF0027 }
 .fa-line-color { color: #00B900 }
-
-// Body
-body {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-// Others
-a {
-  color: $black;
-  &:hover {
-    color: $gray-800;
-    text-decoration: none;
-  }
-}
 
 
 // Header & footer
@@ -193,14 +198,6 @@ a {
     margin: 0;
   }
 }
-/// Responsive
-// @media(max-width: 768px) {
-//   .index {
-//     &__form {
-//       flex-direction: column;
-//     }
-//   }
-// }
 
 
 .wadokaichin {
@@ -272,24 +269,13 @@ a {
   &__answer-box {
     background-color: $gray-300;
     padding: 70px 30px;
+    border-radius: 5px;
     &--text {
       @include heading1();
     }
     &--large-letter {
       color: $primary;
       font-size: 24px;
-    }
-  }
-  &__form-box {
-    margin: 20px;
-    padding: 0px 10px;
-    border: none;
-    &--header {
-      background-color: $gray-300;
-      border: none;
-    }
-    &--body {
-      border: solid $gray-300;
     }
   }
   &__link-box {
@@ -328,7 +314,8 @@ a {
     @include title();
   }
   &__subtitle {
-    @include subtitle();
+    @include heading1();
+    text-align: center;
   }
   &__wrapper {
     margin-top: 40px;
