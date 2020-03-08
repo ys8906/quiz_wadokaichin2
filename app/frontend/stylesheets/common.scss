@@ -94,22 +94,30 @@ a {
   background-color: $gray-300;
   background-attachment: fixed;
   padding: 15px;
-  &__link-text {
-    @include heading1();  
-    margin-right: 15px;
-    float: left;
-  }
   &__icon {
     margin: 5px 10px 0 0;
     float: left;
   }
+  &__social-box {
+    text-align: center;
+    margin: 10px auto;
+  }
   &__dropdown {
     padding: 10px 20px;
     white-space: nowrap;
-  }
-  &__dropdown-text {
-    @include heading1();
-    margin: 10px 0;
+    &--username {
+      @include heading1();
+      vertical-align: 25%;
+    }
+    &--button {
+      @include heading1();  
+      margin-right: 15px;
+      float: left;
+    }
+    &--text {
+      @include heading1();
+      margin: 10px 0;
+    }
   }
 }
 
