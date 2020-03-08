@@ -1,9 +1,9 @@
 <header class="header navbar navbar-fixed-top d-flex">
-  <div class="mr-auto">
-    <h1 class="header__link-text">楽しいクイズが遊べるサイト</h1>
-    <div>
-      <%= link_to "ホームロゴ", root_path, id: "logo" %>
-    </div>
+    <h1>
+      <%= link_to root_path do %>
+        <img src="#" alt="虫食い漢字 クイズ和銅開珍">
+      <% end %>
+    </h1>
   </div>
   <% if user_signed_in? %>
   <div class="header__link-text">ようこそ、<%= current_user.name %>さん！</div>

@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>クイズ和同開珎</title>
+  <% if false %>
+    <title>クイズ和同開珎 <%= "| No." + @quiz.id.to_s if @quiz.present? %></title>
     <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+    <%= csp_meta_tag %>   
+  <% end %>
+  <%= render 'layouts/meta' %>
 
     <%= stylesheet_pack_tag 'application', media: 'all' %>
     <%= javascript_pack_tag 'application' %>

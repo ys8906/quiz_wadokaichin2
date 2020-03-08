@@ -1,0 +1,44 @@
+<%# Rails meta-tags %>
+<%= csrf_meta_tags %>
+<%= csp_meta_tag %>
+
+<%# Basic meta-tags %>
+<meta name="description"
+      content="クイズ和同開珎は、四つの熟語に共通した一つの漢字を当てる、虫食い漢字クイズが遊べるサイトです
+               たくさんのクイズが、いつでもお手軽に楽しめます。">
+<meta name="keywords"             content="クイズ 漢字 和銅開珍 ゲーム 暇つぶし">
+<title>クイズ和同開珎 <%= "| " + @title if @title.present? %></title>
+
+<%# Open Graph for social services %>
+<meta name="twitter:card"         content="summary_large_image">
+<meta name="twitter:site"         content="@[account_name]">
+<meta property="og:url"           content="<% request.url %>" />
+<meta property="og:title"         content="クイズ和同開珎 <%= "| " + @title if @title.present? %>" />
+<meta property="og:description"
+      content="クイズ和同開珎は、四つの熟語に共通した一つの漢字を当てる、虫食い漢字クイズが遊べるサイトです
+               たくさんのクイズが、いつでもお手軽に楽しめます。">
+<meta property="og:image" 
+      content="<%= @quiz.present? ? @quiz.image_url : "https://quiz-site-ys.s3-ap-northeast-1.amazonaws.com/wadokaichin/og-img.jpg" %>" />
+
+<%# Schema (json-ld) %>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "WebSite",
+  "url": "http://localhost:3010/",
+  "logo": "",
+  "about": "",
+  "keywords": "",
+  "thumbnailUrl": "",
+  "sameAs": [
+    "twitter account"
+  ],
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "http://localhost:3010/search/?word={search_term}",
+    "query-input": "required name=search_term"
+ }
+}
+<%= render_breadcrumbs builder: BreadcrumbsOnRails::JsonLd::Builder %>
+</script>
+

@@ -2,7 +2,7 @@
   <ul class="nav nav-tabs justify-content-center">
     <li class="nav-item">
       <h2>
-        <%= link_to "和銅開珍", quiz_wadokaichins_path, class: "index__category nav-link active" %>
+        <%= link_to "クイズ一覧", quiz_wadokaichins_path, class: "index__category nav-link active" %>
       </h2>
     </li>
     <% if false %>
@@ -49,7 +49,7 @@
 
   <% if true # pagination %>
   <main>
-    <section>
+    <section class="container">
       <div class="justify-content-center row">
         <%= render @quizzes %>
         <div class="index__searchtext mt-5"><%= "検索結果はありませんでした。" if @quizzes.size < 1 %></div>

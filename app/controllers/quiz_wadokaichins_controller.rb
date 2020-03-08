@@ -1,4 +1,5 @@
 class QuizWadokaichinsController < ApplicationController
+  add_breadcrumb "ホーム", :root_path
   def index
     params[:order] ? (order = params[:order]) : (order = "created_at DESC")
     if params[:unanswered].to_i.zero? && params[:answered].to_i.zero? && params[:answer_shown].to_i.zero?
@@ -22,9 +23,11 @@ class QuizWadokaichinsController < ApplicationController
   end
 
   def show
-    @quiz       = QuizWadokaichin.find(params[:id])
-    @reactions  = @quiz.quiz_wadokaichin_reactions
-    @savedata   = current_user&.quiz_wadokaichin_savedata&.where(quiz_wadokaichin_id: @quiz.id)
+    @quiz               = QuizWadokaichin.find(params[:id])
+    @title              = "No." + @quiz.id.to_s
+    @reactions          = @quiz.quiz_wadokaichin_reactions
+    @savedata           = current_user&.quiz_wadokaichin_savedata&.where(quiz_wadokaichin_id: @quiz.id)
     @related_quizzes    = QuizWadokaichin.order("RAND()").limit(9)
+    add_breadcrumb "和銅開珍 No.#{@quiz.id}", quiz_wadokaichin_path
   end
 end
