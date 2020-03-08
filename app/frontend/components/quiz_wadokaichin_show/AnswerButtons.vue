@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="wadokaichin__button-box row justify-content-center">
-      <h4>答え</h4>
+      <div class="wadokaichin__button-box--subtitle">答え</div>
       <input
         v-model="answer"
         class="ml-4"

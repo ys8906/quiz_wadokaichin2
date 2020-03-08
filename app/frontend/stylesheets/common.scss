@@ -1,63 +1,69 @@
+// Reset
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
 
 // Typography
 $font-family-base: Noto Sans JP;
-h1 {
+@mixin hero() {
   font-size: 48px;
   font-weight: bold;
-  margin: 0;
 }
-h2 {
+@mixin display2() {
   font-size: 40px;
   font-weight: bold;
-  margin: 0;
 }
-h3 {
+@mixin display1() {
   font-size: 32px;
   font-weight: bold;
-  margin: 0;
 }
-h4 {
+@mixin heading2() {
   font-size: 24px;
   font-weight: bold;
-  margin: 0;
 }
-h5 {
+@mixin heading1() {
   font-size: 16px;
   font-weight: bold;
-  margin: 0;
 }
-h6 {
+@mixin bold() {
   font-size: 14px;
   font-weight: bold;
-  margin: 0;
 }
-h7 {
+@mixin body() {
   font-size: 14px;
-  margin: 0;
 }
-h8 {
+@mixin caption() {
   font-size: 12px;
-  margin: 0;
 }
 
 @mixin title() {
+  @include display1();
   text-align: center;
   margin: 30px 0;
 }
 
 @mixin subtitle() {
+  @include heading2();
   color: $primary;
   text-align: center;
   margin-bottom: 20px;
-}
-
-// Others
-a {
-  color: $black;
-  &:hover {
-    color: $gray-800;
-    text-decoration: none;
-  }
 }
 
 // Fontawesome
@@ -73,6 +79,15 @@ body {
   min-height: 100vh;
 }
 
+// Others
+a {
+  color: $black;
+  &:hover {
+    color: $gray-800;
+    text-decoration: none;
+  }
+}
+
 
 // Header & footer
 .header {
@@ -80,11 +95,12 @@ body {
   background-attachment: fixed;
   padding: 15px;
   &__link-text {
+    @include heading1();  
     margin-right: 15px;
     float: left;
   }
   &__icon {
-    margin-right: 10px;
+    margin: 5px 10px 0 0;
     float: left;
   }
   &__dropdown {
@@ -92,6 +108,7 @@ body {
     white-space: nowrap;
   }
   &__dropdown-text {
+    @include heading1();
     margin: 10px 0;
   }
 }
@@ -100,6 +117,7 @@ body {
   margin-top: auto;
   background-color: $gray-300;
   &__link-text {
+    @include heading1();  
     padding: 10px 0;
     margin-right: 30px;
   }
@@ -111,6 +129,15 @@ body {
   margin: 20px 0;
 }
 
+.flash {
+  &__title {
+    @include heading2();
+  }
+  &__subtitle {
+    @include heading1();  
+  }
+}
+
 .quiz_thumbnail {
   background-color: $gray-300;
   text-align: center;
@@ -119,10 +146,15 @@ body {
   &__title {
     margin: 10px 0 5px 0;
     &--category {
+      @include heading2();
       color: $primary;
     }
     &--number {
-      font-size: 16px;
+      @include heading1();
+    }
+    &--date {
+      font-size: 14px;
+      font-weight: bold;
     }
   }
 }
@@ -134,13 +166,12 @@ body {
 
 // Pages
 .index {
-  &__title {
-    @include title();
-  }
-  &__subtitle {
-    @include subtitle();
+  &__category {
+    @include display1();
+    margin-top: 30px;
   }
   &__searchtext {
+    @include heading1();
     margin: 0 0px;
   }
   &__navbar {
@@ -166,13 +197,14 @@ body {
     margin: 30px 0;
   }
   &__title {
-    @include title();
+    font-size: 32px;
+    font-weight: bold;
     &--number {
-      font-size: 24px;
+      @include heading2();
       margin-left: 10px;
     }
     &--link {
-      font-size: 24px;
+      @include heading2();      
     }
   }
   &__subtitle {
@@ -188,8 +220,14 @@ body {
     object-fit: cover;
     margin: auto;
   }
+  &__caption {
+    @include heading1();
+  }
   &__button-box {
     margin: 10px 0 10px 0;
+    &--subtitle {
+      @include heading2();
+    }
     &--button {
       margin-bottom: 10px;
     }
@@ -214,9 +252,17 @@ body {
     background-color: $gray-300;
     margin: 10px 0 10px 0;
   }
+  &__result-box {
+    &--text {
+      @include display1();      
+    }
+  }
   &__answer-box {
     background-color: $gray-300;
     padding: 70px 30px;
+    &--text {
+      @include heading1();
+    }
     &--large-letter {
       color: $primary;
       font-size: 24px;
@@ -235,6 +281,7 @@ body {
     }
   }
   &__link-box {
+    @include heading2();
     margin: 20px 0;
     &--title {
       margin: 20px;
@@ -246,7 +293,7 @@ body {
 
 .privacy {
   &__box {
-    margin: 0 auto;
+    margin: 0 auto 50px auto;
   }
   &__title {
     @include title();
@@ -255,6 +302,7 @@ body {
     @include subtitle();
   }
   &__text {
+    @include heading1();
     line-height: 1.5;
   }
   &__link {
@@ -277,6 +325,7 @@ body {
     margin-bottom: 20px;
   }
   &__text {
+    @include heading1();
     margin: 0px auto 10px auto;
     text-align: left;
   }
@@ -296,6 +345,7 @@ body {
     margin-bottom: 20px;
   }
   &__text {
+    @include heading1();
     margin: 0px auto 10px auto;
     text-align: left;
   }

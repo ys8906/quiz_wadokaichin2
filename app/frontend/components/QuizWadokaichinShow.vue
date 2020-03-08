@@ -2,6 +2,12 @@
   <div class="row">
     <div class="wadokaichin__half-box col-12 col-md-6">
       <img class="wadokaichin__image" :src="quiz.image_url">
+      <div
+        v-if="hasSavedata"
+        class="wadokaichin__caption text-warning text-center"
+      >
+      以前解答した問題です
+    </div>
       <AnswerButtons
         @check-answer="checkAnswer"
         @show-answer="showAnswer"
@@ -47,7 +53,11 @@ export default {
       type: Array,
       default: null
     },
-    needSavedata: {
+    isSignedIn: {
+      type: Boolean,
+      default: null
+    },
+    hasSavedata: {
       type: Boolean,
       default: null
     },
@@ -64,9 +74,8 @@ export default {
   },
  	watch: {
 		answerIsVisible() {
-      console.log("visible")
 			// もしユーザーがログインしていてセーブデータがない場合、正解するか答えを見たらセーブ
-			if (this.needSavedata) {
+			if (this.isSignedIn && !this.hasSavedata) {
 				axios.post('../../quiz_wadokaichin_savedata', {
 					quiz_id: this.quiz.id,
 					correct: false

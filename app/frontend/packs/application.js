@@ -5,7 +5,9 @@ require("bootstrap")
 
 // frontend内のファイル
 import '../stylesheets/application.scss'
-import '../javascripts/infinite-loading.pkgd.min'
+  // 現状使用していないinfinite-scroll
+  // import '../javascripts/infinite-loading.pkgd.min'
+  // cf. https://infinite-scroll.com/
 
 // Vue
 import Vue from 'vue'
