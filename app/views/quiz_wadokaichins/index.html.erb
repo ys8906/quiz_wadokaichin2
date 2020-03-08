@@ -21,7 +21,7 @@
 
 
   <nav class="index__navbar d-flex justify-content-center">
-    <%= form_with url: root_path, html: { method: "GET", name: "form" },
+    <%= form_with url: root_path, html: { method: "POST", name: "form" },
         class: "index__form index__searchtext form-inline" do |f| %>
       <% if user_signed_in? %>
         <div class="index__box">

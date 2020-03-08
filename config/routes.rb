@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   # クイズ検索ページ = ホーム
   root 'quiz_wadokaichins#index'
+  post '/', to: 'quiz_wadokaichins#index'
 
   # devise
   devise_for :users, controllers: {
