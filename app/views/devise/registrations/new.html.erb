@@ -1,34 +1,54 @@
-<div>Sign up</div>
-
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+<main id="signin" class="container">
+  <h1 class="edit__title">サインイン</h1>
+  <h2 class="edit__subtitle">
+    各項目にご入力のうえ、送信ボタンを押してください。
+  </h2>
+  <div class="edit__wrapper offset-1 col-10">
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
+      <div class="edit__box form-group row">
+        <div class="col-3 edit__text">メールアドレス</div>
+        <div class="text-center col-8">
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "col-12", "v-model": "email" %>
+        </div>
+      </div>
+      <div class="edit__box form-group row">
+        <div class="col-3 edit__text">お名前</div>
+        <div class="text-center col-8">
+          <%= f.text_field :name, autocomplete: "name", class: "col-12", "v-model": "name" %>
+        </div>
+      </div>
+      <div class="edit__box form-group row">
+        <div class="col-3 edit__text">パスワード</div>
+        <div class="text-center col-8">
+          <%= f.password_field :password, autocomplete: "new-password", class: "col-12", "v-model": "password" %>
+          <div class="form-text text-muted edit__text">パスワードは<%= @minimum_password_length %>文字以上で入力してください。</div>
+        </div>
+      </div>
+      <div class="edit__box form-group row">
+        <div class="col-3 edit__text">パスワード確認</div>
+        <div class="text-center col-8">
+          <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "col-12", "v-model": "passwordConfirmation"  %>
+          <div class="form-text text-muted edit__text">パスワードは<%= @minimum_password_length %>文字以上で入力してください。</div>
+        </div>
+      </div>
+      <div class="edit__box text-center">
+        <%= f.submit "送信する", class: "btn btn-primary font-weight-bold text-right",
+             ":disabled": "!this.email || !this.name || !this.password || !this.passwordConfirmation" %>
+      </div>
+    <% end %>
   </div>
+  <%= render "devise/shared/links" %>
+</main>
 
-    <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name, autocomplete: "given-name" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+<script>
+new Vue ({
+	el: '#signin',
+	data: {
+    email: null,
+    name: null,
+    password: null,
+    passwordConfirmation: null
+  }
+})
+</script>

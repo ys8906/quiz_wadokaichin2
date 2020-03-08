@@ -1,9 +1,9 @@
-<div id="edit" class="container">
-  <div class="edit__title">ユーザー情報変更</div>
-  <div class="edit__subtitle">
+<main id="edit" class="container">
+  <h1 class="edit__title">ユーザー情報変更</h1>
+  <h2 class="edit__subtitle">
     メールアドレスおよび現在のパスワードと、変更したい内容を入力してください。
     <br>変更しない場合は、空欄のままにしてください。
-  </div>
+  </h2>
   <div class="edit__wrapper offset-1 col-10">
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
     <%= render "devise/shared/error_messages", resource: resource %>
@@ -45,15 +45,13 @@
       </div>
     <% end %>
   </div>
-</div>
+</main>
 
 <script>
 new Vue ({
 	el: '#edit',
 	data: {
     email: null,
-    name: null,
-    changedPassword: null,
     currentPassword: null
   }
 })

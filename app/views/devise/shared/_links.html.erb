@@ -14,9 +14,21 @@
   <%= link_to "Didn't receive unlock instructions?", new_unlock_path(resource_name) %><br />
 <% end %>
 
-<%- if devise_mapping.omniauthable? %>
-  <%- resource_class.omniauth_providers.each do |provider| %>
-    <% provider.to_s == "google_oauth2" ? social = "Google" : social = OmniAuth::Utils.camelize(provider) %>
-    <%= link_to "Sign in with #{social}", omniauth_authorize_path(resource_name, provider) %><br />
-  <% end %>
-<% end %>
+
+<nav class="navbar row justify-content-center">
+  <p class="text-muted font-weight-bold">または</p>
+  <%- if devise_mapping.omniauthable? %>
+    <%- resource_class.omniauth_providers.each do |provider| %>
+      <% icon = "fab fa-twitter fa-lg fa-twitter-color",  name = "Twitter"  if provider.to_s == "twitter" %>
+      <% icon = "fab fa-google fa-lg fa-google-color",    name = "Google"   if provider.to_s == "google_oauth2" %>
+      <% icon = "fab fa-yahoo fa-lg fa-yahoo-color",      name = "Yahoo"    if provider.to_s == "yahoojp" %>
+      <% icon = "fab fa-line fa-lg fa-line-color",        name = "Line"     if provider.to_s == "line" %>
+      <%= link_to omniauth_authorize_path(resource_name, provider) do %>
+      <div class="header__social-box">
+        <i class="<%= icon[0].to_s %> ml-3"></i>
+        <span class="header__dropdown--text"><%= name %></span>
+      </div>
+      <% end %>
+    <% end %>
+  <% end %>   
+</nav>

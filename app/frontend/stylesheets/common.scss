@@ -344,7 +344,8 @@ a {
     @include title();
   }
   &__subtitle {
-    @include subtitle();
+    @include heading1();
+    text-align: center;
   }
   &__wrapper {
     margin-top: 40px;
