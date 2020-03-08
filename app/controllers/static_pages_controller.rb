@@ -1,11 +1,17 @@
 class StaticPagesController < ApplicationController
+  add_breadcrumb "ホーム", :root_path
+
   def home
   end
 
   def privacy
+    @title = "プライバシー"
+    add_breadcrumb "プライバシー", form_path
   end
 
   def form
+    @title = "フォーム"
+    add_breadcrumb "フォーム", privacy_path
   end
 
   def send_inquiry

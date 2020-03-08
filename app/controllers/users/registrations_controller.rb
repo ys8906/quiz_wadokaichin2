@@ -1,13 +1,15 @@
 # frozen_string_literal: true
 
 class Users::RegistrationsController < Devise::RegistrationsController
+  add_breadcrumb "ホーム", :root_path
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
-  # def new
-  #   super
-  # end
+  def new
+    super
+    add_breadcrumb "ユーザー登録", new_user_registration_path
+  end
 
   # POST /resource
   # def create
