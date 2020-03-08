@@ -1,15 +1,15 @@
-<dl class="quiz_thumbnail card" style="width: 18rem;">
+<dl class="quiz-thumbnail card">
   <%= link_to quiz_wadokaichin_path(quiz_wadokaichin.id) do %>
     <div class="card-body">
       <dt>
-        <img class="card-img-top" src="<%= quiz_wadokaichin.image_url %>">
+        <img class="quiz-thumbnail__img card-img-top" src="<%= quiz_wadokaichin.image_url %>">
       </dt>
       <dd>
-        <h3 class="quiz_thumbnail__title">
-          <span class="quiz_thumbnail__title--category">和銅開珍</span>
-          <span class="quiz_thumbnail__title--number">No.<%= quiz_wadokaichin.id %></span>
+        <h3 class="quiz-thumbnail__title">
+          <span class="quiz-thumbnail__title--category">和銅開珍</span>
+          <span class="quiz-thumbnail__title--number">No.<%= quiz_wadokaichin.id %></span>
         </h3>
-        <p class="quiz_thumbnail__title--date">
+        <p class="quiz-thumbnail__title--date">
           <%= quiz_wadokaichin.created_at.strftime('%Y/%m/%d') %>
         </p>
       </dd>
