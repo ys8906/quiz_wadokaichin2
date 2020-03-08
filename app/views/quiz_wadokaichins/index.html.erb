@@ -39,10 +39,6 @@
         </div>
       <% end %>
       <div class="index__navbar--box">
-        <div class="index__searchtext navbar-text">漢字検索</div>
-        <%= f.text_field :keywords, style: "width: 70px;" %>
-      </div>
-      <div class="index__navbar--box">
         <div class="index__searchtext navbar-text">並び替え</div>
         <%= f.select :order, { "新しい順": "id DESC", "古い順": "id ASC" }, class: "index__searchtext" %>
       </div>
