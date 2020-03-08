@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="wadokaichin__answer-buttons">
     <div class="wadokaichin__button-box row justify-content-center">
       <div class="wadokaichin__button-box--subtitle">答え</div>
       <input
@@ -7,6 +7,8 @@
         class="ml-4 text-center"
         type="text"
         placeholder="回答は1文字です"
+        @keypress.enter="$emit('check-answer', answer)"
+        :disabled="answerIsVisible"
       >
     </div>
     <div id="answer_buttons" class="wadokaichin__button-box row justify-content-center">

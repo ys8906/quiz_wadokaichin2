@@ -1,3 +1,6 @@
+//// 参考：Bootstrap responsive
+// <576, >=576, >=768, >=992, >=1200px
+
 // Reset
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -230,6 +233,16 @@ $font-family-base: Noto Sans JP;
   &__caption {
     @include heading1();
   }
+  &__answer-buttons {
+    @media screen and (max-width: 768px) {  // <576, >=576, >=768, >=992, >=1200px
+      width: 100%;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      z-index: 3;
+      background-color: rgba(224, 224, 224, 0.8);
+    }
+  }
   &__button-box {
     margin: 10px 0 10px 0;
     &--subtitle {
@@ -241,6 +254,9 @@ $font-family-base: Noto Sans JP;
     &--show-answer-button {
       border-color: $gray-300;
       margin-bottom: 10px;
+      @media screen and (max-width: 768px) {
+        background-color: white;
+      }
     }
   }
   &__social-box {
