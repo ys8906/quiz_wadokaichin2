@@ -18,7 +18,7 @@
         解答する
       </button>
       <button
-        class="wadokaichin__button-box--button btn btn-outline-dark ml-4 col-5"
+        class="wadokaichin__button-box--show-answer-button  btn btn-outline-dark ml-4 col-5"
         @click="$emit('show-answer', answer)"
         :disabled="answerIsVisible"
       >
