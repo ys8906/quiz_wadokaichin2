@@ -21,6 +21,7 @@ class ErrorsController < ApplicationController
   end
   
   def render_404(exception = nil)
+    @quiz = QuizWadokaichin.order("RAND()").sample
     render "errors/404", status: 404
   end
 
@@ -29,7 +30,7 @@ class ErrorsController < ApplicationController
       logger.info "Rendering 500 with exception: #{exception.message}  #{$@}"
       notify_slack(500, exception)
     end
-    render "errors/500", status: 500
+    render "errors/500", status: 500, layout: false
   end
 
 end

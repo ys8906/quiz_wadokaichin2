@@ -1,15 +1,11 @@
 <!DOCTYPE html>
 <html>
   <head>
-  <% if false %>
-    <title>クイズ和同開珎 <%= "| No." + @quiz.id.to_s if @quiz.present? %></title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>   
-  <% end %>
   <%= render 'layouts/meta' %>
 
     <%= stylesheet_pack_tag 'application', media: 'all' %>
     <%= javascript_pack_tag 'application' %>
+    <%= favicon_link_tag '/favicon.ico' %>
   </head>
 
   <body>

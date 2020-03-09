@@ -100,7 +100,10 @@ $font-family-base: Noto Sans JP;
 .header {
   background-color: $gray-300;
   background-attachment: fixed;
-  padding: 15px;
+  padding: 5px;
+  &__banner {
+    height: 80px;
+  }
   &__icon {
     margin: 5px 10px 0 0;
     float: left;
@@ -367,5 +370,28 @@ $font-family-base: Noto Sans JP;
     @include heading1();
     margin: 0px auto 10px auto;
     text-align: left;
+  }
+}
+
+.error-404 {
+  background-color: $gray-300;
+  height: 600px;
+  &__title-box {
+    background-color: white;
+    padding: 1px;
+    margin-bottom: 30px;
+  }
+  &__title {
+    @include title();
+  }
+  &__subtitle {
+    @include subtitle();
+  }
+  &__text {
+    @include heading2();
+    margin-bottom: 20px;
+  }
+  &__button-box {
+    margin: 20px;
   }
 }

@@ -1,1 +1,20 @@
-404
+<div class="error-404">
+  <div class="error-404__title-box">
+    <h1 class="error-404__title">404 Not Found</h1>
+    <h2 class="error-404__subtitle">お探しのページは見つかりませんでした</h2>
+  </div>
+    <main class="container text-center">
+      <div class="justify-content-center">
+        <p class="error-404__text">今日のクイズ</p>
+        <img src="<%= @quiz.image_url %>" class="error-404__image">
+      </div>
+      <div class="error-404__button-box">
+        <%= link_to quiz_wadokaichin_url(@quiz.id) do %>
+          <button class="btn btn-primary font-weight-bold">答えはこちら</button>
+        <% end %>
+        <%= link_to root_url do %>
+          <button class="btn btn-outline-dark">ホームはこちら</button>
+        <% end %>
+      </div>
+    </main>
+</div>
