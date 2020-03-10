@@ -123,7 +123,8 @@ class WordDataService
   end
 
   def scrape_jukugo_examples                   # WordDataService.new.scrape_jukugo_examples
-    gyo = ["m", "y", "r", "w",
+    gyo = ["a", "k", "s", "t", "n",
+           "h", "m", "y", "r", "w",
            "g", "z", "d", "b"]       # 行(子音)
     gyo.count.times do |g|
       file_path_each = "app/services/jukugo/jukugo_#{gyo[g]}.csv"
@@ -131,7 +132,6 @@ class WordDataService
       CSV.open(file_path_each, "w") do |csv|
         csv << ["name", "reading", "meaning", "example"]
         data.each do |row|
-          next if row[0]
           # sleep 0.9
           url_example = URI.encode("http://yourei.jp/#{row[0]}")
           doc = Nokogiri::HTML.parse(open(url_example))
@@ -145,8 +145,8 @@ class WordDataService
 
   def merge_jukugo                   # WordDataService.new.merge_jukugo
     gyo = ["a", "k", "s", "t", "n",
-            "h", "m", "y", "r", "w",
-            "g", "z", "d", "b"]
+           "h", "m", "y", "r", "w",
+           "g", "z", "d", "b"]       # 行(子音)
     i = 0
     file_path_merged = "db/fixtures/development/30_jukugo.csv"
     CSV.open(file_path_merged, "w") do |csv|
