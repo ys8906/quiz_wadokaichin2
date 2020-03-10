@@ -7,5 +7,6 @@ CSV.foreach(file_path, headers: true) do |row|
     j.name            = row['name']
     j.reading         = row['reading']
     j.meaning         = row['meaning']
+    j.example         = row['example']
   end
 end

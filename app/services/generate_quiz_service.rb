@@ -1,10 +1,16 @@
 class GenerateQuizService
-
-  # TODO: 重複を防ぐメソッド（確率が低いので後回し）
-
   ## 共通メソッド
-  def kanji_has_jukugos?(left_size, right_size)
-    true if (left_size + right_size == 4)
+  def kanji_has_jukugos?(jukugo_left_match, jukugo_right_match)
+    true if (jukugo_left_match.size + jukugo_left_match.size == 4)
+  end
+
+  def quiz_is_unique?(jukugo_left_match, jukugo_right_match)
+    QuizWadokaichin.all.each do |quiz|
+      if ((quiz.left_name - left_match) + (quiz.jukugo_right_name - jukugo_right_match)) > 0
+        return false
+      end
+    end
+    true
   end
 
   def create_quiz_wadokaichin(kanji, jukugo_left_match, jukugo_right_match)
@@ -26,7 +32,8 @@ class GenerateQuizService
       kanji = Kanji.offset(rand(Kanji.count)).first.character
       jukugo_left_match = Jukugo.where("name like ?", "#{kanji}%").sample(2)
       jukugo_right_match = Jukugo.where("name like ?", "%#{kanji}").sample(2)
-      if kanji_has_jukugos?(jukugo_left_match.size, jukugo_right_match.size)
+      if kanji_has_jukugos?(jukugo_left_match, jukugo_right_match) &&
+            quiz_is_unique?(jukugo_left_match, jukugo_right_match)
         create_quiz_wadokaichin(kanji, jukugo_left_match, jukugo_right_match)
         return QuizWadokaichin.last
       end
