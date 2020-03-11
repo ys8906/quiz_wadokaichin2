@@ -1,0 +1,29 @@
+<div>
+  <aside class="history__sidebar d-block">
+    <div>
+      <div class="px-3 mb-1 text-muted">
+        <span class="font-weight-bold">クイズ履歴</span>
+      </div>
+      <ul class="history__sidebar--text-box nav font-weight-bold">
+        <li class="nav-item">
+          <%= link_to user_pages_path(page: 1), class: "nav-link" do %>
+            <p><%= "▶︎" if params[:page] == "1" %> 正解したクイズ</p>
+          <% end %>
+        </li>
+        <li class="nav-item">
+          <%= link_to user_pages_path(page: 0), class: "nav-link" do %>
+            <p><%= "▶︎" if params[:page] == "0" %> 答えを見たクイズ</p>
+          <% end %>        
+        </li>
+      </ul>
+    </div>
+  </aside>
+  <div class="row justify-content-center">
+    <div class="history__divider d-lg-block d-none"></div>
+    <main class="">
+      <%= render "user_pages/shared/quiz" %>
+    </main>
+  </div>
+
+</div>
+

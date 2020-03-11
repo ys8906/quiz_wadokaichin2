@@ -101,6 +101,7 @@ $font-family-base: Noto Sans JP;
   background-color: $gray-300;
   background-attachment: fixed;
   padding: 5px;
+  z-index: 3;
   &__banner {
     height: 80px;
   }
@@ -187,20 +188,25 @@ $font-family-base: Noto Sans JP;
 .index {
   &__category {
     @include display1();
-    margin-top: 30px;
+    margin: 30px 0;
   }
   &__searchtext {
     @include heading1();
     margin: 0 0px;
   }
   &__navbar {
-    margin: 30px 0;
+    padding: 10px 0;
+    background-color: $gray-300;
     &--box {
       margin: 0 10px;
     }
   }
+  &__main {
+    margin: 20px 0;
+  }
   &__aside {
     margin: 0;
+    border-left: solid 5px $gray-300;
   }
 }
 
@@ -310,6 +316,82 @@ $font-family-base: Noto Sans JP;
   }
 }
 
+
+.history {
+  &__sidebar {
+    width: 200px;
+    position: fixed;
+    padding-top: 120px;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    border-right: solid 5px $gray-300;
+    @media screen and (max-width: 992px) {  // <576, >=576, >=768, >=992, >=1200px
+      padding-top: 0;
+      width: 100%;
+      position: static;
+      z-index: 0;
+      background-color: rgba(224, 224, 224, 0.8);
+      text-align: center;
+    }
+    &--text-box {
+      flex-direction: column;
+      background-color: $gray-300;
+      @media screen and (max-width: 992px) {  // <576, >=576, >=768, >=992, >=1200px
+        flex-direction: row;
+        justify-content: center;
+      }
+    }
+  }
+  &__divider {
+    margin: 90px;
+  }
+  &__main-box {
+    margin-left: 200px;
+  }
+  &__caption {
+    @include heading2();
+    margin-top: 30px;
+  }
+  &__quiz-box {
+    margin: 30px 0;
+    &--image {
+      display: block;
+      height: 100px;
+      width: 100px;
+      object-fit: cover;
+      margin: auto;
+    }
+    &--text-box {
+      margin: 0 20px;
+    }
+    &--id {
+      @include heading2();
+      color: $primary;
+      margin-bottom: 10px;
+    }
+    &--answer {
+      @include heading2();
+      margin: 5px 0;
+    }
+  }
+  &__table {
+    border-collapse: separate;
+    border-spacing: 15px;
+    white-space: nowrap;
+    &--text {
+      @include heading2();
+    }
+    &--answers {
+      @media screen and (max-width: 576px) {  // <576, >=576, >=768, >=992, >=1200px
+        display: none;
+      }      
+    }
+  }
+  &__container {
+    overflow-x: auto; 
+  }
+}
 
 
 .privacy {

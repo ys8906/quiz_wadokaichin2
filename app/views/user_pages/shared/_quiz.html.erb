@@ -1,0 +1,53 @@
+<div class="container history__container">
+  <% if @quizzes.first.blank? %>
+    <p class="history__caption">該当するクイズはありません。</p>
+  <% else %>
+    <table class="history__table text-center">
+      <tbody>
+        <tr class="font-weight-bold">
+          <th></th>
+          <th class="border-bottom">
+            <% if @order == "id DESC" %>
+              <%= link_to "番号 ▲", order: "id ASC", page: params[:page] %>
+            <% else %>
+              <%= link_to "番号 ▼", order: "id DESC", page: params[:page] %>
+            <% end %>
+          </th>
+          <th class="border-bottom">
+            <% if @order == "difficulty DESC" %>
+              <%= link_to "難易度 ▲", order: "difficulty ASC", page: params[:page] %>
+            <% else %>
+              <%= link_to "難易度 ▼", order: "difficulty DESC", page: params[:page] %>
+            <% end %>
+          </th>
+          <th class="border-bottom">
+            <% if @order == "updated_at DESC" %>
+              <%= link_to "挑戦した日 ▲", order: "updated_at ASC", page: params[:page] %>
+            <% else %>
+              <%= link_to "挑戦した日 ▼", order: "updated_at DESC", page: params[:page] %>
+            <% end %>
+          </th>
+          <th class="history__table--answers border-bottom">答え</th>
+          <th class="history__table--answers border-bottom">熟語1</th>
+          <th class="history__table--answers border-bottom">熟語2</th>
+          <th class="history__table--answers border-bottom">熟語3</th>
+          <th class="history__table--answers border-bottom">熟語4</th>
+        </tr>
+        <% @quizzes.each do |quiz| %>
+          <% savedatum = @savedata.find_by(quiz_wadokaichin_id: quiz.id) %>
+          <tr class="history__table--text">
+            <td class="align-middle"><img class="history__quiz-box--image" src="<%= quiz.image_url %>"></td>
+            <td class="align-middle border-bottom">No.<%= quiz.id %></td>
+            <td class="align-middle border-bottom" ><%= quiz.difficulty %></td>
+            <td class="align-middle border-bottom"><%= savedatum.updated_at.strftime('%Y/%m/%d') %></td>
+            <td class="align-middle history__table--answers border-bottom"><%= quiz.answer %></td>
+            <td class="align-middle history__table--answers border-bottom"><%= quiz.jukugo_right_name %></td>
+            <td class="align-middle history__table--answers border-bottom"><%= quiz.jukugo_bottom_name %></td>
+            <td class="align-middle history__table--answers border-bottom"><%= quiz.jukugo_left_name %></td>
+            <td class="align-middle history__table--answers border-bottom"><%= quiz.jukugo_top_name %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+</div>
