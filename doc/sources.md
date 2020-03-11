@@ -56,3 +56,6 @@ JIS第四水準漢字（2,436字）
 ■二字熟語
 <a href="https://k2.hofurink.com/products/myphp8.php?&gyo=a&retu=1&no=1"></a>
 ※gyo: akstn = あかさたな, retu: あいうえお = 12345, no: 熟語ナンバー
+
+■用例
+<a href="http://yourei.jp/">

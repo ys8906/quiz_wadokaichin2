@@ -16,7 +16,7 @@
         <%= link_to "ユーザー情報変更", edit_user_registration_path %>
       </div>
       <div class="header__dropdown--text">
-        <%= button_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-primary font-weight-bold" %>
+        <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
       </div>
     </div>
   </nav>

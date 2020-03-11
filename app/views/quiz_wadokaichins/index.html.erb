@@ -40,7 +40,9 @@
       <% end %>
       <div class="index__navbar--box">
         <div class="index__searchtext navbar-text">並び替え</div>
-        <%= f.select :order, { "新しい順": "id DESC", "古い順": "id ASC" }, class: "index__searchtext" %>
+        <%= f.select :order, { "作成日の新しい順": "id DESC", "作成日の古い順": "id ASC",
+                               "難易度の高い順": "difficulty DESC", "難易度の低い順": "difficulty ASC", },
+             class: "index__searchtext" %>
       </div>
       <div class="index__navbar--box">
         <%= f.submit "表示", name: nil, class: "index__searchtext btn btn-primary font-weight-bold" %>

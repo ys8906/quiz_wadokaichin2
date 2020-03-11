@@ -10,6 +10,7 @@ CSV.foreach(file_path, headers: true) do |row|
     q.jukugo_bottom_name      = row['jukugo_bottom_name']
     q.jukugo_left_name        = row['jukugo_left_name']
     q.jukugo_top_name         = row['jukugo_top_name']
+    q.difficulty              = row['difficulty']
   end
 
   QuizWadokaichinJukugo.seed_once do |qj|
