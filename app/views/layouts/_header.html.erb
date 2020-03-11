@@ -1,7 +1,7 @@
 <header class="header navbar navbar-fixed-top d-flex">
   <h1>
     <%= link_to root_path do %>
-      <img src="images/banner.svg" alt="クイズ和銅開珍" class="header__banner">
+      <img src="https://quiz-site-ys.s3-ap-northeast-1.amazonaws.com/banner.svg" alt="クイズ和銅開珍" class="header__banner">
     <% end %>
   </h1>
   <span class="clear-fix"></span>
@@ -13,10 +13,13 @@
     </a>
     <div class="dropdown-menu dropdown-menu-right header__dropdown">
       <div class="header__dropdown--text">
+        <%= link_to "クイズ履歴", user_pages_path %>
+      </div>
+      <div class="header__dropdown--text">
         <%= link_to "ユーザー情報変更", edit_user_registration_path %>
       </div>
       <div class="header__dropdown--text">
-        <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+        <%= button_to "ログアウト", destroy_user_session_path, method: :delete %>
       </div>
     </div>
   </nav>
