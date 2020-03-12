@@ -1,7 +1,12 @@
 <div class="container history__container">
+  <h2 class="history__title">
+    今までに挑戦したクイズの一覧を見られます。<br>
+    三角のついた文字を押すと、各情報で並び替えられます。
+  </h2>
   <% if @quizzes.first.blank? %>
     <p class="history__caption">該当するクイズはありません。</p>
   <% else %>
+    
     <table class="history__table text-center">
       <tbody>
         <tr class="font-weight-bold">
@@ -36,8 +41,14 @@
         <% @quizzes.each do |quiz| %>
           <% savedatum = @savedata.find_by(quiz_wadokaichin_id: quiz.id) %>
           <tr class="history__table--text">
-            <td class="align-middle"><img class="history__quiz-box--image" src="<%= quiz.image_url %>"></td>
-            <td class="align-middle border-bottom">No.<%= quiz.id %></td>
+            <td class="align-middle">
+              <%= link_to quiz_wadokaichin_path(quiz.id) do %>
+                <img class="history__quiz-box--image" src="<%= quiz.image_url %>">
+              <% end %>
+            </td>
+            <td class="align-middle border-bottom">
+              <%= link_to "No.#{quiz.id}", quiz_wadokaichin_path(quiz.id) %>
+            </td>
             <td class="align-middle border-bottom" ><%= quiz.difficulty %></td>
             <td class="align-middle border-bottom"><%= savedatum.updated_at.strftime('%Y/%m/%d') %></td>
             <td class="align-middle history__table--answers border-bottom"><%= quiz.answer %></td>
