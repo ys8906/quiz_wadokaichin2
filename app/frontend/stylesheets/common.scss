@@ -162,7 +162,14 @@ $font-family-base: Noto Sans JP;
   text-align: center;
   border: none;
   margin: 5px;
-  width: 17rem;
+  width: 15rem;
+  &__image {
+    display: block;
+    height: 160px;
+    width: 190px;
+    object-fit: cover;
+    margin: auto;
+  }
   &__title-box {
     margin: 10px 0 5px 0;
     &--id {
@@ -206,7 +213,11 @@ $font-family-base: Noto Sans JP;
   }
   &__aside {
     margin: 0;
-    border-left: solid 5px $gray-300;
+    border-left: solid 20px $gray-300;
+    @media screen and (max-width: 768px) {  // <576, >=576, >=768, >=992, >=1200px
+      width: 100%;
+      border-left: none;
+    }
   }
 }
 
