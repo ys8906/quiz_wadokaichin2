@@ -7,7 +7,7 @@
       <ul class="history__sidebar--text-box nav font-weight-bold">
         <li class="nav-item">
           <%= link_to user_pages_path(page: 1), class: "nav-link" do %>
-            <p><%= "▶︎" if params[:page] == "1" %> 正解したクイズ</p>
+            <p><%= "▶︎" if params[:page] == "1" || params[:page] == nil %> 正解したクイズ</p>
           <% end %>
         </li>
         <li class="nav-item">
