@@ -21,7 +21,7 @@ class ErrorsController < ApplicationController
   end
   
   def render_404(exception = nil)
-    @quiz = QuizWadokaichin.order("RAND()").sample
+    @quiz = QuizWadokaichin.find(QuizWadokaichin.pluck(:id).shuffle[0])
     render "errors/404", status: 404
   end
 
