@@ -1,5 +1,6 @@
 <template>
   <div class="row">
+
     <div class="wadokaichin__half-box col-12 col-md-6">
       <img class="wadokaichin__image" :src="quiz.image_url">
       <div
@@ -7,43 +8,141 @@
         class="wadokaichin__caption text-warning text-center"
       >
       以前解答した問題です
+      </div>
+
+      <!-- AnswerButtons -->
+      <div class="wadokaichin__answer-buttons">
+        <div class="wadokaichin__button-box row justify-content-center">
+          <div class="wadokaichin__button-box--subtitle">答え</div>
+          <input
+            v-model="answer"
+            class="ml-4 text-center"
+            type="text"
+            placeholder="回答は1文字です"
+            @keypress.enter="checkAnswer"
+            :disabled="answerIsVisible"
+          >
+        </div>
+        <div id="answer_buttons" class="wadokaichin__button-box row justify-content-center">
+          <button
+            class="wadokaichin__button-box--button btn btn-primary font-weight-bold col-5"
+            @click="checkAnswer"
+            :disabled="!answer || isCorrect || answerIsVisible"
+          >
+            解答する
+          </button>
+          <button
+            class="wadokaichin__button-box--show-answer-button  btn btn-outline-dark ml-4 col-5"
+            @click="showAnswer"
+            :disabled="answerIsVisible"
+          >
+            答えを見る
+          </button>
+        </div>    
+      </div>
+
+      <!-- SocialBox -->
+      <div class="wadokaichin__social-box">
+        <div class="wadokaichin__button-box row justify-content-center">
+          <div class="wadokaichin__button-box--button ml-n3 fb-like  wadokaichin__social-box--facebook" :data-href="url"
+              　data-width="" data-layout="button" data-action="like" data-size="large"
+              　data-share="false"></div>
+          <span class="m-2"></span>
+          <button href="#" @click="twitterShare" class="btn wadokaichin__social-box--tweet">
+            <i class="fab fa-twitter fa-lg"></i>
+            Tweet
+          </button>
+        </div>
+      </div>
     </div>
-      <AnswerButtons
-        @check-answer="checkAnswer"
-        @show-answer="showAnswer"
-        :is-correct="isCorrect"
-        :answer-is-visible="answerIsVisible"
-      />
-      <SocialBox
-        :url="url"
-      />
-    </div>
+
     <div class="wadokaichin__half-box col-12 col-md-6">
-      <Resultflash
-        :is-correct="isCorrect"
-      />
-      <AnswerBox
-        :answer-is-visible="answerIsVisible"
-        :quiz="quiz"
-        v-bind:meanings="meanings"
-      />
+      <!-- ResultFlash -->
+      <div class="wadokaichin__result-box mb-3">
+        <div
+          v-if="isCorrect == true"
+          class="wadokaichin__result-box--text text-success text-center"
+        >
+          正解！
+        </div>
+        <div
+          v-else-if="isCorrect == false"
+          class="wadokaichin__result-box--text text-warning text-center"
+        >
+          残念！
+        </div>
+        <!-- 回答前も空白文字でスペースを確保 -->
+        <div v-else
+          class="wadokaichin__result-box--text">ㅤ</div>
+      </div>
+
+      <!-- Answer}Box -->
+      <div class="wadokaichin__answer-box">
+        <div
+          v-if="answerIsVisible"
+        >
+          <div class="wadokaichin__answer-box--text">
+            答え：
+            <span class="wadokaichin__answer-box--large-letter">
+              {{ quiz.answer }}
+            </span>
+          </div>
+          <div class="wadokaichin__answer-box--text">
+            <br>
+            <span class="wadokaichin__answer-box--large-letter">
+              {{ quiz.jukugo_right_name }}：
+            </span>
+            <br>
+            {{ meanings[0] }}
+          </div>
+          <div class="wadokaichin__answer-box--text">
+            <br>
+            <span class="wadokaichin__answer-box--large-letter">
+              {{ quiz.jukugo_bottom_name }}：
+            </span>
+            <br>
+            {{ meanings[1] }}
+          </div>
+          <div class="wadokaichin__answer-box--text">
+            <br>
+            <span class="wadokaichin__answer-box--large-letter">
+              {{ quiz.jukugo_left_name }}：
+            </span>
+            <br>
+            {{ meanings[2] }}
+          </div>
+          <div class="wadokaichin__answer-box--text">
+            <br>
+            <span class="wadokaichin__answer-box--large-letter">
+              {{ quiz.jukugo_top_name }}：
+            </span>
+            <br>
+            {{ meanings[3] }}
+          </div>
+        </div>
+        <div
+          v-else
+        >
+          <h2 class="wadokaichin__answer-box--text">
+            <span class="wadokaichin__answer-box--large-letter text-primary">和</span>
+            同開珎とは、四つの熟語に共通する、一つの漢字を当てるクイズです。<br>
+            漢字を上下左右に四つ並べる様子が、日本最古の貨幣といわれる「和同開珎」に似ているため、
+            しばしばなぞらえて同じ名前で呼ばれます。「虫食い漢字クイズ」などとも呼ばれます。
+          </h2>
+          <div class="wadokaichin__answer-box--text">
+            <br>
+            <span class="wadokaichin__answer-box--large-letter text-primary">画</span>
+            像の中央に解答を入力し、「回答する」を押すと、解答結果が現れます。「答えを見る」を押すと、正答と解説が現れます。
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import AnswerButtons from './quiz_wadokaichin_show/AnswerButtons.vue'
-import SocialBox from './quiz_wadokaichin_show/SocialBox.vue'
-import Resultflash from './quiz_wadokaichin_show/ResultFlash.vue'
-import AnswerBox from './quiz_wadokaichin_show/AnswerBox.vue'
 
 export default {
-  components: {
-    AnswerButtons,
-    SocialBox,
-    Resultflash,
-    AnswerBox,
-  },
   props: {
     quiz: {
       type: Object,
@@ -70,6 +169,7 @@ export default {
     return {
       isCorrect: null,
       answerIsVisible: null,
+      answer: null,
     }
   },
  	watch: {
@@ -84,8 +184,8 @@ export default {
 		}
 	},
   methods: {
-		checkAnswer(answer) {
-			if (answer == this.quiz.answer) {
+		checkAnswer() {
+			if (this.answer == this.quiz.answer) {
 				this.isCorrect = true
         this.answerIsVisible = true
 			} else {
@@ -94,7 +194,14 @@ export default {
     },
     showAnswer() {
       this.answerIsVisible = true
-    }    
+    },
+    twitterShare(){
+      const shareURL =  "https://twitter.com/intent/tweet" +
+                        "?text=" + "あなたは解けるかな？" +   // ツイート内容
+                        "%20%23和銅開珍" +                  // ハッシュタグ
+                        "&url=" + this.url                // シェアURL
+      window.open(shareURL, "tweetwindow", "width=650, height=470, personalbar=0,　toolbar=0, scrollbars=1, sizable=1")
+    }        
   }
 }
 </script>

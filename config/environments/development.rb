@@ -10,8 +10,8 @@ Rails.application.configure do
   config.eager_load = false
 
   # Show full error reports.
+  # エラー画面確認時は、"config.consider_all_requests_local" をfalseに変更する
   config.consider_all_requests_local = false
-    # エラー画面確認時は、"config.consider_all_requests_local" をfalseに変更する
 
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.
