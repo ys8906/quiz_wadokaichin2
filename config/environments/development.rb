@@ -10,10 +10,8 @@ Rails.application.configure do
   config.eager_load = false
 
   # Show full error reports.
-  config.consider_all_requests_local = true
-      # エラー発生時にコントローラーに飛ばしてhtml.erbを描画
-        # 描画確認時は上の "config.consider_all_requests_local" をfalseに変更する
-      config.exceptions_app = ->(env) { ErrorsController.action(:show).call(env) }
+  # エラー画面確認時は、"config.consider_all_requests_local" をfalseに変更する
+  config.consider_all_requests_local = false
 
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.

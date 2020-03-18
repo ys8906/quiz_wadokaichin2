@@ -6,11 +6,11 @@
 - Rails 6.0.2
 - Vue 2.6.11
 - MySQL 5.7
-- Build Setup
 
-### On Docker
+## Build Setup
+
+### Docker
 ```
-$ docker-compose build
 $ docker-compose up --build
 $ docker-compose run web rails db:create db:migrate db:seed_fu
 ```
@@ -21,3 +21,4 @@ $ bundle install
 $ rails db:migrate
 $ rails s
 ```
+※credentialsのキーを上げていないので、deviseの起動でひっかかるはず

@@ -18,4 +18,8 @@ Rails.application.routes.draw do
   resources :quiz_wadokaichin_reactions, only: [:create]
   resources :quiz_wadokaichin_savedata, only: [:create]
   resources :user_pages, only: [:index]
+
+  # エラー画面
+  get '*path', controller: 'application', action: 'render_404'
+  get '*path', controller: 'application', action: 'render_500'
 end

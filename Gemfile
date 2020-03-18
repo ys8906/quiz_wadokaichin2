@@ -34,6 +34,7 @@ gem 'better_errors', '~> 2.6'
 gem 'binding_of_caller', '~> 0.8.0'
 gem 'breadcrumbs_on_rails', '~> 4.0'
 gem 'breadcrumbs_on_rails-json_ld', '~> 1.0'
+gem 'sentry-raven', '~> 3.0'
 
 # Social login
 gem 'omniauth', '~> 1.9'
