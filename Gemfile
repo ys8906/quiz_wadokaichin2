@@ -45,6 +45,10 @@ gem 'omniauth-yahoojp', '~> 0.2.1'
 gem 'omniauth-line', git: 'https://github.com/gomo/omniauth-line.git', branch: 'master'
 gem 'omniauth-facebook', '~> 6.0'
 
+group :production, :staging do
+  gem 'unicorn', '~> 5.5', '>= 5.5.3'
+end
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

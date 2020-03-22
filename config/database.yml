@@ -49,6 +49,7 @@ test:
 #
 production:
   <<: *default
-  database: quiz_production
-  username: quiz
-  password: <%= ENV['QUIZ_DATABASE_PASSWORD'] %>
+  host: <%= Rails.application.credentials.rds[:host] %>
+  database: <%= Rails.application.credentials.rds[:database] %>
+  username: <%= Rails.application.credentials.rds[:username] %>
+  password: <%= Rails.application.credentials.rds[:password] %>
