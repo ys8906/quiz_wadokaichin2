@@ -1,0 +1,11 @@
+id,answer,image_url,jukugo_right_name,jukugo_bottom_name,jukugo_left_name,jukugo_top_name,difficulty
+1,出,https://quiz-site-ys.s3-ap-northeast-1.amazonaws.com/wadokaichin/1.jpg,出口,出演,検出,産出,74
+2,狂,https://quiz-site-ys.s3-ap-northeast-1.amazonaws.com/wadokaichin/2.jpg,狂気,狂言,発狂,熱狂,135
+3,問,https://quiz-site-ys.s3-ap-northeast-1.amazonaws.com/wadokaichin/3.jpg,問屋,問答,審問,顧問,130
+4,走,https://quiz-site-ys.s3-ap-northeast-1.amazonaws.com/wadokaichin/4.jpg,走者,走行,脱走,出走,92
+5,封,https://quiz-site-ys.s3-ap-northeast-1.amazonaws.com/wadokaichin/5.jpg,封建,封筒,転封,開封,191
+6,封,https://quiz-site-ys.s3-ap-northeast-1.amazonaws.com/wadokaichin/6.jpg,奥羽,奥底,陸奥,山奥,175
+7,封,https://quiz-site-ys.s3-ap-northeast-1.amazonaws.com/wadokaichin/7.jpg,打率,打診,連打,安打,228
+8,封,https://quiz-site-ys.s3-ap-northeast-1.amazonaws.com/wadokaichin/8.jpg,編制,編成,本編,長編,96
+9,封,https://quiz-site-ys.s3-ap-northeast-1.amazonaws.com/wadokaichin/9.jpg,端的,端子,川端,両端,189
+10,封,https://quiz-site-ys.s3-ap-northeast-1.amazonaws.com/wadokaichin/10.jpg,目標,目前,演目,注目,81
