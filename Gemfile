@@ -47,6 +47,11 @@ gem 'omniauth-facebook', '~> 6.0'
 
 group :production, :staging do
   gem 'unicorn', '~> 5.5', '>= 5.5.3'
+  gem 'capistrano', '~> 3.11', '>= 3.11.2'
+  gem 'capistrano-bundler', '~> 1.6'
+  gem 'capistrano-rails', '~> 1.4'
+  gem 'capistrano-rbenv', '~> 2.1', '>= 2.1.6'
+  gem 'capistrano3-unicorn', '~> 0.2.1'
 end
 
 group :development, :test do
