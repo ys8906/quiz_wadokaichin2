@@ -60,5 +60,5 @@
 #     # password: "please use keys"
 #   }
 
-server '18.176.129.236', user: 'ys8906', roles: %w{app}
+server '10.0.0.72', user: 'ys8906', roles: %w{app}
 set :ssh_options, keys: '~/.ssh/quiz_wadokaichin_rsa'
