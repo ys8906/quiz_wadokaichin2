@@ -62,7 +62,7 @@
 
 server '18.176.129.236', user: 'ys8906', roles: %w{app}
 set :ssh_options, {
-  keys: %w(~/.ssh/quiz_wadokaichin_key_rsa.pub),
+  keys: %w(~/.ssh/authorized_keys),
   forward_agent: false,
   auth_methods: %w(publickey)
 }
