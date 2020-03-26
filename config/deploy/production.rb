@@ -61,4 +61,4 @@
 #   }
 
 server '18.176.129.236', user: 'ys8906', roles: %w{app}
-set :ssh_options, keys: '~/.ssh/quiz_wadokaichin.pem'
+set :ssh_options, keys: '~/.ssh/quiz_wadokaichin.pem', auth_methods: %w{publickey}
