@@ -48,8 +48,8 @@ module Quiz
     config.i18n.default_locale = :ja
 
     # Sentry
-    # Raven.configure do |config|
-    #   config.dsn = Rails.application.credentials.sentry[:api_key]
-    # end
+    Raven.configure do |config|
+      config.dsn = Rails.application.credentials.sentry[:api_key]
+    end
   end
 end
