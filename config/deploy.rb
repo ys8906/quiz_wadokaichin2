@@ -8,7 +8,7 @@ set :repo_url, "git@github.com:dofainc/Quiz.git"
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
 # Default deploy_to directory is /var/www/my_app_name
-set :deploy_to, "/var/www/Quiz"
+set :deploy_to, "/var/www/rails/Quiz"
 
 # Default value for :format is :airbrussh.
 # set :format, :airbrussh
