@@ -56,6 +56,7 @@ task :list  do
   end
 end
 
+Rake::Task["deploy:assets:backup_manifest"].clear_actions
 
 namespace :deploy do
   desc 'Restart application'
