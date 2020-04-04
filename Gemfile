@@ -35,6 +35,10 @@ gem 'binding_of_caller', '~> 0.8.0'
 gem 'breadcrumbs_on_rails', '~> 4.0'
 gem 'breadcrumbs_on_rails-json_ld', '~> 1.0'
 gem 'sentry-raven', '~> 3.0'
+gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+gem 'rspec-rails', '~> 4.0.0.beta4'
+gem 'faker', '~> 2.10'
+gem 'factory_bot', '~> 5.1.1'
 
 # Social login
 gem 'omniauth', '~> 1.9'
@@ -58,10 +62,6 @@ end
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'rspec-rails', '~> 4.0.0.beta4'
-  gem 'faker', '~> 2.10'
-  gem 'factory_bot', '~> 5.1.1'
 end
 
 group :development do
