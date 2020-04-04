@@ -18,7 +18,7 @@ pid $pid
 preload_app true
 # before starting processes
 before_exec do |server|
-  ENV['BUNDLE_GEMFILE'] = "#{root}/Gemfile"
+  ENV['BUNDLE_GEMFILE'] = "#{$app_dir}/Gemfile"
 end
 before_fork do |server, worker|
   ENV['BUNDLE_GEMFILE'] = "#{$app_dir}/Gemfile"
