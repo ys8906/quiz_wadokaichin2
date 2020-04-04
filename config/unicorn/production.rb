@@ -16,11 +16,6 @@ listen  $listen
 pid $pid
 # loading booster
 preload_app true
-
-before_exec do |server|
-  ENV['BUNDLE_GEMFILE'] = "#{$app_dir}/Gemfile"
-end
-
 # before starting processes
 before_fork do |server, worker|
   defined?(ActiveRecord::Base) and ActiveRecord::Base.connection.disconnect!
