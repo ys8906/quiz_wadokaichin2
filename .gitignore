@@ -40,3 +40,6 @@ app/frontend/images
 
 # db永続化
 db/volumes
+
+# 公開鍵
+/.ssh

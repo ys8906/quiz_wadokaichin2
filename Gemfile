@@ -54,6 +54,8 @@ group :production, :staging do
   gem 'capistrano-rails', '~> 1.4'
   gem 'capistrano-rbenv', '~> 2.1', '>= 2.1.6'
   gem 'capistrano3-unicorn', '~> 0.2.1'
+  gem 'ed25519'
+  gem 'bcrypt_pbkdf'
 end
 
 group :development, :test do
