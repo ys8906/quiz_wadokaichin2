@@ -40,6 +40,23 @@ append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/syst
 
 set :rbenv_ruby, '2.6.5'
 
+
+# sshでログインするユーザ
+set :user,          "ys8906"
+# ssh 公開鍵設定
+set :ssh_options, :port=>"18.176.129.236", :forward_agent=>false, :keys=>"~/.ssh/quiz_wadokaichin_key_rsa"
+# コマンド実行時にsudoをつけるか
+set :use_sudo, false
+# デプロイサーバ定義
+# role :web, "ip-10-0-0-72.ap-northeast-1.compute.internal"
+# lsコマンド実行タスク
+task :list  do
+  on roles(:web) do
+    execute "ls"
+  end
+end
+
+
 namespace :deploy do
   desc 'Restart application'
   task :restart do

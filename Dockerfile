@@ -25,7 +25,7 @@ RUN mkdir /quiz
 ENV APP_ROOT /quiz 
 WORKDIR $APP_ROOT
 
-# ホスト側（ローカル）のGemfileを追加する（ローカルのGemfileは【３】で作成）
+# ホスト側（ローカル）のGemfileを追加する
 ADD ./Gemfile $APP_ROOT/Gemfile
 ADD ./Gemfile.lock $APP_ROOT/Gemfile.lock
 
@@ -34,6 +34,24 @@ RUN yarn install --check-files
 RUN gem install bundler
 RUN bundle install
 ADD . $APP_ROOT
+
+# 秘密鍵を追加
+RUN mkdir ~/.ssh
+    # ADDで "~(チルダ)" は使えないため、ディレクトリ"quiz"から相対パスで指定
+ADD .ssh/quiz_wadokaichin_key_rsa ../root/.ssh/quiz_wadokaichin_key_rsa
+ADD .ssh/git_id_rsa ../root/.ssh/git_id_rsa
+RUN echo "\n\
+Host github                         \n\
+  HostName github.com               \n\
+  IdentityFile ~/.ssh/git_id_rsa    \n\
+  Port 22                           \n\
+  User git                          \n\
+                                    \n\
+Host quiz_wadokaichin_key_rsa       \n\
+  Hostname 18.176.129.236           \n\
+  Port 22                           \n\
+  User ys8906                       \n\
+  IdentityFile ~/.ssh/quiz_wadokaichin_key_rsa" >> ~/.ssh/config
 
 # Update cron tasks by whenever
 RUN bundle exec whenever --update-crontab
