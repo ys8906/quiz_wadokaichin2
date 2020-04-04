@@ -45,8 +45,6 @@ gem 'omniauth-yahoojp', '~> 0.2.1'
 gem 'omniauth-line', git: 'https://github.com/gomo/omniauth-line.git', branch: 'master'
 gem 'omniauth-facebook', '~> 6.0'
 
-gem 'capistrano-ssh-doctor', '~> 1.0'
-
 group :production, :staging do
   gem 'unicorn', '~> 5.5', '>= 5.5.3'
   gem 'capistrano', '~> 3.11', '>= 3.11.2'
