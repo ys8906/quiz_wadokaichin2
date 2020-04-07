@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 class TwitterService
-  def tweet(text, image) # TwitterService.new.tweet()
+  def tweet(text, image)
+    # TwitterService.new.tweet()
     # set credentials
     client = Twitter::REST::Client.new do |config|
       config.consumer_key        = Rails.application.credentials.twitter[:api_key]

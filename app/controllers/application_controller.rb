@@ -19,9 +19,7 @@ class ApplicationController < ActionController::Base
   end
 
   def render_500
-    if exception
-      logger.info "Rendering 500 with exception: #{exception.message}  #{$ERROR_POSITION}"
-    end
+    logger.info "Rendering 500 with exception: #{exception.message}  #{$ERROR_POSITION}" if exception
     render 'errors/500', status: 500, layout: false
   end
 

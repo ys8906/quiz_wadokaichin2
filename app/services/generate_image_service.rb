@@ -14,8 +14,9 @@ class GenerateImageService
     ).bucket(@bucket_name)
   end
 
-  def generate_quiz_wadokaichin_image(quiz) # GenerateImageService.new.generate_quiz_wadokaichin_image()
-    image_url = URI.escape('https://res.cloudinary.com/dlab9jkaw/image/upload/' \
+  def generate_quiz_wadokaichin_image(quiz)
+    # GenerateImageService.new.generate_quiz_wadokaichin_image()
+    image_url = CGI.escape('https://res.cloudinary.com/dlab9jkaw/image/upload/' \
                           "l_text:Verdana_50_bold:#{quiz.jukugo_right_name.slice(1)},g_east,x_160/" \
                           "l_text:Verdana_50_bold:#{quiz.jukugo_bottom_name.slice(1)},g_south,y_35/" \
                           "l_text:Verdana_50_bold:#{quiz.jukugo_left_name.slice(0)},g_west,x_160/" \

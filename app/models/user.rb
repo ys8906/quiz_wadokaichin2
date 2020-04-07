@@ -38,15 +38,15 @@ class User < ApplicationRecord
 
   def send_welcome_mail
     UsersMailer.send_welcome_mail(self).deliver
-  rescue StandardError => e
+  rescue StandardError
     # エラー報告
     @notifier.ping "#{Time.now}: [エラー] #{$ERROR_POSITION}"
   end
-
-  private
 
   # ユニークアドレスを生成
   def self.dummy_email(auth)
     "#{auth.uid}-#{auth.provider}@ys8906-social-login.com"
   end
+
+  private_class_method :dummy_email
 end

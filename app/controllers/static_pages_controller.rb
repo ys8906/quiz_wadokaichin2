@@ -21,7 +21,7 @@ class StaticPagesController < ApplicationController
       FormMailer.send_inquiry(inquiry).deliver
       flash[:success] = 'メッセージを送信しました。ありがとうございます。'
       redirect_back(fallback_location: root_path)
-    rescue StandardError => e
+    rescue StandardError
       # エラー報告
       @notifier.ping "#{Time.now}: [エラー] #{$ERROR_POSITION}"
     end

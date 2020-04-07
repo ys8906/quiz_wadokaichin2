@@ -45,7 +45,8 @@ class GenerateQuizService
   end
 
   ## 自動作成メソッド
-  def generate_wadokaichin_random_auto # GenerateQuizService.new.generate_wadokaichin_random_auto
+  def generate_wadokaichin_random_auto
+    # GenerateQuizService.new.generate_wadokaichin_random_auto
     loop do
       kanji = Kanji.offset(rand(Kanji.count)).first.character
       # cf. 熟語数 -> 全熟語：47462、用例1以上: 37548、用例100以上: 23490、用例1000以上: 9902

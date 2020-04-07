@@ -27,7 +27,7 @@ class Batch
 
     # 完了報告
     p "#{Time.now}: 和同開珎生成バッチ完了"
-  rescue StandardError => e
+  rescue StandardError
     # エラー報告
     @notifier.ping "#{Time.now}: [エラー] #{$ERROR_POSITION}"
   end
@@ -37,7 +37,7 @@ class Batch
     file.puts Time.now
     p 'cron_test 完了'
     raise
-  rescue StandardError => e
+  rescue StandardError
     @notifier.ping "#{Time.now}: [エラー] #{$ERROR_POSITION}"
   end
 end
