@@ -64,6 +64,15 @@ jobs:
 
         
   deploy:
+    docker:
+    - image: circleci/ruby:2.6.5-node-browsers
+      environment:
+        - BUNDLER_VERSION: 2.1.4
+        - RAILS_ENV: 'test'
+    - image: circleci/mysql:5.7
+      environment:
+        - MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
+        - MYSQL_ROOT_HOST: '127.0.0.1'    
     working_directory: ~/Quiz
     steps:
     - checkout
@@ -78,7 +87,7 @@ jobs:
 
 # workflows:
 #   version: 2
-#   est_and_deploy:
+#   test_and_deploy:
 #      jobs:
 #       - test
 #       - deploy:
