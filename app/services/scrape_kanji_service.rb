@@ -5,7 +5,7 @@ class ScrapeKanjiService
   require 'csv'
 
   def scrape_kanken
-   # ScrapeKanjiService.new.scrape_kanken
+    # ScrapeKanjiService.new.scrape_kanken
     10.times do |i|
       url       = "https://kanjijoho.com/cat/kyu#{i + 1}.html"
       file_path = "app/services/kanji/kanken/kanken_level_#{i + 1}.csv"
@@ -24,7 +24,7 @@ class ScrapeKanjiService
   end
 
   def merge_kanji
-   # ScrapeKanjiService.new.merge_kanji
+    # ScrapeKanjiService.new.merge_kanji
     # Merge all kanji csv files into one
     file_path_merged = 'db/fixtures/development/20_kanji.csv'
     CSV.open(file_path_merged, 'w') do |c|
@@ -77,3 +77,4 @@ class ScrapeKanjiService
       end
     end
   end
+end
