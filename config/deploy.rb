@@ -56,6 +56,8 @@ task :list  do
   end
 end
 
+# capのタスクがsprocketsを前提としており、これを未使用だと、特定の作業をスキップしないとエラーが出る
+# cf. http://t.ly/M1YZ9
 Rake::Task["deploy:assets:backup_manifest"].clear_actions
 
 namespace :deploy do
