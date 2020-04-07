@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ChangeColumnToQuizWadokaichin < ActiveRecord::Migration[6.0]
   def change
     rename_column :quiz_wadokaichins, :jukugo_down_name, :jukugo_bottom_name

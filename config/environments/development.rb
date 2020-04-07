@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -40,7 +42,7 @@ Rails.application.configure do
   # devise: mailer option
   config.action_mailer.default_url_options = { host: 'localhost', port: 3010 }
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = { address: "mailcatcher", port: 1025 }
+  config.action_mailer.smtp_settings = { address: 'mailcatcher', port: 1025 }
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
@@ -51,7 +53,6 @@ Rails.application.configure do
   # Highlight code that triggered database queries in logs.
   config.active_record.verbose_query_logs = true
 
-
   # Raises error for missing translations.
   # config.action_view.raise_on_missing_translations = true
 
@@ -60,7 +61,5 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
   # better_errorsをdocker上で使える設定
-  if Rails.env.development?
-    BetterErrors::Middleware.allow_ip! "0.0.0.0/0"
-  end
+  BetterErrors::Middleware.allow_ip! '0.0.0.0/0' if Rails.env.development?
 end

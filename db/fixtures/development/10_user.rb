@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 require 'csv'
-file_path = "db/fixtures/development/10_user.csv"
+file_path = 'db/fixtures/development/10_user.csv'
 
 # First user
 CSV.foreach(file_path, headers: true) do |row|
@@ -17,7 +19,6 @@ end
     u.id        = i + 2
     u.name      = Faker::Name.name
     u.email     = Faker::Internet.email
-    u.password  = "password"
+    u.password  = 'password'
   end
-
 end

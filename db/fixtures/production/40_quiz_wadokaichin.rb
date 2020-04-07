@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 require 'csv'
-file_path = "db/fixtures/development/40_quiz_wadokaichin/40_quiz_wadokaichin.csv"
+file_path = 'db/fixtures/development/40_quiz_wadokaichin/40_quiz_wadokaichin.csv'
 
 CSV.foreach(file_path, headers: true) do |row|
   QuizWadokaichin.seed_once do |q|

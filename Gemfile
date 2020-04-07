@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
@@ -22,42 +24,43 @@ gem 'jbuilder', '~> 2.7'
 # gem 'image_processing', '~> 1.2'
 
 # Reduces boot times through caching; required in config/boot.rb
-gem 'bootsnap', '>= 1.4.2', require: false
-gem 'devise', '4.7.1'
-gem 'seed-fu', '~> 2.3'
-gem 'twitter', '~> 6.2'
-gem 'whenever', '~> 1.0', require: false
-gem 'slack-notifier', '2.3.2'
 gem 'aws-sdk', '~> 3'
-gem 'kaminari', '~> 1.2'
 gem 'better_errors', '~> 2.6'
 gem 'binding_of_caller', '~> 0.8.0'
+gem 'bootsnap', '>= 1.4.2', require: false
 gem 'breadcrumbs_on_rails', '~> 4.0'
 gem 'breadcrumbs_on_rails-json_ld', '~> 1.0'
-gem 'sentry-raven', '~> 3.0'
-gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-gem 'rspec-rails', '~> 4.0.0.beta4'
-gem 'faker', '~> 2.10'
+gem 'byebug', platforms: %i[mri mingw x64_mingw]
+gem 'devise', '4.7.1'
 gem 'factory_bot', '~> 5.1.1'
+gem 'faker', '~> 2.10'
+gem 'kaminari', '~> 1.2'
+gem 'rspec-rails', '~> 4.0.0.beta4'
+gem 'rubocop-github', '~> 0.14.0'
+gem 'seed-fu', '~> 2.3'
+gem 'sentry-raven', '~> 3.0'
+gem 'slack-notifier', '2.3.2'
+gem 'twitter', '~> 6.2'
+gem 'whenever', '~> 1.0', require: false
 
 # Social login
 gem 'omniauth', '~> 1.9'
-gem 'omniauth-twitter', '~> 1.4'
 gem 'omniauth-google-oauth2', '~> 0.8.0'
+gem 'omniauth-twitter', '~> 1.4'
 gem 'omniauth-yahoojp', '~> 0.2.1'
-  # omniauth-oauth2のバージョンアップに対応した版（有志作成）
-gem 'omniauth-line', git: 'https://github.com/gomo/omniauth-line.git', branch: 'master'
+# omniauth-oauth2のバージョンアップに対応した版（有志作成）
 gem 'omniauth-facebook', '~> 6.0'
+gem 'omniauth-line', git: 'https://github.com/gomo/omniauth-line.git', branch: 'master'
 
 group :production, :staging do
-  gem 'unicorn', '~> 5.5', '>= 5.5.3'
+  gem 'bcrypt_pbkdf'
   gem 'capistrano', '~> 3.11', '>= 3.11.2'
   gem 'capistrano-bundler', '~> 1.6'
   gem 'capistrano-rails', '~> 1.4'
   gem 'capistrano-rbenv', '~> 2.1', '>= 2.1.6'
   gem 'capistrano3-unicorn', '~> 0.2.1'
   gem 'ed25519'
-  gem 'bcrypt_pbkdf'
+  gem 'unicorn', '~> 5.5', '>= 5.5.3'
 end
 
 group :development, :test do
@@ -66,8 +69,8 @@ end
 
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
-  gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'
+  gem 'web-console', '>= 3.3.0'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'

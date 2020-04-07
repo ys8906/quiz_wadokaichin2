@@ -260,23 +260,23 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   config.omniauth :twitter,        Rails.application.credentials.twitter[:api_key],
-                                   Rails.application.credentials.twitter[:api_secret_key]
+                  Rails.application.credentials.twitter[:api_secret_key]
   config.omniauth :google_oauth2,  Rails.application.credentials.google[:client_id],
-                                   Rails.application.credentials.google[:client_secret]
+                  Rails.application.credentials.google[:client_secret]
   config.omniauth :yahoojp,        Rails.application.credentials.yahoojp[:client_id],
-                                   Rails.application.credentials.yahoojp[:secret],
-                                   scope: 'openid profile email address'
+                  Rails.application.credentials.yahoojp[:secret],
+                  scope: 'openid profile email address'
   config.omniauth :line,           Rails.application.credentials.line[:channel_id],
-                                   Rails.application.credentials.line[:channel_secret]
+                  Rails.application.credentials.line[:channel_secret]
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.
   #
   config.warden do |manager|
-      manager.failure_app = CustomFailure
-  #   manager.intercept_401 = false
-  #   manager.default_strategies(scope: :user).unshift :some_external_strategy
+    manager.failure_app = CustomFailure
+    #   manager.intercept_401 = false
+    #   manager.default_strategies(scope: :user).unshift :some_external_strategy
   end
 
   # ==> Mountable engine configurations
