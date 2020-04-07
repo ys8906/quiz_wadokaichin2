@@ -41,7 +41,7 @@ jobs:
            bundle exec rake db:create
            bundle exec rake db:migrate
 
-    # run tests!
+    # Rspec
     - run:
         name: Run rspec
         command: |
@@ -49,6 +49,10 @@ jobs:
            --out test_results/rspec.xml \
            --format progress \
            $(circleci tests glob "spec/**/*_spec.rb")
+
+    - run:
+        name: Rubocop
+        command: bundle exec rubocop
 
     # collect reports
     - store_test_results:
