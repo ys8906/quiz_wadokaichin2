@@ -1,5 +1,9 @@
 inherit_from: .rubocop_todo.yml
 
+AllCops:
+  Exclude:
+    - db/**/*
+
 # 日本語でのコメントを許可
 AsciiComments:
   Enabled: false
