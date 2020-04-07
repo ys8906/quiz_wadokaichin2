@@ -35,8 +35,6 @@ jobs:
 
     # Database setup
     - run: mv ./config/database.yml.ci ./config/database.yml
-
-    # Database setup
     - run:
         name: Databasesetup
         command: |
@@ -47,16 +45,10 @@ jobs:
     - run:
         name: Run rspec
         command: |
-          mkdir /tmp/test-results
-          TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | \
-            circleci tests split --split-by=timings)"
-
-          bundle exec rspec \
-            --format progress \
-            --format RspecJunitFormatter \
-            --out /tmp/test-results/rspec.xml \
-            --format progress \
-            $TEST_FILES
+           bundle exec rspec --profile 10 \
+           --out test_results/rspec.xml \
+           --format progress \
+           $(circleci tests glob "spec/**/*_spec.rb")
 
     # collect reports
     - store_test_results:
