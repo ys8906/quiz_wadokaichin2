@@ -1,17 +1,17 @@
 version: 2
 jobs:
-  build:
+  test:
     docker:
-    - image: circleci/ruby:2.5.3-node-browsers
+    - image: circleci/ruby:2.6.5-node-browsers
       environment:
-        - BUNDLER_VERSION: 2.0.2
+        - BUNDLER_VERSION: 2.1.4
         - RAILS_ENV: 'test'
     - image: circleci/mysql:5.7
       environment:
         - MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
         - MYSQL_ROOT_HOST: '127.0.0.1'
 
-    working_directory: ~/Quiz  #自身のアプリディレクトリ名を設定  
+    working_directory: ~/Quiz
 
 
     steps:
@@ -25,7 +25,7 @@ jobs:
     - run:
         name: install dependencies
         command: |
-          gem install bundler -v 2.0.2
+          gem install bundler -v 2.1.4
           bundle install --jobs=4 --retry=3 --path vendor/bundle
 
     - save_cache:
@@ -35,28 +35,25 @@ jobs:
 
     # Database setup
     - run: mv ./config/database.yml.ci ./config/database.yml
-
-    # Database setup
     - run:
         name: Databasesetup
         command: |
            bundle exec rake db:create
-           bundle exec rake db:schema:load
+           bundle exec rake db:migrate
 
-    # run tests!
+    # Rspec
     - run:
         name: Run rspec
         command: |
-          mkdir /tmp/test-results
-          TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | \
-            circleci tests split --split-by=timings)"
+           bundle exec rspec --profile 10 \
+           --out test_results/rspec.xml \
+           --format progress \
+           $(circleci tests glob "spec/**/*_spec.rb")
 
-          bundle exec rspec \
-            --format progress \
-            --format RspecJunitFormatter \
-            --out /tmp/test-results/rspec.xml \
-            --format progress \
-            $TEST_FILES
+    # Rubocop
+    - run:
+        name: Rubocop
+        command: bundle exec rubocop
 
     # collect reports
     - store_test_results:
@@ -64,3 +61,37 @@ jobs:
     - store_artifacts:
         path: /tmp/test-results
         destination: test-results
+
+        
+  deploy:
+    docker:
+    - image: circleci/ruby:2.6.5-node-browsers
+      environment:
+        - BUNDLER_VERSION: 2.1.4
+        - RAILS_ENV: 'test'
+    - image: circleci/mysql:5.7
+      environment:
+        - MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
+        - MYSQL_ROOT_HOST: '127.0.0.1'    
+    working_directory: ~/Quiz
+    steps:
+    - checkout
+    - add_ssh_keys:
+        fingerprints:
+          - "51:47:f3:82:c7:79:25:67:7a:ed:c1:2f:dd:7f:53:de"   
+    - capistrano:
+        name: Capistrano deploy
+        command: bundle exec cap production deploy          
+
+workflows:
+  version: 2
+  test_and_deploy:
+     jobs:
+      - test
+      - deploy:
+          requires:
+           - test
+          filters:
+            branches:
+              only:
+                - master

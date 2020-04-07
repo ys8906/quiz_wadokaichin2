@@ -36,7 +36,7 @@ gem 'factory_bot', '~> 5.1.1'
 gem 'faker', '~> 2.10'
 gem 'kaminari', '~> 1.2'
 gem 'rspec-rails', '~> 4.0.0.beta4'
-gem 'rubocop-github', '~> 0.14.0'
+gem 'rubocop-rails', '~> 2.5', '>= 2.5.1'
 gem 'seed-fu', '~> 2.3'
 gem 'sentry-raven', '~> 3.0'
 gem 'slack-notifier', '2.3.2'
@@ -45,12 +45,11 @@ gem 'whenever', '~> 1.0', require: false
 
 # Social login
 gem 'omniauth', '~> 1.9'
+gem 'omniauth-facebook', '~> 6.0'
 gem 'omniauth-google-oauth2', '~> 0.8.0'
+gem 'omniauth-line', git: 'https://github.com/gomo/omniauth-line.git', branch: 'master'
 gem 'omniauth-twitter', '~> 1.4'
 gem 'omniauth-yahoojp', '~> 0.2.1'
-# omniauth-oauth2のバージョンアップに対応した版（有志作成）
-gem 'omniauth-facebook', '~> 6.0'
-gem 'omniauth-line', git: 'https://github.com/gomo/omniauth-line.git', branch: 'master'
 
 group :production, :staging do
   gem 'bcrypt_pbkdf'
@@ -64,7 +63,6 @@ group :production, :staging do
 end
 
 group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
 end
 
 group :development do
