@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -14,43 +16,37 @@ class User < ApplicationRecord
   def self.from_omniauth(auth)
     if auth.info.email.blank?
       user = User.where(uid: auth.uid, provider: auth.provider).first
-      unless user
-        user = User.create(
-          provider: auth.provider,
-          uid:      auth.uid,
-          name:     auth.info.name,
-          email:    User.dummy_email(auth),       # emailが得られない場合、こちらで用意
-          password: Devise.friendly_token[0, 20]  # Deviseのパスワード生成機能
-        )
-      end
+      user ||= User.create(
+        provider: auth.provider,
+        uid: auth.uid,
+        name: auth.info.name,
+        email: User.dummy_email(auth), # emailが得られない場合、こちらで用意
+        password: Devise.friendly_token[0, 20] # Deviseのパスワード生成機能
+      )
     else
       user = User.where(email: auth.info.email).first
-      unless user
-        user = User.create(
-          provider: auth.provider,
-          uid:      auth.uid,
-          name:     auth.info.name,
-          email:    auth.info.email,
-          password: Devise.friendly_token[0, 20]
-        )
-      end
+      user ||= User.create(
+        provider: auth.provider,
+        uid: auth.uid,
+        name: auth.info.name,
+        email: auth.info.email,
+        password: Devise.friendly_token[0, 20]
+      )
     end
     user
   end
 
   def send_welcome_mail
-    begin
-      UsersMailer.send_welcome_mail(self).deliver
-    rescue => exception
-      # エラー報告
-      @notifier.ping "#{Time.now}: [エラー] #{$@}"
-    end
+    UsersMailer.send_welcome_mail(self).deliver
+  rescue StandardError => e
+    # エラー報告
+    @notifier.ping "#{Time.now}: [エラー] #{$ERROR_POSITION}"
   end
 
   private
-    # ユニークアドレスを生成
-    def self.dummy_email(auth)
-      "#{auth.uid}-#{auth.provider}@ys8906-social-login.com"
-    end
 
+  # ユニークアドレスを生成
+  def self.dummy_email(auth)
+    "#{auth.uid}-#{auth.provider}@ys8906-social-login.com"
+  end
 end

@@ -1,5 +1,6 @@
-class QuizWadokaichin < ApplicationRecord
+# frozen_string_literal: true
 
+class QuizWadokaichin < ApplicationRecord
   # Association
   has_one :quiz_wadokaichin_jukugo, dependent: :destroy
   has_one :jukugo_right, through: :quiz_wadokaichin_jukugo, dependent: :destroy
@@ -10,5 +11,4 @@ class QuizWadokaichin < ApplicationRecord
 
   # Validation
   validates :answer, presence: true
-
 end

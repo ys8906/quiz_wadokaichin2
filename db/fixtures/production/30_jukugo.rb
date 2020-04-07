@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 require 'csv'
-file_path = "db/fixtures/development/30_jukugo.csv"
+file_path = 'db/fixtures/development/30_jukugo.csv'
 
 CSV.foreach(file_path, headers: true) do |row|
   Jukugo.seed_once do |j|

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Use this file to easily define all of your cron jobs.
 #
 # It's helpful, but not entirely necessary to understand cron before proceeding.
@@ -19,7 +21,7 @@
 
 # Learn more: http://github.com/javan/whenever
 
-## Docker上でのcron管理について 
+## Docker上でのcron管理について
 # ■docker上でcronを起動/停止する方法
 # ・docker exec -it [container_name(quiz_web_1)] /bin/bash
 # ・service cron start/stop
@@ -37,5 +39,5 @@ set :environment, rails_env
 set :output, 'log/whenever.log'
 
 every 1.minute do
-	runner "Batch.new.generate_quiz_wadokaichin"
+  runner 'Batch.new.generate_quiz_wadokaichin'
 end

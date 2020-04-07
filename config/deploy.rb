@@ -1,14 +1,16 @@
-# config valid for current version and patch releases of Capistrano
-lock "~> 3.12.1"
+# frozen_string_literal: true
 
-set :application, "Quiz"
-set :repo_url, "git@github.com:dofainc/Quiz.git"
+# config valid for current version and patch releases of Capistrano
+lock '~> 3.12.1'
+
+set :application, 'Quiz'
+set :repo_url, 'git@github.com:dofainc/Quiz.git'
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
 # Default deploy_to directory is /var/www/my_app_name
-set :deploy_to, "/var/www/rails/Quiz"
+set :deploy_to, '/var/www/rails/Quiz'
 
 # Default value for :format is :airbrussh.
 # set :format, :airbrussh
@@ -24,7 +26,7 @@ set :deploy_to, "/var/www/rails/Quiz"
 append :linked_files, 'config/database.yml', 'config/master.key'
 
 # Default value for linked_dirs is []
-append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
+append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'public/system'
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
@@ -40,25 +42,24 @@ append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/syst
 
 set :rbenv_ruby, '2.6.5'
 
-
 # sshでログインするユーザ
-set :user,          "ys8906"
+set :user, 'ys8906'
 # ssh 公開鍵設定
-set :ssh_options, :port=>"18.176.129.236", :forward_agent=>false, :keys=>"~/.ssh/quiz_wadokaichin_key_rsa"
+set :ssh_options, port: '18.176.129.236', forward_agent: false, keys: '~/.ssh/quiz_wadokaichin_key_rsa'
 # コマンド実行時にsudoをつけるか
 set :use_sudo, false
 # デプロイサーバ定義
 # role :web, "ip-10-0-0-72.ap-northeast-1.compute.internal"
 # lsコマンド実行タスク
-task :list  do
+task :list do
   on roles(:web) do
-    execute "ls"
+    execute 'ls'
   end
 end
 
 # capのタスクがsprocketsを前提としており、これを未使用だと、特定の作業をスキップしないとエラーが出る
 # cf. http://t.ly/M1YZ9
-Rake::Task["deploy:assets:backup_manifest"].clear_actions
+Rake::Task['deploy:assets:backup_manifest'].clear_actions
 
 namespace :deploy do
   desc 'Restart application'
@@ -67,7 +68,7 @@ namespace :deploy do
   end
   desc 'Create database'
   task :db_create do
-    on roles(:db) do |host|
+    on roles(:db) do |_host|
       with rails_env: fetch(:rails_env) do
         within current_path do
           execute :bundle, :exec, :rake, 'db:create'

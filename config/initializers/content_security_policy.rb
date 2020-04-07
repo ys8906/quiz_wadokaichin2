@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # from https://github.com/rails/webpacker#vue
 Rails.application.config.content_security_policy do |policy|
   if Rails.env.development?

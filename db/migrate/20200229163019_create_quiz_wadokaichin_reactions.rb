@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateQuizWadokaichinReactions < ActiveRecord::Migration[6.0]
   def change
     create_table :quiz_wadokaichin_reactions do |t|
@@ -7,7 +9,7 @@ class CreateQuizWadokaichinReactions < ActiveRecord::Migration[6.0]
 
       t.timestamps
     end
-    add_index :quiz_wadokaichin_reactions, [:quiz_wadokaichin_id, :remote_ip],
+    add_index :quiz_wadokaichin_reactions, %i[quiz_wadokaichin_id remote_ip],
               unique: true, name: 'quiz_wadokaichin_reactions_index'
   end
 end
