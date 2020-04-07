@@ -63,28 +63,22 @@ jobs:
         destination: test-results
 
   deploy:
-    # Deploy if stg/master
     - add_ssh_keys:
       fingerprints:
         - "51:47:f3:82:c7:79:25:67:7a:ed:c1:2f:dd:7f:53:de"
     - capistrano:
       name: Capistrano deploy
-      command: |
-        if [ "${CIRCLE_BRANCH}" != "master" ]; then
-          exit 0
-        fi
-        bundle exec cap production deploy
+      command: bundle exec cap production deploy
 
-# workflows:
-#   version: 2
-#   test_and_deploy:
-#       jobs:
-#       - test
-#       - deploy:
-#           requires:
-#             - test
-#           filters:
-#             branches:
-#               only:
-#                 - master
-#                 - development
+workflows:
+  version: 2
+  test_and_deploy:
+      jobs:
+      - test
+      - deploy:
+          requires:
+            - test
+          filters:
+            branches:
+              only:
+                - master
