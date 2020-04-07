@@ -85,15 +85,15 @@ jobs:
 #         name: Capistrano deploy
 #         command: bundle exec cap production deploy          
 
-# workflows:
-#   version: 2
-#   test_and_deploy:
-#      jobs:
-#       - test
-#       - deploy:
-#           requires:
-#            - test
-#           filters:
-#             branches:
-#               only:
-#                 - master
+workflows:
+  version: 2
+  test_and_deploy:
+     jobs:
+      - test
+      - deploy:
+          requires:
+           - test
+          filters:
+            branches:
+              only:
+                - master
