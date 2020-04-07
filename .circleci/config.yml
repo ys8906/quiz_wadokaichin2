@@ -50,10 +50,10 @@ jobs:
            --format progress \
            $(circleci tests glob "spec/**/*_spec.rb")
 
-    # Rubocop
-    - run:
-        name: Rubocop
-        command: bundle exec rubocop
+    # # Rubocop
+    # - run:
+    #     name: Rubocop
+    #     command: bundle exec rubocop
 
     # collect reports
     - store_test_results:
