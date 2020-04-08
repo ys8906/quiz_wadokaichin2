@@ -15,6 +15,8 @@ executors:
 
 jobs:
   setup:
+    executor:
+      name: default    
     steps:
     - checkout
     - restore_cache:
