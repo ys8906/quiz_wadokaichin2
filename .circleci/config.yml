@@ -34,7 +34,8 @@ jobs:
         key: v1-dependencies-{{ checksum "Gemfile.lock" }}      
     
   test:
-    executor: default
+    executor:
+      name: default
     steps:
     - setup
     - run: mv ./config/database.yml.ci ./config/database.yml
@@ -61,7 +62,8 @@ jobs:
         destination: test-results
 
   deploy:
-    executor: default
+    executor:
+      name: default
     steps:
     - setup
     - add_ssh_keys:
