@@ -4,7 +4,7 @@
 lock '~> 3.12.1'
 
 set :application, 'Quiz'
-set :repo_url, 'git@github.com:dofainc/Quiz.git'
+set :repo_url, 'git@github.com:ys8906/quiz_wadokaichin2.git'
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
