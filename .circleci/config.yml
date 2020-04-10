@@ -17,17 +17,18 @@ commands:
   setup: 
     steps:
     - checkout
+    - run:
+        name: system install
+        command: apk add --update --no-cache linux-headers git openssh-client tar gzip build-base tzdata mariadb-dev
     - restore_cache:
         keys:
         - v1-dependencies-{{ checksum "Gemfile.lock" }}
         - v1-dependencies-
-
     - run:
         name: install dependencies
         command: |
           gem install bundler -v 2.1.4
           bundle install --jobs=4 --retry=3 --path vendor/bundle
-
     - save_cache:
         paths:
         - ./vendor/bundle
