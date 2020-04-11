@@ -26,6 +26,7 @@ commands:
         command: |
           gem install bundler -v 2.1.4
           bundle install --jobs=4 --retry=3 --path vendor/bundle
+          sudo apt install -y less
     - save_cache:
         paths:
         - ./vendor/bundle
@@ -69,30 +70,29 @@ jobs:
     - add_ssh_keys:
         fingerprints:
           - "af:b3:f6:29:db:2c:27:f5:73:1e:d7:b4:b6:5e:8b:29"
-    ## [TODO] ssh: circleciのipを毎回ec2に追加/削除するようにする
-    # - aws-cli/setup
-    # - run:
-    #     name: Set circleci ip on docker
-    #     command: |
-    #        MYIP=`curl -s ifconfig.me`
-    # - run:
-    #     name: Add inbound rule
-    #     command: |
-    #        aws ec2 authorize-security-group-ingress \
-    #        --group-id $AWS_SECURITY_ID \
-    #        --protocol tcp --port 22 --cidr $MYIP/32
+    - aws-cli/setup
+    - run:
+        name: Set circleci ip on docker
+        command: |
+           MYIP=`curl -s ifconfig.me`
+    - run:
+        name: Add inbound rule
+        command: |
+           aws ec2 authorize-security-group-ingress \
+           --group-id $AWS_SECURITY_ID \
+           --protocol tcp --port 22 --cidr $MYIP/32
     - run:
         name: Capistrano deploy
         command: bundle exec cap production deploy
-    # - run:
-    #     name: Remove inbound rule
-    #     command: |
-    #        aws ec2 revoke-security-group-ingress \
-    #        --group-id $AWS_SECURITY_ID \
-    #        --protocol tcp --port 22 --cidr $MYIP/32
+    - run:
+        name: Remove inbound rule
+        command: |
+           aws ec2 revoke-security-group-ingress \
+           --group-id $AWS_SECURITY_ID \
+           --protocol tcp --port 22 --cidr $MYIP/32
           
-# orbs:
-#   aws-cli: circleci/aws-cli@1.0.0
+orbs:
+  aws-cli: circleci/aws-cli@1.0.0
 
 workflows:
   version: 2
