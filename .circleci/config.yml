@@ -60,6 +60,11 @@ jobs:
     - store_artifacts:
         path: /tmp/test-results
         destination: test-results
+    - add_ssh_keys:
+        fingerprints:
+          - "af:b3:f6:29:db:2c:27:f5:73:1e:d7:b4:b6:5e:8b:29"
+    ## [TODO] ssh: circleciのipを毎回ec2に追加/削除するようにする
+    - aws-cli/setup  
 
   deploy:
     executor:
@@ -91,8 +96,8 @@ jobs:
     #        --group-id $AWS_SECURITY_ID \
     #        --protocol tcp --port 22 --cidr $MYIP/32
           
-# orbs:
-#   aws-cli: circleci/aws-cli@1.0.0
+orbs:
+  aws-cli: circleci/aws-cli@1.0.0
 
 workflows:
   version: 2
