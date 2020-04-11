@@ -50,6 +50,7 @@ jobs:
            --out test_results/rspec.xml \
            --format progress \
            $(circleci tests glob "spec/**/*_spec.rb")
+    ## Rubocopに対応する余力ができたらオンにする
     # # Rubocop
     # - run:
     #     name: Rubocop
@@ -68,8 +69,8 @@ jobs:
     - add_ssh_keys:
         fingerprints:
           - "af:b3:f6:29:db:2c:27:f5:73:1e:d7:b4:b6:5e:8b:29"
-    - aws-cli/setup
-    - aws-white-list-circleci-ip/add
+    ## [TODO] ssh: circleciのipを毎回ec2に追加/削除するようにする
+    # - aws-cli/setup
     # - run:
     #     name: Set circleci ip on docker
     #     command: |
@@ -83,7 +84,6 @@ jobs:
     - run:
         name: Capistrano deploy
         command: bundle exec cap production deploy
-    - aws-white-list-circleci-ip/remove
     # - run:
     #     name: Remove inbound rule
     #     command: |
@@ -91,9 +91,8 @@ jobs:
     #        --group-id $AWS_SECURITY_ID \
     #        --protocol tcp --port 22 --cidr $MYIP/32
           
-orbs:
-  aws-cli: circleci/aws-cli@1.0.0
-  aws-white-list-circleci-ip: configure/aws-white-list-circleci-ip@1.0.1
+# orbs:
+#   aws-cli: circleci/aws-cli@1.0.0
 
 workflows:
   version: 2
