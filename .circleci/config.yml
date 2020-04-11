@@ -72,7 +72,7 @@ jobs:
     - run:
         name: Set circleci ip on docker
         command: |
-           MYIP=$(curl -s ifconfig.me)
+           MYIP=`curl -s ifconfig.me`
     - run:
         name: Add inbound rule
         command: |
