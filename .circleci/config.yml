@@ -80,12 +80,9 @@ jobs:
           - "af:b3:f6:29:db:2c:27:f5:73:1e:d7:b4:b6:5e:8b:29"
     - aws-cli/setup
     - run:
-        name: Set circleci ip on docker
-        command: |
-           MYIP=`curl -s ifconfig.me`
-    - run:
         name: Add inbound rule
         command: |
+           MYIP=`curl -s ifconfig.me`
            aws ec2 authorize-security-group-ingress --group-id $AWS_SECURITY_ID --protocol tcp --port 22 --cidr $MYIP/32
     - run:
         name: Capistrano deploy
