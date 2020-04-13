@@ -6,7 +6,7 @@
   <% if @quizzes.first.blank? %>
     <p class="history__caption">該当するクイズはありません。</p>
   <% else %>
-    
+  <div class="history__overflow">
     <table class="history__table text-center">
       <tbody>
         <tr class="font-weight-bold">
@@ -57,6 +57,7 @@
             <td class="align-middle history__table--answers border-bottom"><%= quiz.jukugo_left_name %></td>
             <td class="align-middle history__table--answers border-bottom"><%= quiz.jukugo_top_name %></td>
           </tr>
+        </div>
         <% end %>
       </tbody>
     </table>

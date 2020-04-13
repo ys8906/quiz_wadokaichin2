@@ -3,17 +3,20 @@
     <% unless (@quiz.id - 1) < 1 %>
       <%= link_to quiz_wadokaichin_path(@quiz.id - 1) do %>
         <i class="fas fa-chevron-left"></i>
-        No. <%= @quiz.id - 1 %>
+        <span class="wadokaichin__title--number">No. <%= @quiz.id - 1 %></span>
       <% end %>
     <% end %>
   </span>
   <span class="wadokaichin__title text-primary offset-1">
-    No.<%= @quiz.id %><span class="wadokaichin__title--level">| Lv.<%= @quiz.difficulty %></span>
+    No.<%= @quiz.id %>
+    <span class="wadokaichin__title--level">
+      | Lv.<%= @quiz.difficulty %>
+    </span>
   </span>
   <span class="wadokaichin__title--link offset-1">
     <% unless (@quiz.id + 1) > QuizWadokaichin.count %>
       <%= link_to quiz_wadokaichin_path(@quiz.id + 1) do %>
-        No. <%= @quiz.id + 1 %>
+        <span class="wadokaichin__title--number">No. <%= @quiz.id + 1 %></span>
         <i class="fas fa-chevron-right"></i>
       <% end %>
     </span>

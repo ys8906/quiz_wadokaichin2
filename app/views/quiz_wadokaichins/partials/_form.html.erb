@@ -24,8 +24,7 @@
                     <%= f.hidden_field :title, value: @quiz.class.name.to_s + @quiz.id.to_s %>
                     <h6 class="form__text">お問い合わせ内容</h6>
                     <div class="text-center">
-                      <%= f.text_area :content, class: "col-12",
-                          style: "border-color: #BFBFBF; border-style: ridge;", size: "x5", "v-model": "content" %>
+                      <%= f.text_area :content, class: "col-12", size: "x5", "v-model": "content" %>
                     </div>
                   <div class="form__box text-center">
                     <%= f.submit "送信する", class: "btn btn-primary font-weight-bold text-right",

@@ -71,9 +71,6 @@
         >
           残念！
         </div>
-        <!-- 回答前も空白文字でスペースを確保 -->
-        <div v-else
-          class="wadokaichin__result-box--text">ㅤ</div>
       </div>
 
       <!-- Answer}Box -->
