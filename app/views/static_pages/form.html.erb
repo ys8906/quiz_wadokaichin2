@@ -4,29 +4,28 @@
   <div class="form__wrapper offset-1 col-10">
     <%= form_with url: form_send_inquiry_path, html: {method: 'GET'},
         skip_enforcing_utf8: true, local: true do |f| %>
-      <div class="form__box form-group row">
-        <p class="col-3 form__text">メールアドレス</p>
-        <div class="text-center col-8">
+      <div class="form__box form-group row justify-content-center">
+        <p class="col-md-3 col-10 form__text">メールアドレス</p>
+        <div class="text-center col-md-8 col-10">
           <%= f.text_field :email, class: "col-12", "v-model": "email" %>
         </div>
       </div>
-      <div class="form__box form-group row">
-        <p class="col-3 form__text">お名前</p>
-        <div class="text-center col-8">
+      <div class="form__box form-group row justify-content-center">
+        <p class="col-md-3 col-10 form__text">お名前</p>
+        <div class="text-center col-md-8 col-10">
           <%= f.text_field :name, class: "col-12", "v-model": "name" %>
         </div>
       </div>
-      <div class="form__box form-group row">
-        <p class="col-3 form__text">タイトル</p>
-        <div class="text-center col-8">
+      <div class="form__box form-group row justify-content-center">
+        <p class="col-md-3 col-10 form__text">タイトル</p>
+        <div class="text-center col-md-8 col-10">
           <%= f.text_field :title, class: "col-12", "v-model": "title" %>
         </div>
       </div>
-      <div class="form__box form-group row">
-        <p class="col-3 form__text">お問い合わせ内容</p>
-        <div class="text-center col-8">
-          <%= f.text_area :content, class: "col-12",
-              style: "border-color: #BFBFBF; border-style: ridge;", size: "x5", "v-model": "content" %>
+      <div class="form__box form-group row justify-content-center">
+        <p class="col-md-3 col-10 form__text">内容</p>
+        <div class="text-center col-md-8 col-10">
+          <%= f.text_area :content, class: "col-12", size: "x5", "v-model": "content" %>
         </div>
       </div>
       <div class="form__box text-center">

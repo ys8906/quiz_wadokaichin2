@@ -8,8 +8,7 @@
   <% if user_signed_in? %>
   <nav class="nav-item dropdown">
     <a href="#" data-toggle="dropdown">
-      <span class="header__dropdown--username">ようこそ、<%= current_user.name %>さん！</span>
-      <i class="far fa-smile fa-2x align-center"></i>
+      <span class="header__dropdown--username"><%= current_user.name %>さん ▼</span>
     </a>
     <div class="dropdown-menu dropdown-menu-right header__dropdown">
       <div class="header__dropdown--text">
