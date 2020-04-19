@@ -42,6 +42,7 @@ gem 'sentry-raven', '~> 3.0'
 gem 'slack-notifier', '2.3.2'
 gem 'twitter', '~> 6.2'
 gem 'whenever', '~> 1.0', require: false
+gem 'toastr-rails', '~> 1.0', '>= 1.0.3'
 
 # Social login
 gem 'omniauth', '~> 1.9'

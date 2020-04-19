@@ -100,69 +100,26 @@ $font-family-base: Noto Sans JP;
 .fa-yahoo-color { color: #FF0027 }
 .fa-line-color { color: #00B900 }
 
-
-// Header & footer
-.header {
-  background-color: $gray-300;
-  background-attachment: fixed;
-  padding: 10px 20px;
-  margin-bottom: 20px;
-  align-items: baseline;
-  z-index: 3;
-  &__banner {
-    height: 50px;
-  }
-  &__icon {
-    margin: 5px 10px 0 0;
-    float: left;
-  }
-  &__social-box {
-    text-align: center;
-    margin: 10px auto;
-  }
-  &__dropdown {
-    padding: 10px 20px;
-    width: 250px;
-    &--username {
-      @include heading1();
-      vertical-align: 35%;
-    }
-    &--button {
-      @include heading1();  
-      margin-right: 15px;
-      float: left;
-    }
-    &--text {
-      @include heading1();
-      margin: 10px 0;
-    }
-  }
-}
-
-.footer {
-  margin-top: 30px;
-  background-color: $gray-300;
-  height: 120px;
-  z-index: 10;
-  &__link-text {
-    @include heading1();
-    margin: 0 15px 15px 15px;
-  }
-}
-
-
 // Shared components
 .pagination {
   margin: 20px 0;
 }
 
 .flash {
+  background-color: none;
+  border: none;
   &__title {
     @include heading2();
   }
   &__subtitle {
     @include heading1();  
   }
+}
+
+.alert {
+  margin: 20px 0;
+  border: none;
+  background: none;
 }
 
 .quiz-thumbnail {
@@ -201,5 +158,8 @@ $font-family-base: Noto Sans JP;
   @media screen and (max-width: 768px) {  // <576, >=576, >=768, >=992, >=1200px
     border: solid 1px $gray-300;
     border-bottom: none;
+    &:last-child {
+      border-bottom: solid 1px $gray-300;
+    }
   }
 }

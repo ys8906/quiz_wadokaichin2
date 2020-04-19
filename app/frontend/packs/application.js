@@ -2,9 +2,15 @@
 // require("jquery")
 require("@fortawesome/fontawesome-free")
 require("bootstrap")
+require("toastr")
 
 // frontend内のファイル
 import '../stylesheets/application.scss'
+
+// toastr
+import toastr from 'toastr';
+toastr.options.positionClass = "toast-bottom-left";
+window.toastr = toastr;
 
 // Vue
 import Vue from 'vue'

@@ -12,7 +12,8 @@
   }
   &__text {
     @include heading1();
-    line-height: 1.5;
+    margin: 0px auto 10px auto;
+    text-align: left;
   }
   &__link {
     margin: 10px 0 20px 0;
@@ -38,8 +39,5 @@
     @include heading1();
     margin: 0px auto 10px auto;
     text-align: left;
-    @media screen and (max-width: 768px) {  // <576, >=576, >=768, >=992, >=1200px
-      text-align: center;
-    }
   }
 }

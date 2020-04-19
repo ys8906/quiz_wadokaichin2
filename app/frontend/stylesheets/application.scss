@@ -14,7 +14,12 @@ $fa-font-path: "~@fortawesome/fontawesome-free/webfonts";
 // Common
 @import "common.scss";
 
+// Gems
+@import '~toastr/toastr';
+
 // Pages
+@import "global-header.scss";
+@import "global-footer.scss";
 @import "quiz-wadokaichins-index.scss";
 @import "quiz-wadokaichins-show.scss";
 @import "user-pages-index.scss";

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class StaticPagesController < ApplicationController
-  add_breadcrumb 'ホーム', :root_path
+  add_breadcrumb '> ホーム', :root_path
 
   def home; end
 
@@ -11,8 +11,8 @@ class StaticPagesController < ApplicationController
   end
 
   def form
-    @title = 'フォーム'
-    add_breadcrumb 'フォーム', privacy_path
+    @title = 'お問い合わせ'
+    add_breadcrumb 'お問い合わせ', privacy_path
   end
 
   def send_inquiry

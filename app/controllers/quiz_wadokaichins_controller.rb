@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class QuizWadokaichinsController < ApplicationController
-  add_breadcrumb 'ホーム', :root_path
+  add_breadcrumb '> ホーム', :root_path
 
   def index
     params[:order] ? (order = params[:order]) : (order = 'created_at DESC')

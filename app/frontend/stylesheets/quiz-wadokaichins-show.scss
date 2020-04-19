@@ -3,7 +3,7 @@
 .wadokaichin {
   &__header-box {
     align-items: flex-end;
-    margin: 30px 0 10px;
+    margin: 30px 0;
   }
   &__title {
     font-size: 32px;
@@ -95,7 +95,7 @@
   &__answer-box {
     background-color: $gray-300;
     padding: 70px 30px;
-    border-radius: 5px;
+    border-radius: 4px;
     &--text {
       @include heading1();
     }
