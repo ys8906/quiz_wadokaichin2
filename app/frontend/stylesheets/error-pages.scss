@@ -1,0 +1,23 @@
+@import "common.scss";
+
+.error-404 {
+  height: 600px;
+  &__title-box {
+    background-color: white;
+    padding: 1px;
+    margin-bottom: 30px;
+  }
+  &__title {
+    @include title();
+  }
+  &__subtitle {
+    @include subtitle();
+  }
+  &__text {
+    @include heading2();
+    margin-bottom: 20px;
+  }
+  &__button-box {
+    margin: 20px;
+  }
+}

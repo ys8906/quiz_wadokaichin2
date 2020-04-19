@@ -11,5 +11,13 @@ $fa-font-path: "~@fortawesome/fontawesome-free/webfonts";
 @import "bootstrap_override.scss";
 @import "~bootstrap/scss/bootstrap";
 
-// Style
+// Common
 @import "common.scss";
+
+// Pages
+@import "quiz-wadokaichins-index.scss";
+@import "quiz-wadokaichins-show.scss";
+@import "user-pages-index.scss";
+@import "static-pages.scss";
+@import "registrations.scss";
+@import "error-pages.scss";

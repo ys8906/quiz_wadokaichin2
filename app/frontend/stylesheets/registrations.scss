@@ -1,0 +1,22 @@
+@import "common.scss";
+
+.edit {
+  &__title {
+    @include title();
+  }
+  &__subtitle {
+    @include heading1();
+    text-align: center;
+  }
+  &__wrapper {
+    margin-top: 40px;
+  }
+  &__box {
+    margin-bottom: 20px;
+  }
+  &__text {
+    @include heading1();
+    margin: 0px auto 10px auto;
+    text-align: left;
+  }
+}
