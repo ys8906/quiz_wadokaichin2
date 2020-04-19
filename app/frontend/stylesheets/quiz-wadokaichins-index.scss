@@ -8,7 +8,10 @@
   }
   &__wrapper {
     max-width: 800px;
-    margin: auto;
+    margin: auto auto 30px auto;
+    @media screen and (max-width: 768px) {
+      margin-bottom: 0;
+    }    
   }
   &__searchtext {
     @include heading1();
@@ -27,7 +30,7 @@
   }
   &__main {
     margin-bottom: 20px; 
-    @media screen and (max-width: 768px) {  // <576, >=576, >=768, >=992, >=1200px
+    @media screen and (max-width: 768px) {
       margin-bottom: 0;
     }         
   }

@@ -38,5 +38,12 @@
       @include heading1();
       margin: 10px 0;
     }
+    &--logout {
+      @include heading1();
+      padding: 0;
+      margin-bottom: 10px;
+      background-color: transparent;
+      border: none;
+    }
   }
 }

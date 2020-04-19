@@ -1,7 +1,6 @@
 @import "common.scss";
 
 .error-404 {
-  height: 600px;
   &__title-box {
     background-color: white;
     padding: 1px;
@@ -16,6 +15,13 @@
   &__text {
     @include heading2();
     margin-bottom: 20px;
+  }
+  &__image {
+    height: 190px;
+    width: 190px;
+    object-fit: cover;
+    margin: 0;
+    text-align: center;
   }
   &__button-box {
     margin: 20px;
