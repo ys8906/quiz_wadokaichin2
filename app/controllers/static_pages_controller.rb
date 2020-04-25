@@ -23,6 +23,7 @@ class StaticPagesController < ApplicationController
       redirect_back(fallback_location: root_path)
     rescue StandardError
       # エラー報告
+      @notifier = Slack::Notifier.new(Rails.application.credentials.slack[:webhook_url])
       @notifier.ping "#{Time.now}: [エラー] #{$ERROR_POSITION}"
     end
   end

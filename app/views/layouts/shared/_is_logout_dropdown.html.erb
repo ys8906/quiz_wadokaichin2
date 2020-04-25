@@ -29,15 +29,18 @@
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <div class="field">
         <p class="header__dropdown--text">メールアドレス</p>
-        <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "wado@quiz.com", "v-model": "email" %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email",
+                          placeholder: "wado@quiz.com", "v-model": "email" %>
       </div>
       <div class="field">
         <p class="header__dropdown--text">パスワード</p>
-        <%= f.password_field :password, autocomplete: "current-password", placeholder: "My9izP@ss", "v-model": "password" %>
+        <%= f.password_field :password, autocomplete: "current-password",
+                             placeholder: "My9izP@ss", "v-model": "password" %>
       </div>
       <% if devise_mapping.rememberable? %>
         <div class="field">
-          <%= f.label :remember_me, "ログインしたままにする", class: "header__dropdown--text" %>
+          <%= f.label :remember_me, "ログインしたままにする",
+                      class: "header__dropdown--text" %>
           <%= f.check_box :remember_me %>
         </div>
       <% end %>
