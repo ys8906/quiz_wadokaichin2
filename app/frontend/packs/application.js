@@ -2,12 +2,15 @@
 // require("jquery")
 require("@fortawesome/fontawesome-free")
 require("bootstrap")
+require("toastr")
 
 // frontend内のファイル
 import '../stylesheets/application.scss'
-  // 現状使用していないinfinite-scroll
-  // import '../javascripts/infinite-loading.pkgd.min'
-  // cf. https://infinite-scroll.com/
+
+// toastr
+import toastr from 'toastr';
+toastr.options.positionClass = "toast-bottom-left";
+window.toastr = toastr;
 
 // Vue
 import Vue from 'vue'

@@ -1,0 +1,51 @@
+@import "common.scss";
+
+.index {
+  &__category {
+    @include display1();
+    margin: 15px 0;
+    text-align: center;
+  }
+  &__wrapper {
+    max-width: 800px;
+    margin: auto auto 30px auto;
+    @media screen and (max-width: 768px) {
+      margin-bottom: 0;
+    }    
+  }
+  &__searchtext {
+    @include heading1();
+    margin: 0 0px;
+  }
+  &__navbar {
+    margin: 20px 0;
+    &--box {
+      margin: 0 10px;
+      select, option { 
+        height: 30px;
+        line-height: 30px;
+        border: solid 1px $gray-300;
+      }
+    }
+  }
+  &__main {
+    margin-bottom: 20px; 
+    @media screen and (max-width: 768px) {
+      margin-bottom: 0;
+    }         
+  }
+  &__aside {
+    margin: 20px 0;
+    border-left: solid 1px $gray-300;
+    @media screen and (max-width: 768px) {  // <576, >=576, >=768, >=992, >=1200px
+      width: 100%;
+      border-left: none;
+    }
+  }
+  &__pagination {
+    @media screen and (max-width: 768px) {  // <576, >=576, >=768, >=992, >=1200px
+      border-top: solid 1px $gray-300;
+      border-bottom: solid 1px $gray-300;
+    }       
+  }
+}

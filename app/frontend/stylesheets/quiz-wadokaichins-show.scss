@@ -1,0 +1,114 @@
+@import "common.scss";
+
+.wadokaichin {
+  &__header-box {
+    align-items: flex-end;
+    margin: 30px 0;
+  }
+  &__title {
+    font-size: 32px;
+    font-weight: bold;
+    &--level {
+      @include heading2();
+      color: black;
+      margin-left: 10px;
+      @media screen and (max-width: 768px) {
+        display: none;
+      }      
+    }
+    &--number {
+      @media screen and (max-width: 768px) {
+        display: none;
+      }      
+    }
+    &--link {
+      @include heading2();      
+    }
+  }
+  &__subtitle {
+    @include subtitle()
+  }
+  &__quiz-box {
+    margin: 20px 50px;
+  }
+  &__image {
+    display: block;
+    height: 250px;
+    width: 250px;
+    object-fit: cover;
+    margin: auto;
+  }
+  &__caption {
+    @include heading1();
+  }
+  &__answer-buttons {
+    @media screen and (max-width: 768px) {  // <576, >=576, >=768, >=992, >=1200px
+      width: 100%;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      z-index: 3;
+      background-color: rgba(224, 224, 224, 0.8);
+    }
+  }
+  &__button-box {
+    margin: 10px 0 10px 0;
+    &--subtitle {
+      @include heading2();
+    }
+    &--button {
+      margin-bottom: 10px;
+    }
+    &--show-answer-button {
+      border-color: $gray-300;
+      margin-bottom: 10px;
+      @media screen and (max-width: 768px) {
+        background-color: white;
+      }
+    }
+  }
+  &__social-box {
+    margin-left: 0px;
+    &--tweet {
+      height: 28px;
+      font-size: 12px;
+      line-height: 12px;
+      color: white;
+      background-color: #1DA1F2;
+    }
+    &--facebook {
+      :hover {
+        color: black;
+      }
+    }
+  }
+  &__vote-box {
+    padding: 10px;
+    background-color: $gray-300;
+    margin: 10px 0 10px 0;
+  }
+  &__result-box {
+    &--text {
+      @include display1();      
+    }
+  }
+  &__answer-box {
+    background-color: $gray-300;
+    padding: 70px 30px;
+    border-radius: 4px;
+    &--text {
+      @include heading1();
+    }
+    &--large-letter {
+      color: $primary;
+      font-size: 24px;
+    }
+  }
+  &__link-box {
+    @include heading2();
+    margin: 20px 0;
+    &--title {
+      margin: 20px;
+    }
+  }
+}

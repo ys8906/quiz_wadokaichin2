@@ -1,0 +1,43 @@
+@import "common.scss";
+
+.privacy {
+  &__box {
+    margin: 0 auto 50px auto;
+  }
+  &__title {
+    @include title();
+  }
+  &__subtitle {
+    @include subtitle();
+  }
+  &__text {
+    @include heading1();
+    margin: 0px auto 10px auto;
+    text-align: left;
+  }
+  &__link {
+    margin: 10px 0 20px 0;
+    line-height: 1.5;
+  }
+}
+
+.form {
+  &__title {
+    @include title();
+  }
+  &__subtitle {
+    @include heading1();
+    text-align: center;
+  }
+  &__wrapper {
+    margin-top: 40px;
+  }
+  &__box {
+    margin-bottom: 20px;
+  }
+  &__text {
+    @include heading1();
+    margin: 0px auto 10px auto;
+    text-align: left;
+  }
+}

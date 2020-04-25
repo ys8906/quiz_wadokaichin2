@@ -1,13 +1,33 @@
-<div>[<%= @user.name %>さん] ようこそ[サービス名]へ！</div>
 <div>
-  <p>[サービス名]をご利用頂きまして、ありがとうございます。</p>
+  <img
+    src="https://quiz-site-ys.s3-ap-northeast-1.amazonaws.com/banner.svg"
+    alt="クイズ和銅開珍"
+    style="height: 50px;"
+  >
+</div>
+<hr style="width: 100%;">
+<div>
   <div>
+    <p style="font-weight: bold;">
+      ようこそ、クイズ和同開珎へ！
+    </p>
     <p>下記の内容にて、アカウント登録が完了しました。</p>
-    <p>メールアドレス： <%= @user.email %></p>
-    <p>お名前： <%= @user.name %></p>
-    <p>パスワード： ご登録時にご入力頂いたもの</p>
+    <div style="padding: 10px; border: solid 1px #DEE2E6">
+      <p>メールアドレス： <%= @user.email %></p>
+      <p>お名前： <%= @user.name %></p>
+      <p>パスワード： ご登録時にご入力頂いたもの</p>
+    </div>
+    <p>今後もクイズ和同開珎をお楽しみください！</p>
+    <a
+      href="<%= root_url %>"
+      style="padding: 7px;
+             border-radius: 4px;
+             background-color: #ba000d;
+             color: #ffffff;
+             text-decoration: none"
+    >
+      さっそく遊ぶ
+    </a>
+    <p>クイズ和同開珎</p>
   </div>
-  <p>今後も[サービス名]をお楽しみください！</p>
-
-  <p>[サービス名] カスタマーセンター</p>
 </div>

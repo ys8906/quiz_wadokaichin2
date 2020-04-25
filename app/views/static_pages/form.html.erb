@@ -1,5 +1,5 @@
 <div id="form" class="container">
-  <h2 class="form__title">メッセージフォーム</h2>
+  <h2 class="form__title">お問い合わせ</h2>
   <h3 class="form__subtitle">感想や別解などがあれば、いつでもお知らせください。</h3>
   <div class="form__wrapper offset-1 col-10">
     <%= form_with url: form_send_inquiry_path, html: {method: 'GET'},
@@ -7,25 +7,29 @@
       <div class="form__box form-group row justify-content-center">
         <p class="col-md-3 col-10 form__text">メールアドレス</p>
         <div class="text-center col-md-8 col-10">
-          <%= f.text_field :email, class: "col-12", "v-model": "email" %>
+          <%= f.text_field :email, placeholder: "wado@quiz.com",
+                           "v-model": "email", class: "col-12" %>
         </div>
       </div>
       <div class="form__box form-group row justify-content-center">
         <p class="col-md-3 col-10 form__text">お名前</p>
         <div class="text-center col-md-8 col-10">
-          <%= f.text_field :name, class: "col-12", "v-model": "name" %>
+          <%= f.text_field :name, placeholder: "和銅 花子",
+                           "v-model": "name", class: "col-12" %>
         </div>
       </div>
       <div class="form__box form-group row justify-content-center">
         <p class="col-md-3 col-10 form__text">タイトル</p>
         <div class="text-center col-md-8 col-10">
-          <%= f.text_field :title, class: "col-12", "v-model": "title" %>
+          <%= f.text_field :title, placeholder: "〜〜〜について",
+                           "v-model": "title", class: "col-12" %>
         </div>
       </div>
       <div class="form__box form-group row justify-content-center">
         <p class="col-md-3 col-10 form__text">内容</p>
         <div class="text-center col-md-8 col-10">
-          <%= f.text_area :content, class: "col-12", size: "x5", "v-model": "content" %>
+          <%= f.text_area :content, "v-model": "content",
+                          class: "col-12", size: "x5" %>
         </div>
       </div>
       <div class="form__box text-center">

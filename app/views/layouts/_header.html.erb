@@ -8,7 +8,9 @@
   <% if user_signed_in? %>
   <nav class="nav-item dropdown">
     <a href="#" data-toggle="dropdown">
-      <span class="header__dropdown--username"><%= current_user.name %>さん</span>
+      <span class="header__dropdown--username">
+        <%= current_user.name.slice(0) %>
+      </span>
     </a>
     <div class="dropdown-menu dropdown-menu-right header__dropdown">
       <div class="header__dropdown--text">
@@ -17,14 +19,17 @@
       <div class="header__dropdown--text">
         <%= link_to "ユーザー情報変更", edit_user_registration_path %>
       </div>
-      <div class="header__dropdown--text">
-        <%= button_to "ログアウト", destroy_user_session_path, method: :delete %>
+      <div>
+        <%= button_to "ログアウト", destroy_user_session_path, method: :delete,
+            class: "header__dropdown--logout" %>
       </div>
     </div>
   </nav>
   <% else %>
   <nav class="d-flex align-items-center">
-    <%= render 'layouts/shared/is_logout_dropdown' %>
+    <!-- サインインページでログインボタンを出さない -->
+    <%= render 'layouts/shared/is_logout_dropdown' unless
+        request.path.include?("sign_in") %>
     <% end %>
   </nav>
 </header>
