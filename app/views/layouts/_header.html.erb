@@ -27,7 +27,9 @@
   </nav>
   <% else %>
   <nav class="d-flex align-items-center">
-    <%= render 'layouts/shared/is_logout_dropdown' %>
+    <!-- サインインページでログインボタンを出さない -->
+    <%= render 'layouts/shared/is_logout_dropdown' unless
+        request.path.include?("sign_in") %>
     <% end %>
   </nav>
 </header>
