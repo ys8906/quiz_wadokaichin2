@@ -73,8 +73,11 @@
         </div>
       </div>
 
-      <!-- Answer}Box -->
-      <div class="wadokaichin__answer-box">
+      <!-- AnswerBox -->
+      <div
+        v-cloak
+        class="wadokaichin__answer-box"
+      >
         <div
           v-if="answerIsVisible"
         >

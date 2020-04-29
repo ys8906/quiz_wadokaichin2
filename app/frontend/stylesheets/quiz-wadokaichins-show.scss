@@ -1,5 +1,9 @@
 @import "common.scss";
 
+[v-cloak] {
+  display: none;
+}
+
 .wadokaichin {
   &__header-box {
     align-items: flex-end;
