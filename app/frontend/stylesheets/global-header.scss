@@ -1,8 +1,10 @@
 @import 'common.scss';
 
 .header {
-  background-attachment: fixed;
-  padding: 20px 20px 0px 20px;
+  position: sticky;
+  top: 0;
+  background-color: white;
+  padding: 20px;
   align-items: baseline;
   z-index: 3;
   &__banner {
