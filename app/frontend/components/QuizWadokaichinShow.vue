@@ -73,7 +73,7 @@
         </div>
       </div>
 
-      <!-- Answer}Box -->
+      <!-- AnswerBox -->
       <div
         v-cloak
         class="wadokaichin__answer-box"
