@@ -5,7 +5,8 @@ class FormMailer < ApplicationMailer
     @inquiry = inquiry
     mail(
       subject: "フォームからのお問い合わせ",
-      from: "クイズ和同開珎<inquiry@wadokaichin.games>"
+      from: "クイズ和同開珎<inquiry@wadokaichin.games>",
+      to: Rails.application.credentials.email[:gmail]
     )
   end
 end
