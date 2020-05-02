@@ -17,6 +17,10 @@
     </a>
     <div class="dropdown-menu dropdown-menu-right header__dropdown">
       <div class="header__dropdown--text">
+        <%= current_user.name %> さん
+      </div>
+      <hr>
+      <div class="header__dropdown--text">
         <%= link_to "クイズ履歴", user_pages_path %>
       </div>
       <div class="header__dropdown--text">
