@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class UsersMailer < ApplicationMailer
-  default from: 'no-reply@wadokaichin.com'
+  default from: 'no-reply@wadokaichin.games'
 
   def send_welcome_mail(user)
     @user = user
