@@ -57,6 +57,8 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "quiz_production"
 
   config.action_mailer.perform_caching = false
+  config.action_mailer.default_url_options = { host: 'wadokaichin.games' }
+  config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     :user_name => Rails.application.credentials.sendgrid[:user_name],
     :password => Rails.application.credentials.sendgrid[:password],
