@@ -49,5 +49,4 @@ class User < ApplicationRecord
     "#{auth.uid}-#{auth.provider}@ys8906-social-login.com"
   end
 
-  private_class_method :dummy_email
 end
