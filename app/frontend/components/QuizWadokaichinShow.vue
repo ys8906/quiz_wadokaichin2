@@ -21,7 +21,7 @@
             v-model="answer"
             class="ml-4 text-center"
             type="text"
-            placeholder="回答は1文字です"
+            placeholder="解答は1文字です"
             :disabled="answerIsVisible"
             @keypress.enter="checkAnswer"
           >
@@ -40,7 +40,7 @@
           <button
             class="wadokaichin__button-box--show-answer-button btn btn-outline-dark ml-4 col-5"
             :disabled="answerIsVisible"
-            @click="showAnswer"
+            @click="showAnswerModal = true"
           >
             答えを見る
           </button>
@@ -148,18 +148,44 @@
             <span
               class="wadokaichin__answer-box--large-letter text-primary"
             >画</span>
-            像の中央に解答を入力し、「回答する」を押すと、解答結果が現れます。「答えを見る」を押すと、正答と解説が現れます。
+            像の中央に解答を入力し、「解答する」を押すと、解答結果が現れます。「答えを見る」を押すと、正答と解説が現れます。
           </div>
         </div>
       </div>
     </div>
+    <Modal
+      v-if="showAnswerModal === true"
+      @close="showAnswerModal = false"
+    >    
+      <div slot="modal__header">
+        答えを見ますか？
+      </div>
+      <div slot="modal__body">
+        <button
+          class="wadokaichin__button-box--button btn btn-primary font-weight-bold col-5"
+          @click="showAnswer"
+        >
+          はい
+        </button>
+        <button
+          class="wadokaichin__button-box--show-answer-button btn btn-outline-dark ml-4 col-5"
+          @click="showAnswerModal = false"
+        >
+          いいえ
+        </button>
+      </div>
+    </Modal>      
   </div>
 </template>
 
 <script>
 import axios from 'axios';
+import Modal from './Modal.vue';
 
 export default {
+  components: {
+    Modal
+  },   
   props: {
     quiz: {
       type: Object,
@@ -185,6 +211,7 @@ export default {
       isCorrect: null,
       answerIsVisible: null,
       answer: null,
+      showAnswerModal: false,      
     };
   },
   watch: {
@@ -208,10 +235,8 @@ export default {
       }
     },
     showAnswer() {
-      if(!confirm("答えを見ますか？")){
-        return
-      }
       this.answerIsVisible = true;
+      this.showAnswerModal = false;
     },
     twitterShare() {
       const shareURL =
