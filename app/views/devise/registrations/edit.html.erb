@@ -1,4 +1,7 @@
-<main id="edit" class="container">
+<main
+  data-vue="registrations-edit"
+  class="container"
+>
   <h1 class="edit__title">ユーザー情報変更</h1>
   <h2 class="edit__subtitle">
     変更する内容を入力し、送信してください。
@@ -56,13 +59,3 @@
     <% end %>
   </div>
 </main>
-
-<script>
-new Vue ({
-	el: '#edit',
-	data: {
-    email: null,
-    currentPassword: null
-  }
-})
-</script>

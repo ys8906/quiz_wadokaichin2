@@ -1,4 +1,7 @@
-<main id="signin" class="container">
+<main
+  data-vue="registrations-new"
+  class="container"
+>
   <h1 class="edit__title">サインイン</h1>
   <h2 class="edit__subtitle">
     各項目にご入力のうえ、送信ボタンを押してください。
@@ -39,15 +42,3 @@
   </div>
   <%= render "devise/shared/links" %>
 </main>
-
-<script>
-new Vue ({
-	el: '#signin',
-	data: {
-    email: null,
-    name: null,
-    password: null,
-    passwordConfirmation: null
-  }
-})
-</script>

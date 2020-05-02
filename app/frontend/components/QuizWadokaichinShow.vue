@@ -174,7 +174,7 @@
           いいえ
         </button>
       </div>
-    </Modal>      
+    </Modal>
   </div>
 </template>
 
@@ -185,7 +185,7 @@ import Modal from './Modal.vue';
 export default {
   components: {
     Modal
-  },   
+  },
   props: {
     quiz: {
       type: Object,

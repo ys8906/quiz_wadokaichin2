@@ -3,6 +3,10 @@
     "plugin:vue/essential",
     "eslint:recommended"
   ],
+  "env": {
+    "node": true,
+    "amd": true
+  },  
   "rules": {
     "vue/attribute-hyphenation": "error",
     "vue/html-closing-bracket-newline": "error",

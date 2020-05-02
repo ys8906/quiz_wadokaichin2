@@ -1,4 +1,7 @@
-<div id="form" class="container">
+<div
+  data-vue="static_pages-form"
+  class="container"
+>
   <h2 class="form__title">お問い合わせ</h2>
   <h3 class="form__subtitle">感想や別解などがあれば、いつでもお知らせください。</h3>
   <div class="form__wrapper offset-1 col-10">
@@ -39,15 +42,3 @@
     <% end %>
   </div>
 </div>
-
-<script>
-new Vue ({
-	el: '#form',
-	data: {
-    email: null,
-    name: null,
-    title: null,
-    content: null,
-  }
-})
-</script>
