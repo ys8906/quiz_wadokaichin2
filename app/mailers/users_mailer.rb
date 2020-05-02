@@ -7,6 +7,7 @@ class UsersMailer < ApplicationMailer
     @user = user
     mail(
       subject: "ようこそクイズ和銅開珎へ！",
+      from: "クイズ和同開珎<inquiry@wadokaichin.games>",
       to: @user.email, &:html
     )
   end
