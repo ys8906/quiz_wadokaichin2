@@ -243,7 +243,7 @@ export default {
         "https://twitter.com/intent/tweet" +
         "?text=" +
         "あなたは解けるかな？" + // ツイート内容
-        "%20%23和銅開珍" + // ハッシュタグ
+        "%20%23和銅開珎" + // ハッシュタグ
         "&url=" +
         this.url; // シェアURL
       window.open(
