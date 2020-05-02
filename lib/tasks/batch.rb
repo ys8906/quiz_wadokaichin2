@@ -21,8 +21,11 @@ class Batch
     generate_image.generate_quiz_wadokaichin_image(quiz)
 
     # ツイート
-    text = 'TEST TWEET: New Wadokaichin'
-    image = "app/frontend/images/quiz_wadokaichins/#{QuizWadokaichin.last.id}.jpg"
+    text = <<-EOC
+【毎日更新中】新しいクイズ和銅開珍です！あなたは解けるかな？
+https://wadokaichin.games/#{quiz.id}
+    EOC
+    image = "app/frontend/images/quiz_wadokaichins/#{quiz.id}.jpg"
     twitter.tweet(text, image)
 
     # 完了報告
