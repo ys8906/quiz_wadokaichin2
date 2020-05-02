@@ -9,14 +9,23 @@
   </head>
 
   <body>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <%# Facebook share %>
     <div id="fb-root"></div>
     <script async defer crossorigin="anonymous"
       src="https://connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v6.0"></script>
     <%= render 'layouts/header' %>
-    <%= render 'layouts/flash' %>
     <%= yield %>
-    <%= debug(params) if Rails.env.development? %>
     <%= render 'layouts/footer' %>
+    <%# toastr %>
+    <% if flash.any? %>
+      <script type="text/javascript">
+        <% flash.each do |key, value| %>
+          <% key = "success" if key == "notice" %>
+          <% key = "error" if key == "alert" %>
+          toastr['<%= key %>']('<%= value %>');
+        <% end %>
+      </script>
+    <% end %>
   </body>
 </html>

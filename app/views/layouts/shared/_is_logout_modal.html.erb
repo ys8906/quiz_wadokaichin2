@@ -1,0 +1,83 @@
+<div class="nav-item dropdown">
+
+  <button
+    @click="showLoginModal = true"
+    class="header__dropdown--button d-block"
+  >
+    ログイン
+  </button>
+
+  <Modal
+    v-if="showLoginModal === true"
+    @close="showLoginModal = false"  
+  >
+    <div slot="modal__header">
+    </div>
+    <div slot="modal__body">  
+      <div>
+        <div class="row justify-content-center">
+          <%- if devise_mapping.omniauthable? %>
+            <%- resource_class.omniauth_providers.each do |provider| %>
+              <% icon = "fab fa-twitter fa-lg fa-twitter-color",  name = "Twitter"  if provider.to_s == "twitter" %>
+              <% icon = "fab fa-google fa-lg fa-google-color",    name = "Google"   if provider.to_s == "google_oauth2" %>
+              <% icon = "fab fa-yahoo fa-lg fa-yahoo-color",      name = "Yahoo"    if provider.to_s == "yahoojp" %>
+              <% icon = "fab fa-line fa-lg fa-line-color",        name = "Line"     if provider.to_s == "line" %>
+              <%= link_to omniauth_authorize_path(resource_name, provider) do %>
+              <div class="header__social-box">
+                <i class="<%= icon[0].to_s %>"></i>
+                <span class="header__dropdown--text"><%= name %></span>
+              </div>
+              <% end %>
+            <% end %>
+          <% end %>   
+        </div>
+
+        <div class="clearfix"></div>
+        <div class="dropdown-divider"></div>
+        <p class="header__dropdown--text text-center">または</p>
+        <div class="dropdown-divider"></div>
+
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+          <div class="field">
+            <p class="header__dropdown--text">メールアドレス</p>
+            <%= f.email_field :email, autofocus: true, autocomplete: "email",
+                              placeholder: "wado@quiz.com", "v-model": "email" %>
+          </div>
+          <div class="field">
+            <p class="header__dropdown--text">パスワード</p>
+            <%= f.password_field :password, autocomplete: "current-password",
+                                placeholder: "My9izP@ss", "v-model": "password" %>
+          </div>
+          <% if devise_mapping.rememberable? %>
+            <div class="field">
+              <%= f.label :remember_me, "ログインしたままにする",
+                          class: "header__dropdown--text" %>
+              <%= f.check_box :remember_me %>
+            </div>
+          <% end %>
+
+          <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+            <div class="header__dropdown--text"><%= link_to "パスワードをお忘れですか？", new_password_path(resource_name) %></div>
+          <% end %>
+          <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
+            <div class="header__dropdown--text"><%= link_to "登録確認メールが届いていませんか？", new_confirmation_path(resource_name) %></div>
+          <% end %>
+          <%- if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks' %>
+            <div class="header__dropdown--text"><%= link_to "パスワード再設定メールが届いていませんか？", new_unlock_path(resource_name) %></div>
+          <% end %>
+
+          <div class="actions">
+            <%= f.submit "ログインする", class: "btn btn-primary font-weight-bold",
+                ":disabled": "!this.email || !this.password" %>
+          </div>
+        <% end %>
+        <div class="dropdown-divider"></div>
+
+        <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
+          <div class="header__dropdown--text"><%= link_to "初めてのご利用ですか？", new_registration_path(resource_name) %></div>
+        <% end %>
+      </div>
+    </div>
+  </Modal>
+
+</div>

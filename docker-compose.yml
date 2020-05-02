@@ -12,7 +12,7 @@ services:
 
   web: &web
     build: .
-    command: rails s -p 3000 -b '0.0.0.0'
+    command: /bin/sh -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
     environment:
       WEBPACKER_DEV_SERVER_HOST: webpacker
       WEBPACKER_DEV_SERVER_PUBLIC: 0.0.0.0:3035

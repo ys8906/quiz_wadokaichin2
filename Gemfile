@@ -10,7 +10,7 @@ gem 'rails', '~> 6.0.2', '>= 6.0.2.1'
 # Use mysql as the database for Active Record
 gem 'mysql2', '>= 0.4.4'
 # Use Puma as the app server
-gem 'puma', '~> 4.1'
+gem 'puma', '~> 4.3'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
 gem 'webpacker', '~> 4.0'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -42,6 +42,7 @@ gem 'sentry-raven', '~> 3.0'
 gem 'slack-notifier', '2.3.2'
 gem 'twitter', '~> 6.2'
 gem 'whenever', '~> 1.0', require: false
+gem 'toastr-rails', '~> 1.0', '>= 1.0.3'
 
 # Social login
 gem 'omniauth', '~> 1.9'

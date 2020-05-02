@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class StaticPagesController < ApplicationController
-  add_breadcrumb 'ホーム', :root_path
+  add_breadcrumb '> ホーム', :root_path
 
   def home; end
 
@@ -11,8 +11,8 @@ class StaticPagesController < ApplicationController
   end
 
   def form
-    @title = 'フォーム'
-    add_breadcrumb 'フォーム', privacy_path
+    @title = 'お問い合わせ'
+    add_breadcrumb 'お問い合わせ', privacy_path
   end
 
   def send_inquiry
@@ -23,6 +23,7 @@ class StaticPagesController < ApplicationController
       redirect_back(fallback_location: root_path)
     rescue StandardError
       # エラー報告
+      @notifier = Slack::Notifier.new(Rails.application.credentials.slack[:webhook_url])
       @notifier.ping "#{Time.now}: [エラー] #{$ERROR_POSITION}"
     end
   end

@@ -1,90 +1,58 @@
-<div id="index" class="justify-content-center overflow-hidden">
+<div id="index" class="index justify-content-center overflow-hidden">
   <nav>
-    <ul class="nav justify-content-center">
-      <li class="nav-item">
-        <h2 class="index__category">
-          クイズ一覧
-        </h2>
-      </li>
-      <% if false %>
-        <li class="nav-item">
-          <h2>
-            <a class="index__category nav-link" href="#">カテゴリー2</a>
-          </h2>
-        </li>
-        <li class="nav-item">
-          <h2>
-            <a class="index__category nav-link" href="#">カテゴリー3</a>
-          </h2>
-        </li>
-      <% end %>
-    </ul>
+    <h2 class="index__category">
+      クイズ一覧
+    </h2>
   </nav>
 
-  <nav class="index__navbar row justify-content-center">
-    <%= form_with url: root_path, html: { method: "POST", name: "form" },
-        class: "index__form index__searchtext form-inline justify-content-center" do |f| %>
-      <% if user_signed_in? %>
+  <div class="index__wrapper">
+    <nav class="index__navbar row justify-content-center">
+      <%= form_with url: root_path, html: { method: "POST", name: "form" },
+          class: "index__form index__searchtext form-inline justify-content-center" do |f| %>
+        <% if user_signed_in? %>
+          <div class="index__navbar--box">
+            <div class="index__searchtext navbar-text">答えを見たクイズ</div>
+            <%= f.check_box :answer_shown, { checked: params[:answer_shown].to_i == 1 } %>
+          </div>
+          <div class="index__navbar--box">
+            <div class="index__searchtext navbar-text">正解したクイズ</div>
+            <%= f.check_box :answered, { checked: params[:answered].to_i == 1 } %>
+          </div>
+          <div class="index__navbar--box">
+            <div class="index__searchtext navbar-text">未回答のクイズ</div>
+            <%= f.check_box :unanswered, { checked: params[:unanswered].to_i == 1 } %>
+          </div>
+        <% end %>
         <div class="index__navbar--box">
-          <div class="index__searchtext navbar-text">答えを見たクイズ</div>
-          <%= f.check_box :answer_shown, { checked: params[:answer_shown].to_i == 1 } %>
+          <div class="index__searchtext navbar-text">並び替え</div>
+          <%= f.select :order, { "作成日の新しい順": "id DESC", "作成日の古い順": "id ASC",
+                                "難易度の高い順": "difficulty DESC", "難易度の低い順": "difficulty ASC", },
+              class: "index__searchtext" %>
         </div>
         <div class="index__navbar--box">
-          <div class="index__searchtext navbar-text">正解したクイズ</div>
-          <%= f.check_box :answered, { checked: params[:answered].to_i == 1 } %>
-        </div>
-        <div class="index__navbar--box">
-          <div class="index__searchtext navbar-text">未回答のクイズ</div>
-          <%= f.check_box :unanswered, { checked: params[:unanswered].to_i == 1 } %>
+          <%= f.submit "表示", name: nil, class: "index__searchtext btn btn-primary font-weight-bold" %>
         </div>
       <% end %>
-      <div class="index__navbar--box">
-        <div class="index__searchtext navbar-text">並び替え</div>
-        <%= f.select :order, { "作成日の新しい順": "id DESC", "作成日の古い順": "id ASC",
-                               "難易度の高い順": "difficulty DESC", "難易度の低い順": "difficulty ASC", },
-             class: "index__searchtext" %>
-      </div>
-      <div class="index__navbar--box">
-        <%= f.submit "表示", name: nil, class: "index__searchtext btn btn-primary font-weight-bold" %>
-      </div>
-    <% end %>
-  </nav>
-
-  <% if true # pagination %>
-  <div class="index__container row justify-content-center">
-    <main class="col-md-8 col-12">
-      <section class="index__main">
-        <div class="justify-content-center row">
-          <%= render @quizzes %>
-          <div class="index__searchtext mt-5"><%= "検索結果はありませんでした。" if @quizzes.size < 1 %></div>
+    </nav>
+    <div class="index__container row justify-content-center">
+      <main class="col-md-8 col-12">
+        <section class="index__main">
+          <div class="justify-content-center row">
+            <%= render @quizzes %>
+            <div class="index__searchtext mt-5"><%= "検索結果はありませんでした。" if @quizzes.size < 1 %></div>
+          </div>
+        </section>
+        <div class="index__pagination">
+          <%= paginate @quizzes %>
         </div>
-      </section>
-      <%= paginate @quizzes %>
-    </main>
-    <aside class="index__aside col-md-4 col-10">
-      <%# Twitter埋め込み：https://publish.twitter.com/# %>
-      <a class="twitter-timeline" data-height="400" data-theme="light" href="https://twitter.com/sato_yoshito?ref_src=twsrc%5Etfw">  
-      </a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-    </aside>
-  </div>
-  <% end %>
-
-
-  <% if false # infinite-loading %>
-  <%# FIXME: hideNavが効かない現象 %>
-  <div class="container">
-    <div id="quiz_thumbnails" class="justify-content-center row">
-      <%= render @quizzes %>
-      <div class="quiz_thumbnails"
-        data-infinite-scroll='{ "path": "li.page-item a[rel=next]",
-                                "append": ".quiz_thumbnail",
-                                "history": "push",
-                                "hideNav": "nav" }'>
-        <%= paginate @quizzes %>
-      </div>
+      </main>
+      <aside class="index__aside col-md-4 col-10">
+        <%# Twitter埋め込み：https://publish.twitter.com/# %>
+        <a class="twitter-timeline" data-height="400" data-theme="light" href="https://twitter.com/q_wadokaichin">  
+        </a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+      </aside>
     </div>
   </div>
-  <% end %>
 
 </div>
 

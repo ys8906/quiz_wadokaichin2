@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class UserPagesController < ApplicationController
-  add_breadcrumb 'ホーム', :root_path
+  add_breadcrumb '> ホーム', :root_path
   before_action :authenticate_user!
 
   def index

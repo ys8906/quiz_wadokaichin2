@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   # devise
   devise_for :users, controllers: {
     sessions: 'users/sessions',
+    passwords: 'users/passwords',
     omniauth_callbacks: 'users/omniauth_callbacks'
   }
 
@@ -16,7 +17,7 @@ Rails.application.routes.draw do
   get   '/form', to: 'static_pages#form'
   get   '/form/send_inquiry', to: 'static_pages#send_inquiry'
 
-  resources :quiz_wadokaichins, only: %i[index show]
+  resources :quiz_wadokaichins, only: [:index, :show]
   resources :quiz_wadokaichin_reactions, only: [:create]
   resources :quiz_wadokaichin_savedata, only: [:create]
   resources :user_pages, only: [:index]

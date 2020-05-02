@@ -1,16 +1,53 @@
-<div>Forgot your password?</div>
+<div
+  data-vue="passwords-new"
+  class="nav-item dropdown"
+>
+  <div class="dropdown-menu-right pass-reset__dropdown">
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+    <div class="pass-reset__title">
+      パスワードをお忘れですか？
+    </div>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+
+      <div class="field">
+        <p class="pass-reset__dropdown--text">メールアドレス</p>
+        <%= f.email_field :email,
+            autofocus: true,
+            autocomplete: "email",
+            placeholder: "wado@quiz.com",
+            "v-model": "email",
+            class: "mb-3" %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit "パスワードをリセットする",
+            class: "btn btn-primary font-weight-bold",
+            ":disabled": "!this.email" %>    
+      </div>
+    <% end %>  
+
+    <div class="clearfix"></div>
+    <div class="dropdown-divider"></div>
+    <p class="pass-reset__dropdown--text text-center">または</p>
+    <div class="dropdown-divider"></div>
+
+    <div class="row">
+      <%- if devise_mapping.omniauthable? %>
+        <%- resource_class.omniauth_providers.each do |provider| %>
+          <% icon = "fab fa-twitter fa-lg fa-twitter-color",  name = "Twitter"  if provider.to_s == "twitter" %>
+          <% icon = "fab fa-google fa-lg fa-google-color",    name = "Google"   if provider.to_s == "google_oauth2" %>
+          <% icon = "fab fa-yahoo fa-lg fa-yahoo-color",      name = "Yahoo"    if provider.to_s == "yahoojp" %>
+          <% icon = "fab fa-line fa-lg fa-line-color",        name = "Line"     if provider.to_s == "line" %>
+          <%= link_to omniauth_authorize_path(resource_name, provider) do %>
+          <div class="pass-reset__social-box">
+            <i class="<%= icon[0].to_s %> ml-3"></i>
+            <span class="pass-reset__dropdown--text"><%= name %></span>
+          </div>
+          <% end %>
+        <% end %>
+      <% end %>   
+    </div>
   </div>
-
-  <div class="actions">
-    <%= f.submit "Send me reset password instructions" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>

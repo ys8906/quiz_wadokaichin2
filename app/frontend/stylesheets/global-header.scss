@@ -1,0 +1,51 @@
+@import 'common.scss';
+
+.header {
+  position: sticky;
+  top: 0;
+  background-color: white;
+  padding: 20px;
+  align-items: baseline;
+  z-index: 3;
+  &__banner {
+    height: 50px;
+  }
+  &__icon {
+    margin: 5px 10px 0 0;
+    float: left;
+  }
+  &__social-box {
+    text-align: center;
+    margin: 10px 5px;
+  }
+  &__dropdown {
+    padding: 10px 20px;
+    width: 250px;
+    &--username {
+      @include heading1();
+      vertical-align: 50%;
+      background-color: $gray-300;
+      border-radius: 4px;
+      padding: 15px;
+    }
+    &--button {
+      @include heading1();  
+      margin-right: 15px;
+      float: left;
+      background-color: $gray-300;
+      border-radius: 4px;
+      padding: 15px;
+    }
+    &--text {
+      @include heading1();
+      margin: 10px 0;
+    }
+    &--logout {
+      @include heading1();
+      padding: 0;
+      margin-bottom: 10px;
+      background-color: transparent;
+      border: none;
+    }
+  }
+}
