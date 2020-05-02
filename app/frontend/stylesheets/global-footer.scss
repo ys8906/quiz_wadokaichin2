@@ -4,7 +4,7 @@
   margin-top: auto;
   background-color: $gray-300;
   height: 120px;
-  z-index: 10;
+  z-index: 2;
   &__link-text {
     @include heading1();
     margin: 0 15px 15px 15px;
