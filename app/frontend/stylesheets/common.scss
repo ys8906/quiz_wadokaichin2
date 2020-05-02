@@ -155,7 +155,7 @@ $font-family-base: Noto Sans JP;
       font-weight: bold;
     }
   }
-  @media screen and (max-width: 768px) {  // <576, >=576, >=768, >=992, >=1200px
+  @media screen and (max-width: 768px) {
     border: solid 1px $gray-300;
     border-bottom: none;
     &:last-child {
