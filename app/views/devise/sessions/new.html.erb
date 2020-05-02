@@ -1,4 +1,7 @@
-<div id="is-logout-dropdown" class="nav-item dropdown">
+<div
+  data-vue="sessions-new"
+  class="nav-item dropdown"
+>
   <div class="dropdown-menu-right login__dropdown">
     <div class="row">
       <%- if devise_mapping.omniauthable? %>
@@ -60,13 +63,3 @@
     <% end %>
   </div>
 </div>
-
-<script>
-new Vue ({
-	el: '#is-logout-dropdown',
-	data: {
-    email: null,
-    password: null
-  }
-})
-</script>
