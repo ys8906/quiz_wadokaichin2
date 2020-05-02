@@ -22,7 +22,7 @@ class Batch
 
     # ツイート
     text = <<-EOC
-【毎日更新中】新しいクイズ和銅開珍です！あなたは解けるかな？
+【毎日更新中】新しいクイズ和銅開珎です！あなたは解けるかな？
 https://wadokaichin.games/#{quiz.id}
     EOC
     image = "app/frontend/images/quiz_wadokaichins/#{quiz.id}.jpg"

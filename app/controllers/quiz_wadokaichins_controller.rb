@@ -31,6 +31,6 @@ class QuizWadokaichinsController < ApplicationController
     @reactions          = @quiz.quiz_wadokaichin_reactions
     @savedata           = current_user&.quiz_wadokaichin_savedata&.where(quiz_wadokaichin_id: @quiz.id)
     @related_quizzes    = QuizWadokaichin.order('RAND()').limit(9)
-    add_breadcrumb "和銅開珍 No.#{@quiz.id}", quiz_wadokaichin_path
+    add_breadcrumb "和銅開珎 No.#{@quiz.id}", quiz_wadokaichin_path
   end
 end
