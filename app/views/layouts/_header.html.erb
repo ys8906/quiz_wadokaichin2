@@ -31,7 +31,7 @@
   <% else %>
   <nav class="d-flex align-items-center">
     <%# サインインページでログインボタンを出さない %>
-    <%= render 'layouts/shared/is_logout_dropdown' unless
+    <%= render 'layouts/shared/is_logout_modal' unless
         request.path.include?("sign_in") %>
     <% end %>
   </nav>
