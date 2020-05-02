@@ -46,12 +46,12 @@
     @include heading1();
   }
   &__answer-buttons {
-    @media screen and (max-width: 768px) {  // <576, >=576, >=768, >=992, >=1200px
+    @media screen and (max-width: 768px) {
       width: 100%;
       position: fixed;
       bottom: 0;
       left: 0;
-      z-index: 3;
+      z-index: 1;
       background-color: rgba(224, 224, 224, 0.8);
     }
   }
@@ -113,6 +113,9 @@
     margin: 20px 0;
     &--title {
       margin: 20px;
+      @media screen and (max-width: 768px) {
+        text-align: center;
+      }      
     }
   }
 }
