@@ -7,8 +7,8 @@
 
   <body>
     <%# [OPTIMIZE] js/css読み込みはbodyの最後にしたいが、表示が崩れる %>
-    <%= javascript_pack_tag 'application' %>
     <%= stylesheet_pack_tag 'application', media: 'all' %>    
+    <%= javascript_pack_tag 'application' %>
     <%= render 'layouts/header' %>
     <%= yield %>
     <%= render 'layouts/footer' %>
