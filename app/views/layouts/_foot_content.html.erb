@@ -1,0 +1,16 @@
+<%# Toastr %>
+<% if flash.any? %>
+  <script type="text/javascript">
+    <% flash.each do |key, value| %>
+      <% key = "success" if key == "notice" %>
+      <% key = "error" if key == "alert" %>
+      toastr['<%= key %>']('<%= value %>');
+    <% end %>
+  </script>
+<% end %>
+
+<%# Facebook share %>
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous"
+  src="https://connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v6.0">
+</script>

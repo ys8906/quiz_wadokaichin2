@@ -1,34 +1,17 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <%= render 'layouts/meta' %>
-    <%= stylesheet_pack_tag 'application', media: 'all' %>
-    <%# Preload: cf.https://github.com/rails/webpacker/blob/master/lib/webpacker/helper.rb %>
-    <%= preload_pack_asset 'media/webfonts/fa-brands-400.woff2' %>
-    <%= preload_pack_asset 'media/webfonts/fa-regular-400.woff2' %>
-    <%= preload_pack_asset 'media/webfonts/fa-solid-900.woff2' %>
     <%= favicon_link_tag '/favicon.ico' %>
+    <%= render 'layouts/meta' %>
   </head>
 
   <body>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <%# Facebook share %>
-    <div id="fb-root"></div>
-    <script async defer crossorigin="anonymous"
-      src="https://connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v6.0"></script>
+    <%# [OPTIMIZE] js読み込みはbodyの最後にしたいが、表示が崩れる %>
+    <%= javascript_pack_tag 'application' %>  
     <%= render 'layouts/header' %>
     <%= yield %>
     <%= render 'layouts/footer' %>
-    <%# toastr %>
-    <% if flash.any? %>
-      <script type="text/javascript">
-        <% flash.each do |key, value| %>
-          <% key = "success" if key == "notice" %>
-          <% key = "error" if key == "alert" %>
-          toastr['<%= key %>']('<%= value %>');
-        <% end %>
-      </script>
-    <% end %>
-    <%= javascript_pack_tag 'application' %>
+    <%= stylesheet_pack_tag 'application', media: 'all' %>
+    <%= render 'layouts/foot_content' %>
   </body>
 </html>
