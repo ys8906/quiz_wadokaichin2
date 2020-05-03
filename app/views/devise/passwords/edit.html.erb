@@ -1,3 +1,4 @@
+<% if false %>
 <div>Change your password</div>
 
 <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
@@ -21,5 +22,47 @@
     <%= f.submit "Change my password" %>
   </div>
 <% end %>
+<% end %>
 
-<%= render "devise/shared/links" %>
+
+<div
+  data-vue="passwords-edit"
+  class="nav-item dropdown"
+>
+  <div class="dropdown-menu-right pass-reset__dropdown">
+
+    <div class="pass-reset__title">
+      パスワード再設定
+    </div>
+
+    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+      <%= f.hidden_field :reset_password_token %>
+
+      <div class="field">
+        <p class="pass-reset__dropdown--text">新しいパスワード</p>
+        <%= f.password_field :password,
+            autofocus: true,
+            autocomplete: "new-password",
+            "v-model": "password" %>
+        <div class="pass-reset__dropdown--caption text-muted">
+            パスワードは<%= @minimum_password_length %>文字以上で入力してください。
+        </div>
+      </div>
+
+      <div class="field mb-2">
+        <p class="pass-reset__dropdown--text">パスワード確認</p>
+        <%= f.password_field :password_confirmation,
+            autocomplete: "new-password",
+            "v-model": "passwordConfirmation" %>
+      </div>      
+
+      <div class="actions">
+        <%= f.submit "パスワードを再設定する",
+            class: "btn btn-primary font-weight-bold",
+            ":disabled": "!this.password || !this.passwordConfirmation" %>
+      </div>
+    <% end %>  
+
+  </div>
+</div>
