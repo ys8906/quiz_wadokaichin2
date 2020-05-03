@@ -62,4 +62,7 @@ Rails.application.configure do
 
   # better_errorsをdocker上で使える設定
   BetterErrors::Middleware.allow_ip! '0.0.0.0/0' if Rails.env.development?
+
+  # ngrokをアクセス許可：PageSpeed Insights用
+  config.hosts << '.ngrok.io'
 end

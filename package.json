@@ -10,6 +10,7 @@
     "axios": "^0.19.2",
     "bootstrap": "^4.4.1",
     "jquery": "^3.4.1",
+    "ngrok": "^3.2.7",
     "popper.js": "^1.16.1",
     "rails-ujs": "^5.2.4-1",
     "toastr": "^2.1.4",
@@ -26,5 +27,5 @@
   },
   "scripts": {
     "lint": "yarn run eslint --ext .vue --ext .js app/frontend"
-  }  
+  }
 }
