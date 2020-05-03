@@ -38,10 +38,6 @@ class User < ApplicationRecord
 
   def send_welcome_mail
     UsersMailer.send_welcome_mail(self).deliver
-  rescue StandardError
-    # エラー報告
-    @notifier = Slack::Notifier.new(Rails.application.credentials.slack[:webhook_url])
-    @notifier.ping "#{Time.now}: [エラー] #{$ERROR_POSITION}"
   end
 
   # ユニークアドレスを生成
@@ -49,5 +45,4 @@ class User < ApplicationRecord
     "#{auth.uid}-#{auth.provider}@ys8906-social-login.com"
   end
 
-  private_class_method :dummy_email
 end

@@ -18,8 +18,8 @@ class ApplicationController < ActionController::Base
     render 'errors/404', status: 404
   end
 
-  def render_500
-    logger.info "Rendering 500 with exception: #{exception.message}  #{$ERROR_POSITION}" if exception
+  def render_500(e)
+    Raven.capture_exception(e)
     render 'errors/500', status: 500, layout: false
   end
 

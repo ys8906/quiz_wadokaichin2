@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html>
   <head>
-  <%= render 'layouts/meta' %>
-
+    <%= render 'layouts/meta' %>
     <%= stylesheet_pack_tag 'application', media: 'all' %>
-    <%= javascript_pack_tag 'application' %>
+    <%# Preload: cf.https://github.com/rails/webpacker/blob/master/lib/webpacker/helper.rb %>
+    <%= preload_pack_asset 'media/webfonts/fa-brands-400.woff2' %>
+    <%= preload_pack_asset 'media/webfonts/fa-regular-400.woff2' %>
+    <%= preload_pack_asset 'media/webfonts/fa-solid-900.woff2' %>
     <%= favicon_link_tag '/favicon.ico' %>
   </head>
 
@@ -27,5 +29,6 @@
         <% end %>
       </script>
     <% end %>
+    <%= javascript_pack_tag 'application' %>
   </body>
 </html>
