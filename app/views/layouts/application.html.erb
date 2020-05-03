@@ -6,12 +6,12 @@
   </head>
 
   <body>
+    <%= stylesheet_pack_tag 'application', media: 'all' %>    
     <%# [OPTIMIZE] js読み込みはbodyの最後にしたいが、表示が崩れる %>
-    <%= javascript_pack_tag 'application' %>  
+    <%= javascript_pack_tag 'application' %>
     <%= render 'layouts/header' %>
     <%= yield %>
     <%= render 'layouts/footer' %>
-    <%= stylesheet_pack_tag 'application', media: 'all' %>
     <%= render 'layouts/foot_content' %>
   </body>
 </html>
