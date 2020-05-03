@@ -25,22 +25,22 @@ class Batch
 【毎日更新中】新しいクイズ和銅開珎です！あなたは解けるかな？
 https://wadokaichin.games/#{quiz.id}
     EOC
-    image = "app/frontend/images/quiz_wadokaichins/#{quiz.id}.jpg"
+    image = "app/frontend/images/#{quiz.id}.jpg"
     twitter.tweet(text, image)
 
+    # ローカルの画像を削除
+    File.delete(image)    
+
     # 完了報告
-    p "#{Time.now}: 和同開珎生成バッチ完了"
+    @notifier.ping "#{Time.now.strftime("%Y年%m月%d日 %H:%M:%S")}: 和同開珎生成バッチ完了"
   rescue StandardError
     # エラー報告
-    @notifier.ping "#{Time.now}: [エラー] #{$ERROR_POSITION}"
+    @notifier.ping "#{Time.now.strftime("%Y年%m月%d日 %H:%M:%S")}: [エラー] #{$ERROR_POSITION}"
   end
 
   def cron_test
-    file = File.open("test/test_#{Time.now}.txt", 'w')
-    file.puts Time.now
-    p 'cron_test 完了'
-    raise
+    @notifier.ping "cron test"
   rescue StandardError
-    @notifier.ping "#{Time.now}: [エラー] #{$ERROR_POSITION}"
+    @notifier.ping "#{Time.now.strftime("%Y年%m月%d日 %H:%M:%S")}: [エラー] #{$ERROR_POSITION}"
   end
 end
