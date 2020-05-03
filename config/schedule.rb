@@ -38,6 +38,13 @@ rails_env = ENV['RAILS_ENV'] || :development
 set :environment, rails_env
 set :output, 'log/whenever.log'
 
-every 1.minute do
-  runner 'Batch.new.generate_quiz_wadokaichin'
+if rails_env.to_sym == :production
+  every :day, at: "12:00am" do
+    begin
+      runner 'Batch.new.generate_quiz_wadokaichin'
+    rescue => e
+      Rails.logger.error("aborted batch")
+    end
+  end
 end
+

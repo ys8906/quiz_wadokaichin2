@@ -50,6 +50,11 @@ set :ssh_options, port: '18.176.129.236', forward_agent: false, keys: '~/.ssh/qu
 set :use_sudo, false
 # デプロイサーバ定義
 # role :web, "ip-10-0-0-72.ap-northeast-1.compute.internal"
+
+# Cron by whenever
+set :whenever_command, "bundle exec whenever"
+require "whenever/capistrano"
+
 # lsコマンド実行タスク
 task :list do
   on roles(:web) do
