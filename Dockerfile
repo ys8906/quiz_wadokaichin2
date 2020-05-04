@@ -11,7 +11,7 @@ RUN apt-get update -qq && \
                        nodejs \
                        # For gem 'whenever'   
                        cron \
-                       vim    
+                       vim
 
 # Install Yarn 
 RUN apt-get update && apt-get install -y curl apt-transport-https wget && \
@@ -52,6 +52,3 @@ Host quiz_wadokaichin_key_rsa       \n\
   Port 22                           \n\
   User ys8906                       \n\
   IdentityFile ~/.ssh/quiz_wadokaichin_key_rsa" >> ~/.ssh/config
-
-# Update cron tasks by whenever
-RUN bundle exec whenever --update-crontab
