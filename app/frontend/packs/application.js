@@ -1,9 +1,41 @@
 // node modules
-require("@fortawesome/fontawesome-free")
+// require("@fortawesome/fontawesome-free")
 require("bootstrap")
 require("toastr")
 
-// frontend内のファイル
+// Fontawesome
+import { dom, library } from '@fortawesome/fontawesome-svg-core';
+import {
+  faTimes,
+  faChevronLeft,
+  faChevronRight,
+  faAngleDoubleLeft,
+  faAngleDoubleRight,
+  faAngleLeft,
+  faAngleRight  
+} from "@fortawesome/free-solid-svg-icons"
+import {
+  faTwitter,
+  faGoogle,
+  faYahoo,
+  faLine 
+} from "@fortawesome/free-brands-svg-icons"
+library.add(
+  faTimes,
+  faChevronLeft,
+  faChevronRight,
+  faAngleDoubleLeft,
+  faAngleDoubleRight,
+  faAngleLeft,
+  faAngleRight,
+  faTwitter,
+  faGoogle,
+  faYahoo,
+  faLine
+);
+dom.watch();
+
+// SCSS
 import '../stylesheets/application.scss'
 
 // toastr
