@@ -1,5 +1,4 @@
 // node modules
-// require("@fortawesome/fontawesome-free")
 require("bootstrap")
 require("toastr")
 
