@@ -34,17 +34,14 @@
 # （whenever --clear-crontab: スケジュールを削除）
 
 ENV.each { |k, v| env(k, v) }
-rails_env = ENV['RAILS_ENV'] || :development
+rails_env = :production
 set :environment, rails_env
 set :output, 'log/whenever.log'
 
-if rails_env.to_sym == :production
-  every :day, at: "12:00am" do
-    begin
-      runner 'Batch.new.generate_quiz_wadokaichin'
-    rescue => e
-      Rails.logger.error("aborted batch")
-    end
+every 1.day, at: '12:00 am' do
+  begin
+    runner 'Batch.new.generate_quiz_wadokaichin'
+  rescue => e
+    Rails.logger.error("aborted batch")
   end
 end
-
