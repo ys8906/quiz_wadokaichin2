@@ -52,8 +52,7 @@ set :use_sudo, false
 # role :web, "ip-10-0-0-72.ap-northeast-1.compute.internal"
 
 # Cron by whenever
-set :whenever_command, "bundle exec whenever"
-require "whenever/capistrano"
+set :whenever_identifier, ->{ "#{fetch(:application)}_#{fetch(:stage)}" }
 
 # lsコマンド実行タスク
 task :list do
