@@ -38,10 +38,9 @@ rails_env = :production
 set :environment, rails_env
 set :output, 'log/whenever.log'
 
-every 1.day, at: '10:00 pm' do
+every 12.hours do
   begin
     runner 'Batch.new.generate_quiz_wadokaichin'
-    rake "-s sitemap:create"
     rake "-s sitemap:refresh"
   rescue => e
     Rails.logger.error("aborted batch")

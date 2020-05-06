@@ -6,6 +6,7 @@ class Users::SessionsController < Devise::SessionsController
 
   # GET /resource/sign_in
   def new
+    add_breadcrumb 'サインイン', new_user_session_path
     super
   end
 
