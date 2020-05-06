@@ -18,6 +18,12 @@ listen  $listen
 pid $pid
 # loading booster
 preload_app true
+
+# 旧→新ディレクトリのgemfileを読み込ませる
+before_exec do |server|
+  ENV['BUNDLE_GEMFILE'] = "#{working_directory}/Gemfile"
+end
+
 # before starting processes
 before_fork do |server, _worker|
   defined?(ActiveRecord::Base) && ActiveRecord::Base.connection.disconnect!
