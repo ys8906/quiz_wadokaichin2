@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
 class Users::SessionsController < Devise::SessionsController
-  add_breadcrumb '> ホーム', :root_path
+  add_breadcrumb "> ホーム", :root_path
   before_action :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in
   def new
-    add_breadcrumb 'サインイン', new_user_session_path
+    add_breadcrumb "ログイン", new_user_session_path
     super
   end
 

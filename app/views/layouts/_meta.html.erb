@@ -26,13 +26,13 @@
 <%# Basic meta-tags %>
 <meta name="description"          content=<%= default_description %>>
 <meta name="keywords"             content=<%= default_keywords %>>
-<title>クイズ和同開珎 <%= "| " + @title if @title.present? %></title>
+<title><%= @title + " | " if @title.present? %>クイズ和同開珎 </title>
 
 <%# Open Graph for social services %>
 <meta name="twitter:card"         content="summary_large_image">
 <meta name="twitter:site"         content="@[account_name]">
 <meta property="og:url"           content="<% request.url %>" />
-<meta property="og:title"         content="クイズ和同開珎 <%= "| " + @title if @title.present? %>" />
+<meta property="og:title"         content="<%= @title + " | "  if @title.present? %>クイズ和同開珎" />
 <meta property="og:description"   content=<%= default_description %>>
 <meta property="og:image" 
       content="<%= @quiz.present? ? @quiz.image_url : default_img_url %>" />

@@ -1,10 +1,12 @@
 # frozen_string_literal: true
 
 class Users::PasswordsController < Devise::PasswordsController
+  add_breadcrumb '> ホーム', :root_path
   # GET /resource/password/new
-  # def new
-  #   super
-  # end
+  def new
+    add_breadcrumb 'パスワードリセット', new_user_password_path
+    super
+  end
 
   # POST /resource/password
   def create
