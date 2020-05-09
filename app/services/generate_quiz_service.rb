@@ -76,7 +76,7 @@ class GenerateQuizService
     # firstから順に、上のパターンに合うような熟語を絞っていき、和銅開珍を完成させる
     # 　(例)出: 出口(L)　出演(L)　検出(R)　算出(R)
 
-    search_first_left_matches(first, second, third, fourth)  
+    search_first_left_matches(first, second, third, fourth)
     search_first_right_matches(first, second, third, fourth)
     if (@LLRRs + @LRRLs + @RLLRs + @RRLLs).blank?
       p "該当する組み合わせはありませんでした。"
@@ -86,6 +86,28 @@ class GenerateQuizService
       puts "@LRRLs: #{@LRRLs}" if @LRRLs.present?
       puts "@RLLRs: #{@RLLRs}" if @RLLRs.present?
       puts "@RRLLs: #{@RRLLs}" if @RRLLs.present?
+    end
+  end
+
+  def create_from_yojijukugos
+    # GenerateQuizService.new.create_from_yojijukugos
+    file_path = "app/services/yojijukugo/yojijukugo.csv"
+    file_path_judged = "app/services/yojijukugo/yojijukugo_judged.csv"
+    CSV.open(file_path_judged, 'w') do |c|
+      c << ["kanji", "first", "second", "third", "fourth"]
+      CSV.foreach(file_path, headers: true) do |row|
+        p row[0]
+        first   = row[0].slice(0)
+        second  = row[0].slice(1)
+        third   = row[0].slice(2)
+        fourth  = row[0].slice(3)
+        search_first_left_matches(first, second, third, fourth)
+        search_first_right_matches(first, second, third, fourth)
+        c << @LLRRs if @LLRRs.present?
+        c << @LRRLs if @LRRLs.present?
+        c << @RLLRs if @RLLRs.present?
+        c << @RRLLs if @RRLLs.present?
+      end
     end
   end
 
