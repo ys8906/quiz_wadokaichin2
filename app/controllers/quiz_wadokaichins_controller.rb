@@ -27,7 +27,6 @@ class QuizWadokaichinsController < ApplicationController
 
   def show
     @quiz               = QuizWadokaichin.find(params[:id])
-    @title              = 'No.' + @quiz.id.to_s
     @reactions          = @quiz.quiz_wadokaichin_reactions
     @savedata           = current_user&.quiz_wadokaichin_savedata&.where(quiz_wadokaichin_id: @quiz.id)
     @related_quizzes    = QuizWadokaichin.order('RAND()').limit(9)
