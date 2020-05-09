@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
 class GenerateQuizService
-  ### QuizWadokaichin
   ## 共通メソッド
-  # validation
   def combination_is_valid?(jukugo_left_match, jukugo_right_match)
     condition = kanji_has_jukugos?(jukugo_left_match, jukugo_right_match) &&
                 quiz_is_unique?(jukugo_left_match, jukugo_right_match)
@@ -49,14 +47,106 @@ class GenerateQuizService
     # GenerateQuizService.new.generate_wadokaichin_random_auto
     loop do
       kanji = Kanji.offset(rand(Kanji.count)).first.character
+      # left/right_match: 共通する漢字が左(右)側でマッチする
+      # 　(例)出: left -> 出口, right -> 算出
       # cf. 熟語数 -> 全熟語：47462、用例1以上: 37548、用例100以上: 23490、用例1000以上: 9902
-      jukugo_left_match = Jukugo.where('name like ?', "#{kanji}%")
-                                .where(example: 1000..Float::INFINITY).sample(2)
+      jukugo_left_match  = Jukugo.where('name like ?', "#{kanji}%")
+                                 .where(example: 1000..Float::INFINITY).sample(2)
       jukugo_right_match = Jukugo.where('name like ?', "%#{kanji}")
                                  .where(example: 1000..Float::INFINITY).sample(2)
       if combination_is_valid?(jukugo_left_match, jukugo_right_match)
         create_quiz_wadokaichin(kanji, jukugo_left_match, jukugo_right_match)
         return QuizWadokaichin.last
+      end
+    end
+  end
+
+  ## 逆引き検索
+  def search_from_jukugos(first, second, third, fourth)
+    # GenerateQuizService.new.search_from_jukugos()
+    # 特定の4文字について、(反)時計周りで順番が違わないように、漢字・熟語を検索
+    # 可能なのは以下の4*2通り
+    # 　縦軸: t: top, r: right, b: bottom, l: left
+    # 　横軸: L: left_match, R: right_match
+    #           時計回り 反時計回り
+    #     LLRR  rblt    brtl
+    #     LRRL  bltr    rtlb
+    #     RLLR  trbl    lbrt
+    #     RRLL  ltrb    tlbr
+    # firstから順に、上のパターンに合うような熟語を絞っていき、和銅開珍を完成させる
+    # 　(例)出: 出口(L)　出演(L)　検出(R)　算出(R)
+
+    search_first_left_matches(first, second, third, fourth)  
+    search_first_right_matches(first, second, third, fourth)
+    if (@LLRRs + @LRRLs + @RLLRs + @RRLLs).blank?
+      p "該当する組み合わせはありませんでした。"
+    else
+      p "以下の組み合わせが見つかりました。"
+      puts "@LLRRs: #{@LLRRs}" if @LLRRs.present?
+      puts "@LRRLs: #{@LRRLs}" if @LRRLs.present?
+      puts "@RLLRs: #{@RLLRs}" if @RLLRs.present?
+      puts "@RRLLs: #{@RRLLs}" if @RRLLs.present?
+    end
+  end
+
+  def search_first_left_matches(first, second, third, fourth)
+    jukugo_first_left_matches  = Jukugo.where('name like ?', "%#{first}")
+    lls = []
+    lrs = []
+    jukugo_first_left_matches.each do |j|
+      kanji = j.name.slice(0)
+      l2 = kanji + second
+      lls << [kanji, j.name, l2] if Jukugo.find_by(name: l2)
+      r2 = second + kanji
+      lrs << [kanji, j.name, r2] if Jukugo.find_by(name: r2)
+    end
+
+    @LLRRs = []
+    lls.each do |ll|
+      r3 = third + ll[0]
+      if Jukugo.find_by(name: r3)
+        r4 = fourth + ll[0]
+        @LLRRs << [ll, r3, r4].flatten if Jukugo.find_by(name: r4)
+      end
+    end
+
+    @LRRLs = []
+    lrs.each do |lr|
+      r3 = third + lr[0]
+      if Jukugo.find_by(name: r3)
+        l4 = lr[0] + fourth
+        @LRRLs << [lr, r3, l4].flatten if Jukugo.find_by(name: l4)
+      end
+    end
+  end
+
+  def search_first_right_matches(first, second, third, fourth)
+    jukugo_first_right_matches  = Jukugo.where('name like ?', "#{first}%")
+    rls = []
+    rrs = []
+    jukugo_first_right_matches.each do |j|
+      kanji = j.name.slice(1)
+      l2 = kanji + second
+      rls << [kanji, j.name, l2] if Jukugo.find_by(name: l2)
+      r2 = second + kanji
+      rrs << [kanji, j.name, r2] if Jukugo.find_by(name: r2)
+    end
+
+    @RLLRs = []
+    rls.each do |rl|
+      l3 = rl[0] + third
+      if Jukugo.find_by(name: l3)
+        r4 = fourth + rl[0]
+        @RLLRs << [rl, l3, r4].flatten if Jukugo.find_by(name: r4)
+      end
+    end
+
+    @RRLLs = []
+    rrs.each do |rr|
+      l3 = rr[0] + third
+      if Jukugo.find_by(name: l3)
+        l4 = rr[0] + fourth
+        @RRLLs << [rr, l3, l4].flatten if Jukugo.find_by(name: l4)
       end
     end
   end
