@@ -21,4 +21,4 @@ $ bundle install
 $ rails db:migrate
 $ rails s
 ```
-※credentialsのキーを上げていないので、deviseの起動でひっかかるはず
+※credentialsの共有が必要
