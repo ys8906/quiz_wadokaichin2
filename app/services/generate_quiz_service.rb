@@ -76,7 +76,7 @@ class GenerateQuizService
     # firstから順に、上のパターンに合うような熟語を絞っていき、和銅開珍を完成させる
     # 　(例)出: 出口(L)　出演(L)　検出(R)　算出(R)
 
-    search_first_left_matches(first, second, third, fourth)  
+    search_first_left_matches(first, second, third, fourth)
     search_first_right_matches(first, second, third, fourth)
     if (@LLRRs + @LRRLs + @RLLRs + @RRLLs).blank?
       p "該当する組み合わせはありませんでした。"
@@ -89,6 +89,28 @@ class GenerateQuizService
     end
   end
 
+  def create_from_people_name
+    # GenerateQuizService.new.create_from_people_name
+    # 特定の4文字から成るリストに応用可能
+    file_path = "app/services/people_name/people_name.csv"
+    file_path_judged = "app/services/people_name/people_name_judged.csv"
+    CSV.open(file_path_judged, 'w') do |c|
+      c << ["category", "name", "reading", "kanji", "first", "second", "third", "fourth"]
+      CSV.foreach(file_path, headers: true) do |row|
+        first   = row[1].slice(0)
+        second  = row[1].slice(1)
+        third   = row[1].slice(2)
+        fourth  = row[1].slice(3)
+        search_first_left_matches(first, second, third, fourth)
+        search_first_right_matches(first, second, third, fourth)
+        c << [row[0], row[1], row[2], @LLRRs] if @LLRRs.present?
+        c << [row[0], row[1], row[2], @LRRLs] if @LRRLs.present?
+        c << [row[0], row[1], row[2], @RLLRs] if @RLLRs.present?
+        c << [row[0], row[1], row[2], @RRLLs] if @RRLLs.present?
+      end
+    end
+  end
+
   def search_first_left_matches(first, second, third, fourth)
     jukugo_first_left_matches  = Jukugo.where('name like ?', "%#{first}")
     lls = []
@@ -96,28 +118,32 @@ class GenerateQuizService
     jukugo_first_left_matches.each do |j|
       kanji = j.name.slice(0)
       l2 = kanji + second
-      lls << [kanji, j.name, l2] if Jukugo.find_by(name: l2)
+      lls << [kanji, j.name, l2] if (l2 != j.name) && Jukugo.find_by(name: l2)
       r2 = second + kanji
-      lrs << [kanji, j.name, r2] if Jukugo.find_by(name: r2)
+      lrs << [kanji, j.name, r2] if (r2 != j.name) && Jukugo.find_by(name: r2)
     end
 
     @LLRRs = []
     lls.each do |ll|
       r3 = third + ll[0]
-      if Jukugo.find_by(name: r3)
+      if ll.exclude?(r3) && Jukugo.find_by(name: r3)
+        ll << r3
         r4 = fourth + ll[0]
-        @LLRRs << [ll, r3, r4].flatten if Jukugo.find_by(name: r4)
+        @LLRRs << [ll, r4].flatten if ll.exclude?(r4) && Jukugo.find_by(name: r4)
       end
+      @LLRRs = @LLRRs.uniq
     end
 
     @LRRLs = []
     lrs.each do |lr|
       r3 = third + lr[0]
-      if Jukugo.find_by(name: r3)
+      if lr.exclude?(r3) && Jukugo.find_by(name: r3)
+        lr << r3
         l4 = lr[0] + fourth
-        @LRRLs << [lr, r3, l4].flatten if Jukugo.find_by(name: l4)
+        @LRRLs << [lr, l4].flatten if lr.exclude?(l4) && Jukugo.find_by(name: l4)
       end
     end
+    @LRRLs = @LRRLs.uniq
   end
 
   def search_first_right_matches(first, second, third, fourth)
@@ -127,27 +153,31 @@ class GenerateQuizService
     jukugo_first_right_matches.each do |j|
       kanji = j.name.slice(1)
       l2 = kanji + second
-      rls << [kanji, j.name, l2] if Jukugo.find_by(name: l2)
+      rls << [kanji, j.name, l2] if (l2 != j.name) && Jukugo.find_by(name: l2)
       r2 = second + kanji
-      rrs << [kanji, j.name, r2] if Jukugo.find_by(name: r2)
+      rrs << [kanji, j.name, r2] if (r2 != j.name) && Jukugo.find_by(name: r2)
     end
 
     @RLLRs = []
     rls.each do |rl|
       l3 = rl[0] + third
-      if Jukugo.find_by(name: l3)
+      if rl.exclude?(l3) && Jukugo.find_by(name: l3)
+        rl << l3
         r4 = fourth + rl[0]
-        @RLLRs << [rl, l3, r4].flatten if Jukugo.find_by(name: r4)
+        @RLLRs << [rl, r4].flatten if rl.exclude?(r4) && Jukugo.find_by(name: r4)
       end
     end
+    @RLLRs = @RLLRs.uniq
 
     @RRLLs = []
     rrs.each do |rr|
       l3 = rr[0] + third
-      if Jukugo.find_by(name: l3)
+      if rr.exclude?(l3) && Jukugo.find_by(name: l3)
+        rr << l3
         l4 = rr[0] + fourth
-        @RRLLs << [rr, l3, l4].flatten if Jukugo.find_by(name: l4)
+        @RRLLs << [rr, l4].flatten if rr.exclude?(l4) && Jukugo.find_by(name: l4)
       end
     end
+    @RRLLs = @RRLLs.uniq
   end
 end
