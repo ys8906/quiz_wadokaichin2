@@ -12,6 +12,9 @@ class ApplicationController < ActionController::Base
   rescue_from StandardError, with: :render_500
   rescue_from ActionController::RoutingError, with: :render_404
   rescue_from ActiveRecord::RecordNotFound, with: :render_404
+  rescue_from ActionController::BadRequest, with: :render_422
+  rescue_from ActionController::UnknownFormat, with: :render_422
+  rescue_from ActionController::InvalidAuthenticityToken, with: :render_422
 
   def render_404
     @quiz = QuizWadokaichin.last
@@ -22,6 +25,10 @@ class ApplicationController < ActionController::Base
     Raven.capture_exception(e)
     render 'errors/500', status: 500, layout: false
   end
+
+  def render_422
+    render 'errors/422', status: 422
+  end  
 
   # Devise
   def store_action
