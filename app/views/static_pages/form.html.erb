@@ -13,6 +13,12 @@
         <div class="text-center col-md-8 col-10">
           <%= f.text_field :email, placeholder: "wado@quiz.com",
                            "v-model": "email", class: "col-12" %>
+          <span
+            v-if="isIncorrectEmail"
+            style="display: flex; color: #f0ad4e;"
+          >
+            アドレスの形式が不正です
+          </span>
         </div>
       </div>
       <div class="form__box form-group row justify-content-center">
@@ -38,7 +44,7 @@
       </div>
       <div class="form__box text-center">
         <%= f.submit "送信する", class: "btn btn-primary font-weight-bold text-right",
-             ":disabled": "!this.email || !this.name || !this.title || !this.content" %>
+             ":disabled": "!this.email || !this.name || !this.title || !this.content || isIncorrectEmail" %>
       </div>
     <% end %>
   </div>
