@@ -42,6 +42,7 @@ RSpec.describe "UserSessions", type: :request do
         }.to change(User,:count).by(1)
         expect(response.status).to eq 302
         expect(User.find_by(name: "name")).to be_valid
+        expect(ActionMailer::Base.deliveries.last.subject).to include("ようこそクイズ和銅開珎へ！")
       end
   
       it "ログインできる" do
@@ -65,12 +66,14 @@ RSpec.describe "UserSessions", type: :request do
           let(:omniauth_email) { "koreha@email.desuka?" }
           it "得られた情報でアカウントを作成する" do
             expect { subject }.to change { User.count }.by(1)
+            expect(ActionMailer::Base.deliveries.last.subject).to include("ようこそクイズ和銅開珎へ！")
           end
         end
         context "emailがなければ" do
           let(:omniauth_email) { nil }
           it "ダミーアドレスでアカウントを作成する" do
             expect { subject }.to change { User.count }.by(1)
+            expect(ActionMailer::Base.deliveries.last.subject).to include("ようこそクイズ和銅開珎へ！")
           end
         end
       end
@@ -92,12 +95,14 @@ RSpec.describe "UserSessions", type: :request do
           let(:omniauth_email) { "koreha@email.desuka?" }
           it "得られた情報でアカウントを作成する" do
             expect { subject }.to change { User.count }.by(1)
+            expect(ActionMailer::Base.deliveries.last.subject).to include("ようこそクイズ和銅開珎へ！")
           end
         end
         context "emailがなければ" do
           let(:omniauth_email) { nil }
           it "ダミーアドレスでアカウントを作成する" do
             expect { subject }.to change { User.count }.by(1)
+            expect(ActionMailer::Base.deliveries.last.subject).to include("ようこそクイズ和銅開珎へ！")
           end
         end
       end
@@ -119,12 +124,14 @@ RSpec.describe "UserSessions", type: :request do
           let(:omniauth_email) { "koreha@email.desuka?" }
           it "得られた情報でアカウントを作成する" do
             expect { subject }.to change { User.count }.by(1)
+            expect(ActionMailer::Base.deliveries.last.subject).to include("ようこそクイズ和銅開珎へ！")
           end
         end
         context "emailがなければ" do
           let(:omniauth_email) { nil }
           it "ダミーアドレスでアカウントを作成する" do
             expect { subject }.to change { User.count }.by(1)
+            expect(ActionMailer::Base.deliveries.last.subject).to include("ようこそクイズ和銅開珎へ！")
           end
         end
       end
@@ -146,12 +153,14 @@ RSpec.describe "UserSessions", type: :request do
           let(:omniauth_email) { "koreha@email.desuka?" }
           it "得られた情報でアカウントを作成する" do
             expect { subject }.to change { User.count }.by(1)
+            expect(ActionMailer::Base.deliveries.last.subject).to include("ようこそクイズ和銅開珎へ！")
           end
         end
         context "emailがなければ" do
           let(:omniauth_email) { nil }
           it "ダミーアドレスでアカウントを作成する" do
             expect { subject }.to change { User.count }.by(1)
+            expect(ActionMailer::Base.deliveries.last.subject).to include("ようこそクイズ和銅開珎へ！")
           end
         end
       end
