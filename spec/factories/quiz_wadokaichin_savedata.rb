@@ -11,7 +11,9 @@
 #  updated_at          :datetime         not null
 #  correct             :integer          default(0), not null
 #
-class QuizWadokaichinSavedatum < ApplicationRecord
-  belongs_to :user
-  # correct == 0: 答えを見た、correct == 1: 正答した
+FactoryBot.define do
+  factory :quiz_wadokaichin_savedatum do
+    association   :user
+    association   :quiz_wadokaichin
+  end
 end

@@ -21,5 +21,23 @@ FactoryBot.define do
     name       { Faker::Name.name }
     email      { Faker::Internet.email }
     password   { 'password' }
+
+    trait :with_quiz_records do
+      after(:create) do |user|
+        create_list(:quiz_wadokaichin, 2)
+        # 正答したクイズ
+        user.quiz_wadokaichin_savedata << build(
+          :quiz_wadokaichin_savedatum,
+          quiz_wadokaichin_id: QuizWadokaichin.first.id,
+          correct: 1
+        )
+        # 答えを見たクイズ
+        user.quiz_wadokaichin_savedata << build(
+          :quiz_wadokaichin_savedatum,
+          quiz_wadokaichin_id: QuizWadokaichin.second.id,
+          correct: 0
+        )
+      end
+    end
   end
 end

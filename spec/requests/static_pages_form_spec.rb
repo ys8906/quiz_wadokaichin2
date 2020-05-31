@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
+require "rails_helper"
 
-RSpec.describe 'StaticPagesController#form', type: :request do
+RSpec.describe "StaticPagesController#form", type: :request do
   include_context "header_footer_examples"
   subject { get privacy_path; response }
 

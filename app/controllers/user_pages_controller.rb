@@ -8,8 +8,8 @@ class UserPagesController < ApplicationController
     page = params[:page] || 1
     params[:order] ? (@order = params[:order]) : (@order = 'id DESC')
     ids = current_user.
-          quiz_wadokaichin_savedata
-          .where(correct: page).pluck(:quiz_wadokaichin_id)
+          quiz_wadokaichin_savedata.
+          where(correct: page).pluck(:quiz_wadokaichin_id)
     @quizzes = QuizWadokaichin.where(id: ids).order(@order)
 
     @savedata = current_user.quiz_wadokaichin_savedata

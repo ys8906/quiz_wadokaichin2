@@ -65,4 +65,5 @@ RSpec.configure do |config|
   # Gem拡張
   config.include Devise::Test::IntegrationHelpers, type: :request
   config.include FactoryBot::Syntax::Methods
+  OmniAuth.config.test_mode = true
 end

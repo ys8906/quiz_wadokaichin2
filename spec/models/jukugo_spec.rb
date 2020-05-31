@@ -24,6 +24,6 @@ RSpec.describe Jukugo, type: :model do
   end
 
   it 'is invalid if overlapped' do
-    expect(FactoryBot.build(:jukugo)).to_not be_valid
+    expect(FactoryBot.build(:jukugo, name: Jukugo.first.name)).to_not be_valid
   end
 end
