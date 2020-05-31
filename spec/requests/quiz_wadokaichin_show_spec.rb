@@ -10,7 +10,7 @@ RSpec.describe "QuizWadokaichin#show", type: :request do
 
   before do
     # create_listだとデータが全て同じ: uniquenessに引っかかる
-    11.times { create(:quiz_wadokaichin) }
+    4.times { create(:quiz_wadokaichin) }
   end
 
   it "クイズID・クイズレベル・前後のクイズへのリンクが表示される" do
