@@ -11,8 +11,9 @@
 #  updated_at          :datetime         not null
 #  correct             :integer          default(0), not null
 #
-require 'rails_helper'
-
-RSpec.describe QuizWadokaichinSavedatum, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+FactoryBot.define do
+  factory :quiz_wadokaichin_savedatum do
+    association   :user
+    association   :quiz_wadokaichin
+  end
 end

@@ -19,18 +19,21 @@ commands:
     - checkout
     - restore_cache:
         keys:
-        - v1-dependencies-{{ checksum "Gemfile.lock" }}
-        - v1-dependencies-
+        - v1-dependencies-{{ checksum "Gemfile.lock" }}-{{ checksum "yarn.lock" }}
     - run:
         name: install dependencies
         command: |
           gem install bundler -v 2.1.4
           bundle install --jobs=4 --retry=3 --path vendor/bundle
           sudo apt install -y less
+    - run:
+        name: install yarn dependencies
+        command: yarn
     - save_cache:
         paths:
         - ./vendor/bundle
-        key: v1-dependencies-{{ checksum "Gemfile.lock" }}      
+        - ./node_modules
+        key: v1-dependencies-{{ checksum "Gemfile.lock" }}-{{ checksum "yarn.lock" }}
    
 jobs:        
   test:
@@ -38,6 +41,7 @@ jobs:
       name: default
     steps:
     - setup
+    - run: bundle exec rake assets:precompile
     - run: mv ./config/database.yml.ci ./config/database.yml
     - run:
         name: Data base setup

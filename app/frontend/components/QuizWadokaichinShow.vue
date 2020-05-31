@@ -218,12 +218,12 @@ export default {
     answerIsVisible() {
       // もしユーザーがログインしていてセーブデータがない場合、正解するか答えを見たらセーブ
       if (this.isSignedIn && !this.hasSavedata) {
-        axios.post("../../quiz_wadokaichin_savedata", {
+        axios.post("/api/v1/quiz_wadokaichin_savedata", {
           quiz_id: this.quiz.id,
           correct: false,
         });
       }
-    },
+    }
   },
   methods: {
     checkAnswer() {
