@@ -1,10 +1,9 @@
 <div class="container history__container">
   <h2 class="history__title">
-    今までに挑戦したクイズの一覧を見られます。<br>
-    三角のついた文字を押すと、各情報で並び替えられます。
+    今までに挑戦したクイズの一覧を見られます。
   </h2>
   <% if @quizzes.first.blank? %>
-    <p class="history__caption">該当するクイズはありません。</p>
+    <p class="history__caption">該当するクイズはありません</p>
   <% else %>
   <div class="history__overflow">
     <table class="history__table text-center">

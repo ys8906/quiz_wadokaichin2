@@ -1,5 +1,17 @@
 # frozen_string_literal: true
 
+# == Schema Information
+#
+# Table name: jukugos
+#
+#  id         :bigint           not null, primary key
+#  name       :string(2)
+#  reading    :string(255)
+#  meaning    :text(65535)
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  example    :integer
+#
 require 'rails_helper'
 
 RSpec.describe Jukugo, type: :model do
@@ -12,6 +24,6 @@ RSpec.describe Jukugo, type: :model do
   end
 
   it 'is invalid if overlapped' do
-    expect(FactoryBot.build(:jukugo)).to_not be_valid
+    expect(FactoryBot.build(:jukugo, name: Jukugo.first.name)).to_not be_valid
   end
 end

@@ -100,6 +100,10 @@ $font-family-base: Noto Sans JP;
 .line-color { color: #00B900 }
 
 // Shared components
+.btn:disabled {
+  cursor: default;
+}
+
 .pagination {
   margin: 20px 0;
   .page-item.active {

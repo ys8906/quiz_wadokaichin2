@@ -16,12 +16,17 @@ Rails.application.routes.draw do
   # static_pages
   get   '/privacy', to: 'static_pages#privacy'
   get   '/form', to: 'static_pages#form'
-  get   '/form/send_inquiry', to: 'static_pages#send_inquiry'
+  post  '/form/send_inquiry', to: 'static_pages#send_inquiry'
 
   resources :quiz_wadokaichins, only: [:index, :show]
   resources :quiz_wadokaichin_reactions, only: [:create]
-  resources :quiz_wadokaichin_savedata, only: [:create]
   resources :user_pages, only: [:index]
+
+  namespace :api do
+    namespace :v1 do
+      resources :quiz_wadokaichin_savedata, only: [:create]
+    end
+  end
 
   # エラー画面
   get '*path', controller: 'application', action: 'render_404'

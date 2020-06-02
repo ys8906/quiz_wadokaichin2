@@ -16,10 +16,10 @@ class QuizWadokaichinsController < ApplicationController
       searched_ids = statuses.each_with_object([]) do |status, a|
         # もし状態にチェックがあれば（params[:status] == "1"）、該当するクイズidを代入
         # fetchを使って、変数をparamsのキーと対応させる
-        a << savedata.where(correct: status).pluck(:id) if params.fetch(status) == '1'
+        a << savedata.where(correct: status).ids if params.fetch(status) == '1'
       end
       # 最後に、未回答のクイズ（params[:unanswered]）にチェックがあれば、データのないクイズidを代入する
-      searched_ids << QuizWadokaichin.pluck(:id) - savedata.pluck(:id) if params[:unanswered] == '1'
+      searched_ids << QuizWadokaichin.ids - savedata.ids if params[:unanswered] == '1'
       # 条件に当てはまるidの配列を使い、@quizzesを生成
       @quizzes = QuizWadokaichin.order(order).where(id: searched_ids.flatten).page(params[:page]).per(9)
     end

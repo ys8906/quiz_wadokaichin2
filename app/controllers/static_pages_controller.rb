@@ -3,8 +3,6 @@
 class StaticPagesController < ApplicationController
   add_breadcrumb "> ホーム", :root_path
 
-  def home; end
-
   def privacy
     add_breadcrumb "プライバシーポリシー", privacy_path
   end

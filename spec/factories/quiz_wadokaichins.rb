@@ -15,8 +15,13 @@
 #  jukugo_top_name    :string(255)
 #  difficulty         :integer
 #
-require 'rails_helper'
-
-RSpec.describe QuizWadokaichin, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+FactoryBot.define do
+  factory :quiz_wadokaichin do
+    answer              { "目" }
+    image_url           { "https://image.url" }
+    association :jukugo_right, factory: :jukugo
+    association :jukugo_bottom, factory: :jukugo
+    association :jukugo_left, factory: :jukugo
+    association :jukugo_top, factory: :jukugo
+  end
 end
