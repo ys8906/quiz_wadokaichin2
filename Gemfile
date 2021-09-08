@@ -25,7 +25,7 @@ gem 'jbuilder', '~> 2.7'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'aws-sdk', '~> 3'
-gem 'better_errors', '~> 2.6'
+gem 'better_errors', '~> 2.8'
 gem 'binding_of_caller', '~> 0.8.0'
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'breadcrumbs_on_rails', '~> 4.0'
